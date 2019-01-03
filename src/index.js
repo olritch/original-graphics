@@ -15,3 +15,11 @@ import App from './components/App';
 // )
 
 ReactDOM.render(<App />, document.querySelector('#root'));
+
+// Sheila
+// Create a footer component (call it Footer.js)
+// Footer should just return a div with text Footer
+// Let's make Footer a class based component
+// Import into App.js so that it appears on browser
+
+
