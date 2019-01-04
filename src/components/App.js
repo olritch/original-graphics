@@ -5,7 +5,7 @@ import Footer from './Footer';
 import Login from './Login';
 
 const App = () => {
-    return <div className="ui inverted vertical center aligned segment" style={{minHeight: '350px', padding: '1em 0em'}}>
+    return <div className="ui inverted vertical center aligned segment" style={{minHeight: '500px', padding: '1em 0em'}}>
         <BrowserRouter>
           <div>
             <Navbar path="/" exact />
