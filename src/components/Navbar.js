@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Menu, Dropdown } from 'semantic-ui-react';
+import { Modal, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
 
@@ -37,7 +37,7 @@ class Navbar extends Component {
                         <Menu.Item name="blog" active={activeItem === 'blog'} onClick={this.handleItemClick} />
                         <div className='right item'>
                             <Link to='/' role='button' className='ui inverted button'>Sign up</Link>
-                            <Modal trigger={<Link to='/' style={{marginLeft: '0.5em'}} role='button' className='ui inverted button'>Log-in</Link>}>
+                            <Modal trigger={<Link to='/' style={{marginLeft: '0.5em'}} role='button' className='ui inverted button'>Login</Link>} closeIcon>
                             <Login />
                             </Modal>
                         </div>
