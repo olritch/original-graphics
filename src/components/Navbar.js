@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Modal, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Login from './Login';
+import SignUp from './SignUp';
 
 class Navbar extends Component {
     state = { activeItem: 'home' };
@@ -36,9 +37,12 @@ class Navbar extends Component {
                         </Dropdown>
                         <Menu.Item name="blog" active={activeItem === 'blog'} onClick={this.handleItemClick} />
                         <div className='right item'>
-                            <Link to='/' role='button' className='ui inverted button'>Sign up</Link>
-                            <Modal trigger={<Link to='/' style={{marginLeft: '0.5em'}} role='button' className='ui inverted button'>Login</Link>} closeIcon>
-                            <Login />
+                            <Modal trigger={
+                                <Link to='/' role='button' className='ui inverted button'>Sign up</Link>} closeIcon>
+                                <SignUp />
+                            </Modal>
+                            <Modal trigger={
+                                <Link to='/' style={{marginLeft: '0.5em'}} role='button' className='ui inverted button'>Login</Link>} closeIcon> <Login />
                             </Modal>
                         </div>
                     </Menu>

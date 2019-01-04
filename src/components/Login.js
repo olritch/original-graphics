@@ -17,7 +17,7 @@ class Login extends React.Component {
                 <div className="ui stacked segment">
                   <div className="field">
                     <div className="ui fluid left icon input">
-                      <input type="text" placeholder="E-mail address" />
+                      <input type="text" placeholder="Username" />
                       <i aria-hidden="true" className="user icon" />
                     </div>
                   </div>
@@ -36,7 +36,7 @@ class Login extends React.Component {
             <div className="ui message">
                 <Header className="small" textAlign="left">
                     <span>New to us? <Link to="/">Create account</Link></span>
-                    <span style={{float: 'right'}}><Link to='/'>Forgot Email or Password?</Link></span>
+                    <span style={{float: 'right'}}>Forgot <Link to='/'>Username</Link> or <Link to='/'>Password</Link>?</span>
                 </Header>
             </div>
           </div>
