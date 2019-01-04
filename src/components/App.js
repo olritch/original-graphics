@@ -5,17 +5,15 @@ import Footer from './Footer';
 import Login from './Login';
 
 const App = () => {
-    return (
-        <div>
-            <BrowserRouter>
-                <div>
-                    <Navbar />
-                    <Route path = '/login' exact component={Login} />
-                    <Footer />
-                </div>
-            </BrowserRouter>
-        </div>
-    )
+    return <div className="ui inverted vertical center aligned segment" style={{minHeight: '350px', padding: '1em 0em'}}>
+        <BrowserRouter>
+          <div>
+            <Navbar path="/" exact />
+            <Route path="/login" exact component={Login} />
+            {/* <Footer path="/" exact /> */}
+          </div>
+        </BrowserRouter>
+      </div>
 }
 
 export default App;
