@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Header } from 'semantic-ui-react';
 
 class Footer extends Component {
 
@@ -12,7 +11,7 @@ class Footer extends Component {
                         <div className='three wide column'>
                             <div className='ui inverted header small'>About Original Graphics</div>
                             <div className='ui inverted link list'>
-                            <Link className='item' to='/'>Company Info</Link>
+                            <Link className='item' to='/about-us'>Company Info</Link>
                             <Link className='item' to='/gallery'>Gallery</Link>
                             <Link className='item' to='/blog'>Blog</Link>
                             <Link className='item' to='/calendar'>Calendar</Link>
