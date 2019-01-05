@@ -6,6 +6,7 @@ import SignUp from './User/SignUp';
 
 class Navbar extends Component {
     state = { activeItem: 'home' };
+
     handleItemClick = (e, { name }) => this.setState({ activeItem: name })
 
     render() {
