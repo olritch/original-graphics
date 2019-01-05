@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 
 class LandingPage extends Component {
     render() {
-        return <div>LandingPage</div>
+        return (
+            <div className='ui vertical center aligned segment'>
+                <div className='ui container'>
+
+                </div>
+            </div>
+        )
     }
 }
 

@@ -5,7 +5,7 @@ import { Header, Modal } from 'semantic-ui-react';
 class Login extends React.Component {
 
   render() {
-      return <div className="column" style={{ padding: '30px 0px 30px 0px' }}>
+      return <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
           <Modal.Header className="ui grey center aligned header medium">
             Original Graphics
           </Modal.Header>
