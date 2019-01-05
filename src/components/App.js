@@ -3,7 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LandingPage from './LandingPage';
-// import SignUp from './SignUp';
+import GalleryList from './Gallery/GalleryList';
 
 class App extends Component {
 
@@ -13,6 +13,7 @@ class App extends Component {
           <div>
             <Navbar/>
             <Route path='/' exact component={LandingPage}/>
+            <Route path='/gallery' exact component={GalleryList}/>
             <Footer/>
           </div>
         </BrowserRouter>
