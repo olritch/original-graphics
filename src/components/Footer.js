@@ -56,7 +56,7 @@ class Footer extends Component {
                             <div className='ui inverted bottom attached huge header'>Follow Us</div>
                         </div>
                     </div>
-                    <div className='ui inverted header tiny'>Copyright &copy; 2019 Original Graphics Inc. All Rights Reserved.</div>
+                    <div style={{fontSize: '10px'}} className='ui inverted header tiny'>Copyright &copy; 2019 Original Graphics Inc. All Rights Reserved.</div>
                 </div>
             </div>
         )
