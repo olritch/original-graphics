@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
+import ScrollToTop from './ScrollToTop';
 
 import Navbar from './Navbar';
 import Footer from './Footer';
@@ -33,6 +34,7 @@ class App extends Component {
   render() {
     return (
         <BrowserRouter>
+          <ScrollToTop>
           <div>
             <Navbar/>
             <Route path='/' exact component={LandingPage}/>
@@ -57,6 +59,7 @@ class App extends Component {
             <Route path='/instructor-info' exact component={InstructorInfo}/>
             <Footer/>
           </div>
+          </ScrollToTop>
         </BrowserRouter>
     )
   }
