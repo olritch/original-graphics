@@ -1,9 +1,25 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
+
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LandingPage from './LandingPage';
+
 import GalleryList from './Gallery/GalleryList';
+import Aerial from './Gallery/Aerial';
+import Family from './Gallery/Family';
+import Landscape from './Gallery/Landscape';
+import Pet from './Gallery/Pet';
+import Wedding from './Gallery/Wedding';
+
+import AboutUs from './AboutUs';
+import ClassCalendar from './Classes/ClassCalendar';
+import Blog from './Blog';
+
+import StoreCalendar from './Store/StoreCalendar';
+import StoreCard from './Store/StoreCard';
+import StoreFrame from './Store/StoreFrame';
+import StorePoster from './Store/StorePoster';
 
 class App extends Component {
 
@@ -14,6 +30,18 @@ class App extends Component {
             <Navbar/>
             <Route path='/' exact component={LandingPage}/>
             <Route path='/gallery' exact component={GalleryList}/>
+            <Route path='/gallery/family' exact component={Family}/>
+            <Route path='/gallery/wedding' exact component={Wedding}/>
+            <Route path='/gallery/landscape' exact component={Landscape}/>
+            <Route path='/gallery/aerial' exact component={Aerial}/>
+            <Route path='/gallery/pet' exact component={Pet}/>
+            <Route path='/about-us' exact component={AboutUs}/>
+            <Route path='/calendar' exact component={ClassCalendar}/>
+            <Route path='/blog' exact component={Blog}/>
+            <Route path='/store/calendar' exact component={StoreCalendar}/>
+            <Route path='/store/card' exact component={StoreCard}/>
+            <Route path='/store/frame' exact component={StoreFrame}/>
+            <Route path='/store/poster' exact component={StorePoster}/>
             <Footer/>
           </div>
         </BrowserRouter>

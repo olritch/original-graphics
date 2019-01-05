@@ -13,9 +13,9 @@ class Footer extends Component {
                             <div className='ui inverted header small'>About Original Graphics</div>
                             <div className='ui inverted link list'>
                             <Link className='item' to='/'>Company Info</Link>
-                            <Link className='item' to='/'>Gallery</Link>
-                            <Link className='item' to='/'>Blog</Link>
-                            <Link className='item' to='/'>Calendar</Link>
+                            <Link className='item' to='/gallery'>Gallery</Link>
+                            <Link className='item' to='/blog'>Blog</Link>
+                            <Link className='item' to='/calendar'>Calendar</Link>
                             </div>
                         </div>
                         <div className='three wide column'>
