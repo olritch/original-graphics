@@ -24,15 +24,15 @@ class Navbar extends Component {
                             <Dropdown.Item>Wedding</Dropdown.Item>
                             <Dropdown.Item>Landscape</Dropdown.Item>
                             <Dropdown.Item>Aerial</Dropdown.Item>
-                            <Dropdown.Item>Pets</Dropdown.Item>
+                            <Dropdown.Item>Pet</Dropdown.Item>
                         </Dropdown.Menu>
                         </Dropdown>
                         <Dropdown item text="Store" name="store" onClick={this.handleItemClick}>
                             <Dropdown.Menu>
-                                <Dropdown.Item>Framing</Dropdown.Item>
+                                <Dropdown.Item>Frame</Dropdown.Item>
                                 <Dropdown.Item>Calendar</Dropdown.Item>
                                 <Dropdown.Item>Poster</Dropdown.Item>
-                                <Dropdown.Item>Cards</Dropdown.Item>
+                                <Dropdown.Item>Card</Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
                         <Menu.Item name="blog" active={activeItem === 'blog'} onClick={this.handleItemClick} />
