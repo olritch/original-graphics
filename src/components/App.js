@@ -15,11 +15,18 @@ import Wedding from './Gallery/Wedding';
 import AboutUs from './AboutUs';
 import ClassCalendar from './Classes/ClassCalendar';
 import Blog from './Blog';
+import InstructorInfo from './Classes/InstructorInfo';
 
 import StoreCalendar from './Store/StoreCalendar';
 import StoreCard from './Store/StoreCard';
 import StoreFrame from './Store/StoreFrame';
 import StorePoster from './Store/StorePoster';
+
+import Contact from './Contact';
+import Help from './Help';
+import Privacy from './Privacy';
+import Terms from './Terms';
+import Sitemap from './Sitemap';
 
 class App extends Component {
 
@@ -42,6 +49,12 @@ class App extends Component {
             <Route path='/store/card' exact component={StoreCard}/>
             <Route path='/store/frame' exact component={StoreFrame}/>
             <Route path='/store/poster' exact component={StorePoster}/>
+            <Route path='/contact' exact component={Contact}/>
+            <Route path='/help' exact component={Help}/>
+            <Route path='/privacy' exact component={Privacy}/>
+            <Route path='/terms' exact component={Terms}/>
+            <Route path='/sitemap' exact component={Sitemap}/>
+            <Route path='/instructor-info' exact component={InstructorInfo}/>
             <Footer/>
           </div>
         </BrowserRouter>
