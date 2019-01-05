@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Button, Header, Modal } from 'semantic-ui-react'
+import { Segment, Header, Modal } from 'semantic-ui-react'
 import Recaptcha from 'react-recaptcha'
 
 class SignUp extends Component {
