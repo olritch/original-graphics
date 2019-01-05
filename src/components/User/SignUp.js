@@ -46,11 +46,13 @@ class SignUp extends Component {
                   <div className="field">
                     <div className="ui fluid left icon input">
                       <input required type="text" placeholder="Username" />
+                      <i aria-hidden='true' className='user icon'/>
                     </div>
                   </div>
                   <div className="field">
                     <div className="ui fluid left icon input">
                       <input required type="password" placeholder="Password" />
+                      <i aria-hidden='true' className='lock icon'/>
                     </div>
                   </div>
                   <div className="field">

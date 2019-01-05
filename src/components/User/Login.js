@@ -10,7 +10,7 @@ class Login extends React.Component {
             Original Graphics
           </Modal.Header>
           <Modal.Header className="ui black center aligned header large">
-            Login to your account
+            Log in to your account
           </Modal.Header>
           <Modal.Content>
             <form className="ui large form" style={{ minWidth: '300px' }}>
