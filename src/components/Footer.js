@@ -7,7 +7,7 @@ class Footer extends Component {
         return (
             <div className='ui inverted vertical footer segment'>
                 <div className='ui container'>
-                    <div className='ui stackable inverted divided equal height stackable grid'>
+                    <div className='ui inverted divided equal height stackable grid'>
                         <div className='three wide column'>
                             <div className='ui inverted header small'>About Original Graphics</div>
                             <div className='ui inverted link list'>
