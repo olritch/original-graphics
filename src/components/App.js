@@ -15,6 +15,7 @@ import Wedding from './Gallery/Wedding';
 
 import AboutUs from './AboutUs';
 import ClassCalendar from './Classes/ClassCalendar';
+import ClassList from './Classes/ClassList';
 import Blog from './Blog';
 import InstructorInfo from './Classes/InstructorInfo';
 
@@ -59,6 +60,7 @@ class App extends Component {
             <Route path='/sitemap' exact component={Sitemap}/>
             <Route path='/instructor-info' exact component={InstructorInfo}/>
             <Route path='/store' exact component={StoreList}/>
+            <Route path='/class' exact component={ClassList}/>
             <Footer/>
           </div>
           </ScrollToTop>
