@@ -18,6 +18,7 @@ import ClassCalendar from './Classes/ClassCalendar';
 import Blog from './Blog';
 import InstructorInfo from './Classes/InstructorInfo';
 
+import StoreList from './Store/StoreList';
 import StoreCalendar from './Store/StoreCalendar';
 import StoreCard from './Store/StoreCard';
 import StoreFrame from './Store/StoreFrame';
@@ -57,6 +58,7 @@ class App extends Component {
             <Route path='/terms' exact component={Terms}/>
             <Route path='/sitemap' exact component={Sitemap}/>
             <Route path='/instructor-info' exact component={InstructorInfo}/>
+            <Route path='/store' exact component={StoreList}/>
             <Footer/>
           </div>
           </ScrollToTop>
