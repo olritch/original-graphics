@@ -60,14 +60,14 @@ class Navbar extends Component {
                 </Menu.Item>
                 <div className="right item">
                   <Modal trigger={<Link to="/" role="button" className="ui inverted button">
-                        Log in
+                      Log in
                       </Link>} closeIcon>
-                    {' '}
+                      {' '}
                     <Login />
                   </Modal>
                   <Modal trigger={<Link to="/" style={{ marginLeft: '0.5em' }} role="button" className="ui inverted button">
-                        Sign Up
-                  </Link>} closeIcon>
+                      Sign Up
+                      </Link>} closeIcon>
                     <SignUp />
                   </Modal>
                 </div>
