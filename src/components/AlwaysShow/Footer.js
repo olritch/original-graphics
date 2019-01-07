@@ -3,6 +3,14 @@ import { Link } from 'react-router-dom';
 
 class Footer extends Component {
 
+    state = {
+        numberOfLikes: 0
+    }
+
+    incrementLikes = () => {
+        this.setState({ numberOfLikes : this.state.numberOfLikes + 1})
+    }
+
     render() {
         return (
             <div className='ui inverted vertical footer segment'>
@@ -54,6 +62,14 @@ class Footer extends Component {
                                 </Link>
                             </div>
                             <div className='ui inverted bottom attached huge header'>Follow Us</div>
+                                <div onClick={this.incrementLikes} className="ui labeled button" tabIndex="0">
+                                <div  className="ui red button">
+                                    <i className="heart icon"></i> Like
+                                </div>
+                                <span  className="ui basic red left pointing label">
+                                    {this.state.numberOfLikes}
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div style={{fontSize: '10px'}} className='ui inverted header tiny'>Copyright &copy; 2019 Original Graphics Inc. All Rights Reserved.</div>
