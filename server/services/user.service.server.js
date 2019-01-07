@@ -1,7 +1,7 @@
 module.exports = function(app) {
     const userModel = require('../models/user/user.model.server');
 
-    app.post('/api/user', createUser);
+    app.post('/api/register', createUser);
 
     async function createUser(req, res) {
         const newUser = req.body;
