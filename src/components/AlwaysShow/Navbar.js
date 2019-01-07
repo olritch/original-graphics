@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Login from './User/Login';
-import SignUp from './User/SignUp';
+import Login from '../User/Login';
+import SignUp from '../User/SignUp';
 
 class Navbar extends Component {
 

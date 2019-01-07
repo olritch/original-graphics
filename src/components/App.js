@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom'
-import ScrollToTop from './ScrollToTop';
+import ScrollToTop from './AlwaysShow/ScrollToTop';
 
-import Navbar from './Navbar';
-import Footer from './Footer';
+import Navbar from './AlwaysShow/Navbar';
+import Footer from './AlwaysShow/Footer';
 import LandingPage from './LandingPage';
 import Profile from './User/Profile';
 
@@ -14,10 +14,10 @@ import Landscape from './Gallery/Landscape';
 import Pet from './Gallery/Pet';
 import Wedding from './Gallery/Wedding';
 
-import AboutUs from './AboutUs';
+import AboutUs from './CompanyInfo/AboutUs';
 import ClassCalendar from './Classes/ClassCalendar';
 import ClassList from './Classes/ClassList';
-import Blog from './Blog';
+import Blog from './CompanyInfo/Blog';
 import InstructorInfo from './Classes/InstructorInfo';
 
 import StoreList from './Store/StoreList';
@@ -26,11 +26,11 @@ import StoreCard from './Store/StoreCard';
 import StoreFrame from './Store/StoreFrame';
 import StorePoster from './Store/StorePoster';
 
-import Contact from './Contact';
-import Help from './Help';
-import Privacy from './Privacy';
-import Terms from './Terms';
-import Sitemap from './Sitemap';
+import Contact from './Help/Contact';
+import Help from './Help/Help';
+import Privacy from './Help/Privacy';
+import Terms from './Help/Terms';
+import Sitemap from './Help/Sitemap';
 
 class App extends Component {
 
