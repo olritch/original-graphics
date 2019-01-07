@@ -5,6 +5,7 @@ import ScrollToTop from './ScrollToTop';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import LandingPage from './LandingPage';
+import Profile from './User/Profile';
 
 import GalleryList from './Gallery/GalleryList';
 import Aerial from './Gallery/Aerial';
@@ -61,6 +62,7 @@ class App extends Component {
             <Route path='/instructor-info' exact component={InstructorInfo}/>
             <Route path='/store' exact component={StoreList}/>
             <Route path='/class' exact component={ClassList}/>
+            <Route path='/profile' exact component={Profile}/>
             <Footer/>
           </div>
           </ScrollToTop>
