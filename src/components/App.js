@@ -6,6 +6,8 @@ import Navbar from './AlwaysShow/Navbar';
 import Footer from './AlwaysShow/Footer';
 import LandingPage from './LandingPage';
 import Profile from './User/Profile';
+import ForgotUsername from './User/ForgotUsername';
+import ForgotPassword from './User/ForgotPassword';
 
 import GalleryList from './Gallery/GalleryList';
 import Aerial from './Gallery/Aerial';
@@ -15,9 +17,9 @@ import Pet from './Gallery/Pet';
 import Wedding from './Gallery/Wedding';
 
 import AboutUs from './CompanyInfo/AboutUs';
+import Blog from './CompanyInfo/Blog';
 import ClassCalendar from './Classes/ClassCalendar';
 import ClassList from './Classes/ClassList';
-import Blog from './CompanyInfo/Blog';
 import InstructorInfo from './Classes/InstructorInfo';
 
 import StoreList from './Store/StoreList';
@@ -63,6 +65,8 @@ class App extends Component {
             <Route path='/store' exact component={StoreList}/>
             <Route path='/class' exact component={ClassList}/>
             <Route path='/profile' exact component={Profile}/>
+            <Route path='/forgot-username' exact component={ForgotUsername}/>
+            <Route path='/forgot-password' exact component={ForgotPassword}/>
             <Footer/>
           </div>
           </ScrollToTop>

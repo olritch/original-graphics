@@ -45,7 +45,7 @@ class Login extends React.Component {
           <div className="ui message">
               <Header className="small" textAlign="left">
                   <span onClick={this.goSignup}>New to us? <Link to="/">Create account</Link></span>
-                  <span style={{float: 'right'}}>Forgot <Link to='/'>Username</Link> or <Link to='/'>Password</Link>?</span>
+                  <span style={{float: 'right'}}>Forgot <Link onClick={this.clearModal} to='/forgot-username'>Username</Link> or <Link onClick={this.clearModal} to='/forgot-password'>Password</Link>?</span>
               </Header>
           </div>
         </div>
