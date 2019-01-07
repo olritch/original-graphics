@@ -19,6 +19,11 @@ class SignUp extends Component {
         }
     }
 
+    goLogin = () => {
+      this.props.changeLogin(true);
+      this.props.changeSignup(false);
+    }
+
     handleSubscribe = (e) => {
         e.preventDefault();
 
@@ -76,7 +81,7 @@ class SignUp extends Component {
             </Modal.Content>
             <div className="ui message">
               <Header className="small" textAlign="left">
-                <span>
+                <span onClick={this.goLogin}>
                   Already have an account? <Link to="/">
                     Click here!
                   </Link>
