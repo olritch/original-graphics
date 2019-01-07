@@ -4,9 +4,13 @@ import { Button, Header, Modal } from 'semantic-ui-react';
 
 class Login extends React.Component {
 
-  goSignup =() => {
+  goSignup = () => {
     this.props.changeLogin(false);
     this.props.changeSignup(true);
+  }
+
+  clearModal = () => {
+    this.props.changeLogin(false);
   }
 
   render() {
@@ -32,7 +36,7 @@ class Login extends React.Component {
                     <i aria-hidden="true" className="lock icon" />
                   </div>
                 </div>
-                <Button as={ Link } to='/profile' className="ui teal large fluid button">
+                <Button onClick={this.clearModal} as={ Link } to='/profile' className="ui teal large fluid button">
                   Login
                 </Button>
               </div>

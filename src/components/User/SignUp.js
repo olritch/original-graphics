@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Segment, Header, Modal } from 'semantic-ui-react'
+import { Button, Segment, Header, Modal } from 'semantic-ui-react'
 import Recaptcha from 'react-recaptcha'
 
 class SignUp extends Component {
@@ -25,10 +25,8 @@ class SignUp extends Component {
     }
 
     handleSubscribe = (e) => {
-        e.preventDefault();
-
         if (this.state.isVerified) {
-            alert('You have successfully subscribed!');
+            this.props.changeSignup(false);
         } else {
             alert('Please verify that you are human!');
         }
@@ -65,9 +63,9 @@ class SignUp extends Component {
                       <input required type="password" placeholder="Confirm Password" />
                     </div>
                   </div>
-                  <button onClick={this.handleSubscribe} className="ui teal large fluid button">
+                  <Button as={ Link } to='/profile' onClick={this.handleSubscribe} className="ui teal large fluid button">
                     Create Account
-                  </button>
+                  </Button>
                   <Segment>
                   <Recaptcha sitekey="6LfiA4cUAAAAAIPWf25xQ1bAohV7SRFQ4rS-aSLc"
                   render="explicit"
