@@ -8,7 +8,7 @@ class LandingPage extends Component {
               <h1 style={{fontSize: '80px'}} className='ui inverted header'>
                 Original Graphics
               </h1>
-              <h2>The Best Place For All Your Photography Needs.</h2>
+              <h2>The Best Place For All Your Photography And Videography Needs.</h2>
               <div className='ui huge primary button'>Get Started
                 <i className='right arrow icon'></i>
               </div>
