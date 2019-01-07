@@ -37,7 +37,7 @@ class SignUp extends Component {
             <Modal.Header className="ui black left aligned huge header">
               Join Original Graphics
               <h2 className="ui header grey left aligned">
-                The best place for all of your photography needs.
+                The best place for all of your photography and videography needs.
               </h2>
             </Modal.Header>
             <Modal.Header className="ui black left aligned header medium">

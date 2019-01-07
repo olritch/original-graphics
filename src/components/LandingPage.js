@@ -4,7 +4,7 @@ class LandingPage extends Component {
     render() {
         return (
           <div className='ui inverted vertical masthead center aligned segment'>
-            <div style={{padding: '160px 0px 160px 0px'}} className='ui text container'>
+            <div style={{padding: '160px 0px 160px 0px'}} className='ui container'>
               <h1 style={{fontSize: '80px'}} className='ui inverted header'>
                 Original Graphics
               </h1>
