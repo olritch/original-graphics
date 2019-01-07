@@ -23,19 +23,21 @@ function findUserByCredentials(username, password) {
 }
 
 function findUsers() {
-
+    return UserModel.find()
+        .sort({ firstName: 1 })
+        .select('-password');
 }
 
 function findUserByUsername(username) {
-
+    return UserModel.findOne( {username : username });
 }
 
 function updateUser(uid, user) {
-
+    return UserModel.updateOne( { _id: uid }, user);
 }
 
 function deleteUser(uid) {
-
+    return UserModel.remove({ _id : uid });
 }
 
 module.exports = UserModel;
