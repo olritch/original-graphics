@@ -98,26 +98,29 @@ class SignUp extends Component {
             Create your Original Graphics Account
           </Modal.Header>
           <Modal.Content>
-            <Message size='small' attached negative
-              content='Password and verify password are not a match'/>
+            {errors.match && (<Message size='small' attached negative
+              content={errors.match}/>)}
             <form onSubmit={this.onSubmit} className="ui large form" style={{ minWidth: '300px' }}>
               <div className="ui stacked segment">
                 <div className="field">
                   <div className="ui fluid left icon input">
-                    <input required onChange={this.onChange} name="username" type="text" placeholder="Username" />
+                    <input onChange={this.onChange} name="username" type="text" placeholder="Username" />
                     <i aria-hidden="true" className="user icon" />
                   </div>
+                  {errors.username && (<Message size='small' attached negative content={errors.username}/>)}
                 </div>
                 <div className="field">
                   <div className="ui fluid left icon input">
-                    <input required onChange={this.onChange} name="password" type="password" placeholder="Password" />
+                    <input onChange={this.onChange} name="password" type="password" placeholder="Password" />
                     <i aria-hidden="true" className="lock icon" />
                   </div>
+                  {errors.password && (<Message size='small' attached negative content={errors.password} />)}
                 </div>
                 <div className="field">
                   <div className="ui fluid left icon input">
-                    <input required onChange={this.onChange} name="verifyPassword" type="password" placeholder="Confirm Password" />
+                    <input onChange={this.onChange} name="verifyPassword" type="password" placeholder="Confirm Password" />
                   </div>
+                  {errors.verifyPassword && (<Message size='small' attached negative content={errors.verifyPassword} />)}
                 </div>
                 <Button onClick={this.handleSubscribe} className="ui teal large fluid button">
                   Create Account
