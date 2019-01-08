@@ -4,11 +4,8 @@ import { Link } from 'react-router-dom';
 class Footer extends Component {
 
     state = {
-        numberOfLikes: 0
-    }
-
-    incrementLikes = () => {
-        this.setState({ numberOfLikes : this.state.numberOfLikes + 1})
+        numberOfLikes: 0,
+        liked: false
     }
 
     render() {
