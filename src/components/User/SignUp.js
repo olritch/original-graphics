@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { Message, Button, Segment, Header, Modal } from 'semantic-ui-react';
 import Recaptcha from 'react-recaptcha';
+import axios from 'axios';
 
 class SignUp extends Component {
 
@@ -80,6 +81,24 @@ class SignUp extends Component {
       this.setState({
         errors: {}
       });
+
+      let res = await axios.get(`/api/user?username=${username}`);
+      if (!res.data) {
+        const user = { username, password };
+        // register the user
+        res = await axios.post('/api/register', user);
+        // navigate to profile
+        this.props.history.push({
+          pathname: `profile`,
+          state: { user: res.data }
+        });
+      } else {
+        this.setState({
+          errors: {
+            match: 'Username is taken, please try another one'
+          }
+        });
+      }
 
     }
 
