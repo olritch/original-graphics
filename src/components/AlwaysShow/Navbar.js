@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Modal, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
-import Login from './User/Login';
-import SignUp from './User/SignUp';
+import Login from '../User/Login';
+import SignUp from '../User/SignUp';
 
 class Navbar extends Component {
 
@@ -81,7 +81,7 @@ class Navbar extends Component {
                   </button>
                 <Modal open={this.state.isLogin} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closeLogin}>
                     <Login changeLogin={this.changeLogin} changeSignup={this.changeSignup}/>
-                  </Modal>
+                </Modal>
                 <button style={{marginLeft: '0.5em'}} onClick={this.changeSignup.bind(this, true)} className="ui inverted button">
                   Sign up
                 </button>
