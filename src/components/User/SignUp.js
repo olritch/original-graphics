@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom'
 import { Message, Button, Segment, Header, Modal } from 'semantic-ui-react';
 import Recaptcha from 'react-recaptcha';
 import axios from 'axios';
 
 class SignUp extends Component {
-
-    state = {
-      isVerified: false,
-      username: '',
-      password: '',
-      verifyPassword: '',
-      errors: {}
+      state = {
+        isVerified: false,
+        username: '',
+        password: '',
+        verifyPassword: '',
+        errors: {}
     };
 
     recaptchaLoaded = () => {
@@ -161,4 +160,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp)
