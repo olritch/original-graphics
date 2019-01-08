@@ -5,12 +5,13 @@ import Recaptcha from 'react-recaptcha';
 import axios from 'axios';
 
 class SignUp extends Component {
-      state = {
-        isVerified: false,
-        username: '',
-        password: '',
-        verifyPassword: '',
-        errors: {}
+
+  state = {
+      isVerified: false,
+      username: '',
+      password: '',
+      verifyPassword: '',
+      errors: {}
     };
 
     recaptchaLoaded = () => {
@@ -77,6 +78,7 @@ class SignUp extends Component {
         return;
       }
 
+      // clear errors
       this.setState({
         errors: {}
       });

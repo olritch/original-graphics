@@ -1,8 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import { Button, Header, Modal } from 'semantic-ui-react';
+import axios from 'axios';
 
 class Login extends React.Component {
+
+  state = {
+    username: '',
+    password: '',
+    errors: {}
+  }
+
+  onSubmit = () => {
+
+  }
+
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
 
   goSignup = () => {
     this.props.changeLogin(false);
@@ -22,17 +39,17 @@ class Login extends React.Component {
             Log in to your account
           </Modal.Header>
           <Modal.Content>
-            <form className="ui large form" style={{ minWidth: '300px' }}>
+            <form onSubmit={this.onSubmit} className="ui large form" style={{ minWidth: '300px' }}>
               <div className="ui stacked segment">
                 <div className="field">
                   <div className="ui fluid left icon input">
-                    <input type="text" placeholder="Username" />
+                    <input onChange={this.onChange} name='username' type="text" placeholder="Username" />
                     <i aria-hidden="true" className="user icon" />
                   </div>
                 </div>
                 <div className="field">
                   <div className="ui fluid left icon input">
-                    <input type="password" placeholder="Password" />
+                    <input onChange={this.onChange} name='password' type="password" placeholder="Password" />
                     <i aria-hidden="true" className="lock icon" />
                   </div>
                 </div>
