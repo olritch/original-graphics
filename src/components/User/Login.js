@@ -36,6 +36,7 @@ class Login extends React.Component {
         pathname: `/profile`,
         state: { user: res.data }
       });
+      this.clearModal();
     } else {
       this.setState({
         errors: {
