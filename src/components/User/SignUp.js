@@ -91,6 +91,7 @@ class SignUp extends Component {
           pathname: `profile`,
           state: { user: res.data }
         });
+        this.props.changeSignup(false);
       } else {
         this.setState({
           errors: {
