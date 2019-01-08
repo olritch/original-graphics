@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ScrollToTop from './AlwaysShow/ScrollToTop';
 
 import Navbar from './AlwaysShow/Navbar';
@@ -37,41 +37,41 @@ import Sitemap from './Help/Sitemap';
 class App extends Component {
 
   render() {
-    return (
-        <BrowserRouter>
-          <ScrollToTop>
+    return <BrowserRouter>
+        <ScrollToTop>
           <div>
-            <Navbar/>
-            <Route path='/' exact component={LandingPage}/>
-            <Route path='/gallery' exact component={GalleryList}/>
-            <Route path='/gallery/family' exact component={Family}/>
-            <Route path='/gallery/wedding' exact component={Wedding}/>
-            <Route path='/gallery/landscape' exact component={Landscape}/>
-            <Route path='/gallery/aerial' exact component={Aerial}/>
-            <Route path='/gallery/pet' exact component={Pet}/>
-            <Route path='/about-us' exact component={AboutUs}/>
-            <Route path='/calendar' exact component={ClassCalendar}/>
-            <Route path='/blog' exact component={Blog}/>
-            <Route path='/store/calendar' exact component={StoreCalendar}/>
-            <Route path='/store/card' exact component={StoreCard}/>
-            <Route path='/store/frame' exact component={StoreFrame}/>
-            <Route path='/store/poster' exact component={StorePoster}/>
-            <Route path='/contact' exact component={Contact}/>
-            <Route path='/help' exact component={Help}/>
-            <Route path='/privacy' exact component={Privacy}/>
-            <Route path='/terms' exact component={Terms}/>
-            <Route path='/sitemap' exact component={Sitemap}/>
-            <Route path='/instructor-info' exact component={InstructorInfo}/>
-            <Route path='/store' exact component={StoreList}/>
-            <Route path='/class' exact component={ClassList}/>
-            <Route path='/profile' exact component={Profile}/>
-            <Route path='/forgot-username' exact component={ForgotUsername}/>
-            <Route path='/forgot-password' exact component={ForgotPassword}/>
-            <Footer/>
+            <Navbar />
+            <Switch>
+              <Route path="/" exact component={LandingPage} />
+              <Route path="/gallery" exact component={GalleryList} />
+              <Route path="/gallery/family" exact component={Family} />
+              <Route path="/gallery/wedding" exact component={Wedding} />
+              <Route path="/gallery/landscape" exact component={Landscape} />
+              <Route path="/gallery/aerial" exact component={Aerial} />
+              <Route path="/gallery/pet" exact component={Pet} />
+              <Route path="/about-us" exact component={AboutUs} />
+              <Route path="/calendar" exact component={ClassCalendar} />
+              <Route path="/blog" exact component={Blog} />
+              <Route path="/store/calendar" exact component={StoreCalendar} />
+              <Route path="/store/card" exact component={StoreCard} />
+              <Route path="/store/frame" exact component={StoreFrame} />
+              <Route path="/store/poster" exact component={StorePoster} />
+              <Route path="/contact" exact component={Contact} />
+              <Route path="/help" exact component={Help} />
+              <Route path="/privacy" exact component={Privacy} />
+              <Route path="/terms" exact component={Terms} />
+              <Route path="/sitemap" exact component={Sitemap} />
+              <Route path="/instructor-info" exact component={InstructorInfo} />
+              <Route path="/store" exact component={StoreList} />
+              <Route path="/class" exact component={ClassList} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/forgot-username" exact component={ForgotUsername} />
+              <Route path="/forgot-password" exact component={ForgotPassword} />
+            </Switch>
+            <Footer />
           </div>
-          </ScrollToTop>
-        </BrowserRouter>
-    )
+        </ScrollToTop>
+      </BrowserRouter>
   }
 }
 
