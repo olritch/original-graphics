@@ -4,6 +4,7 @@ module.exports = function(app) {
     app.post('/api/register', createUser);
     app.get('/api/user/:uid', findUserById);
     app.get('/api/user', findUser);
+    app.post('/api/login', login);
 
     async function createUser(req, res) {
         const newUser = req.body;
@@ -31,6 +32,11 @@ module.exports = function(app) {
             res.json(data);
             return;
         }
+    }
+
+    function login(req, res) {
+        const user = req.user;
+        res.json(user);
     }
 
 }
