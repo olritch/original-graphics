@@ -3,18 +3,28 @@ import { Modal, Menu, Dropdown } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Login from '../User/Login';
 import SignUp from '../User/SignUp';
+import Purchase from '../User/Purchase';
 
 class Navbar extends Component {
 
   state = {
       activeItem: 'home',
       isLogin: false,
-      isSignup: false
+      isSignup: false,
+      isPurchase: false
     };
 
   closeLogin = () => this.setState({ isLogin: false })
 
   closeSignup = () => this.setState({ isSignup: false })
+
+  closePurchase = () => this.setState({ isPurchase: false })
+
+  changePurchase = (bol) => {
+    this.setState({
+      isPurchase: bol
+    })
+  }
 
   changeLogin = (bol) => {
     this.setState({
@@ -87,6 +97,12 @@ class Navbar extends Component {
                 </button>
                 <Modal open={this.state.isSignup} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closeSignup}>
                   <SignUp changeLogin={this.changeLogin} changeSignup={this.changeSignup}/>
+                </Modal>
+                <button onClick={this.changePurchase.bind(this, true)} className="ui inverted button">
+                    Purchase
+                  </button>
+                <Modal open={this.state.isPurchase} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closePurchase}>
+                    <Purchase />
                 </Modal>
                 </div>
               </Menu>
