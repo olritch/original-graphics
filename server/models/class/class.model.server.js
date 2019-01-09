@@ -8,7 +8,7 @@ ClassModel.deleteClass = deleteClass;
 ClassModel.getClasses = getClasses;
 
 function getClasses(date) {
-    return ClassModel.find({date: date});
+    return ClassModel.find({ date: date });
 }
 
 function createClass(course) {
