@@ -3,7 +3,8 @@ module.exports = function(app) {
 
     app.post('/api/register', createUser);
     app.get('/api/user/:uid', findUserById);
-    app.get('/api/user', findUserByUsername)
+    app.get('/api/user', findUser);
+    app.post('/api/login', login);
 
     async function createUser(req, res) {
         const newUser = req.body;
@@ -17,13 +18,25 @@ module.exports = function(app) {
         res.json(data);
     }
 
-    async function findUserByUsername(req, res) {
+    async function findUser(req, res) {
         const username = req.query['username'];
+        const password = req.query['password'];
+        if (username && password) {
+            const data = await userModel.findUserByCredentials(username, password);
+            res.json(data);
+            return;
+        }
+
         if (username) {
             const data = await userModel.findUserByUsername(username);
             res.json(data);
             return;
         }
+    }
+
+    function login(req, res) {
+        const user = req.user;
+        res.json(user);
     }
 
 }

@@ -4,11 +4,26 @@ import { Link } from 'react-router-dom';
 class Footer extends Component {
 
     state = {
-        numberOfLikes: 0
+        likes: 0,
+        updated: false
     }
 
-    incrementLikes = () => {
-        this.setState({ numberOfLikes : this.state.numberOfLikes + 1})
+    updateLikes = () => {
+        if (!this.state.updated) {
+            this.setState((prevState, props) => {
+                return {
+                    likes: prevState.likes + 1,
+                    updated: true
+                };
+            });
+        } else {
+            this.setState((prevState, props) => {
+                return {
+                    likes: prevState.likes - 1,
+                    updated: false
+                };
+            });
+        }
     }
 
     render() {
@@ -62,12 +77,12 @@ class Footer extends Component {
                                 </Link>
                             </div>
                             <div className='ui inverted bottom attached huge header'>Follow Us</div>
-                                <div onClick={this.incrementLikes} className="ui labeled button" tabIndex="0">
+                            <div onClick={this.updateLikes} className="ui labeled button" tabIndex="0">
                                 <div  className="ui red button">
                                     <i className="heart icon"></i> Like
                                 </div>
                                 <span  className="ui basic red left pointing label">
-                                    {this.state.numberOfLikes}
+                                    {this.state.likes}
                                 </span>
                             </div>
                         </div>
