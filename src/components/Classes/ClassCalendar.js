@@ -6,7 +6,8 @@ class ClassCalendar extends Component {
 
   state = {
     classes: [],
-    date: new Date()
+    date: new Date(),
+    showClassInput: false
   }
 
   onChange = async date => {
@@ -21,6 +22,9 @@ class ClassCalendar extends Component {
   }
 
   createClass = async () => {
+    this.setState({
+      showClassInput: true
+    })
     const course = {
       date: formatDateString(this.state.date)
     }
@@ -30,8 +34,8 @@ class ClassCalendar extends Component {
 
   render() {
     return (
-      <div className="ui center aligned container segment">
-        <div onClick={this.createClass} className='ui button'>Create Class</div>
+      <div className="ui container segment">
+        <div onClick={this.createClass} className='ui right floated large teal button'>Create Class</div>
         <Calendar onChange={this.onChange} value={this.state.date} />
       </div>
     )
