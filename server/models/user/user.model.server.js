@@ -29,7 +29,7 @@ function findUsers() {
 }
 
 function findUserByUsername(username) {
-    return UserModel.findOne( {username : username });
+    return UserModel.findOne( { username : username });
 }
 
 function updateUser(uid, user) {

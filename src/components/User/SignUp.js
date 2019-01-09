@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom'
 import { Message, Button, Segment, Header, Modal } from 'semantic-ui-react';
 import Recaptcha from 'react-recaptcha';
 import axios from 'axios';
 
 class SignUp extends Component {
 
-    state = {
+  state = {
       isVerified: false,
       username: '',
       password: '',
@@ -78,6 +78,7 @@ class SignUp extends Component {
         return;
       }
 
+      // clear errors
       this.setState({
         errors: {}
       });
@@ -92,6 +93,7 @@ class SignUp extends Component {
           pathname: `profile`,
           state: { user: res.data }
         });
+        this.props.changeSignup(false);
       } else {
         this.setState({
           errors: {
@@ -161,4 +163,4 @@ class SignUp extends Component {
     }
 }
 
-export default SignUp;
+export default withRouter(SignUp)
