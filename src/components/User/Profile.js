@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { TextArea, Dropdown, Form } from 'semantic-ui-react';
+import { TextArea, Form } from 'semantic-ui-react';
 
 class Profile extends Component {
 

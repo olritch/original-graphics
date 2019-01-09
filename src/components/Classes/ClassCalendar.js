@@ -36,23 +36,20 @@ class ClassCalendar extends Component {
   }
 
   render() {
-    return (
-      <div className="ui container segment">
+    return <div className="ui container segment">
         {this.state.showClassInput ?
           <div>
-            <div onClick={this.showClassInput.bind(this, false)} className='ui right floated large red button'>
+            <div onClick={this.createClass} className="ui right floated large teal button">
+              Submit
+            </div>
+            <div onClick={this.showClassInput.bind(this, false)} className="ui right floated large red button">
               Cancel
             </div>
-            <div onClick={this.createClass} className='ui right floated large teal button'>
-                Submit
-            </div>
-          </div> :
-          <div onClick={this.showClassInput.bind(this, true)} className='ui right floated large teal button'>
+          </div> : <div onClick={this.showClassInput.bind(this, true)} className="ui right floated large teal button">
             Create Class
           </div>}
         <Calendar onChange={this.onChange} value={this.state.date} />
       </div>
-    )
   }
 }
 
