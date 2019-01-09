@@ -5,6 +5,11 @@ const ClassModel = mongoose.model('ClassModel', ClassSchema);
 ClassModel.createClass = createClass;
 ClassModel.updateClass = updateClass;
 ClassModel.deleteClass = deleteClass;
+ClassModel.getClasses = getClasses;
+
+function getClasses(date) {
+    return ClassModel.find({date: date});
+}
 
 function createClass(course) {
     return ClassModel.create(course);
