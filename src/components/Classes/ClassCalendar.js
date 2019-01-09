@@ -15,16 +15,13 @@ class ClassCalendar extends Component {
     console.log(dateString);
 
     let res = await axios.get(`/api/class?date=${dateString}`)
-      console.log(res.data);
       this.setState({
         classes: res.data
       })
+      console.log(this.state.classes);
   }
 
   createClass = async () => {
-    this.setState({
-      showClassInput: true
-    })
     const course = {
       date: formatDateString(this.state.date)
     }
@@ -32,10 +29,27 @@ class ClassCalendar extends Component {
     console.log(res.data);
   }
 
+  showClassInput = (bool) => {
+    this.setState({
+      showClassInput: bool
+    });
+  }
+
   render() {
     return (
       <div className="ui container segment">
-        <div onClick={this.createClass} className='ui right floated large teal button'>Create Class</div>
+        {this.state.showClassInput ?
+          <div>
+            <div onClick={this.showClassInput.bind(this, false)} className='ui right floated large red button'>
+              Cancel
+            </div>
+            <div onClick={this.createClass} className='ui right floated large teal button'>
+                Submit
+            </div>
+          </div> :
+          <div onClick={this.showClassInput.bind(this, true)} className='ui right floated large teal button'>
+            Create Class
+          </div>}
         <Calendar onChange={this.onChange} value={this.state.date} />
       </div>
     )
