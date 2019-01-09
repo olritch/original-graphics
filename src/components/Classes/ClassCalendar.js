@@ -36,20 +36,64 @@ class ClassCalendar extends Component {
   }
 
   render() {
-    return <div className="ui container segment">
-        {this.state.showClassInput ?
+    return (
+      // <div className="ui container segment">
+      //   {this.state.showClassInput ?
+      //     <div>
+      //       <div onClick={this.createClass} className="ui right floated large teal button">
+      //         Submit
+      //       </div>
+      //       <div onClick={this.showClassInput.bind(this, false)} className="ui right floated large red button">
+      //         Cancel
+      //       </div>
+      //     </div> : <div onClick={this.showClassInput.bind(this, true)} className="ui right floated large teal button">
+      //       Create Class
+      //     </div>}
+      //   <Calendar onChange={this.onChange} value={this.state.date} />
+      // </div>
+      <div className='ui grid segment container'>
+        <div className='six wide column'>
+          <Calendar onChange={this.onChange} value={this.state.date} />
+        </div>
+
+        <div className='ten wide column'>
+
+          {this.state.showClassInput ?
+
           <div>
-            <div onClick={this.createClass} className="ui right floated large teal button">
-              Submit
+
+          <div className='ui form'>
+            <div onClick={this.createClass} className="ui large teal button">
+                Submit
             </div>
-            <div onClick={this.showClassInput.bind(this, false)} className="ui right floated large red button">
+            <div onClick={this.showClassInput.bind(this, false)} className="ui large red button">
               Cancel
             </div>
-          </div> : <div onClick={this.showClassInput.bind(this, true)} className="ui right floated large teal button">
-            Create Class
-          </div>}
-        <Calendar onChange={this.onChange} value={this.state.date} />
+            <div className='ui stacked segment'>
+              <div className='field'>
+                <input type='text' placeholder='Title' name='title'/>
+              </div>
+              <div className='field'>
+                <input type='text' placeholder='Proficiency' name='proficiency' />
+              </div>
+              <div className='field'>
+                <input type='text' placeholder='Date' name='date' />
+              </div>
+              <textarea placeholder='Description' rows='4'></textarea>
+            </div>
+          </div>
+
+          </div> :
+
+          <div onClick={this.showClassInput.bind(this, true)} className="ui fluid large teal button">
+              Create Class
+          </div>
+          }
+
+        </div>
+
       </div>
+    )
   }
 }
 
