@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var ShopSchema = mongoose.Schema(
+const ShopSchema = mongoose.Schema(
     {
 
     },
