@@ -52,7 +52,7 @@ class Purchase extends React.Component {
             // src''US/i/scr/pixel.gif"/>
 
             // </form>
-
+            <div class="ui message">
             <form className="ui form">
             <h4 className="ui dividing header">Shipping Information</h4>
             <div className="field">
@@ -491,7 +491,7 @@ class Purchase extends React.Component {
             </div>
             <div className="ui button" tabIndex="0">Submit Order</div>
             </form>
-
+            </div>
         )
     }
 }
