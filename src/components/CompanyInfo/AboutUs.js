@@ -9,14 +9,14 @@ class AboutUs extends Component {
             <div className="ui large message">
               Original Graphics aims to give you an exemplary customer service
               experience. We have been providing high quality photography
-              services since 2015. <div>Tell us what you want and we make it
-              our highest priority to fulfill your request.</div>
+              services since 2015. Tell us what you want and we make it
+              our highest priority to fulfill your request.
             </div>
           </div>
           <div className="ui divider" />
         </div>
       )
-   }
+    }
 }
 
 export default AboutUs;
