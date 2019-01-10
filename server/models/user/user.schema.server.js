@@ -1,6 +1,6 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var UserSchema = mongoose.Schema(
+const UserSchema = mongoose.Schema(
     {
         username : String,
         password : String,
@@ -9,7 +9,7 @@ var UserSchema = mongoose.Schema(
         email : { type: String, default: '' },
         image : { type: String, default: 'logo.png' },
         admin : { type: Boolean, default: false },
-        bio : { type: String, default: 'Photography Student' },
+        bio : { type: String, default: '' },
         dateCreated : { type: Date, default: Date.now }
     },
     { collection: 'user' }
