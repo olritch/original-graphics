@@ -36,7 +36,7 @@ class Navbar extends Component {
             <div className="ui container">
               <Menu secondary inverted pointing>
                 <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to="/about-us" name="aboutUs" active={activeItem === 'about-us'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to="/about-us" name="about-us" active={activeItem === 'about-us'} onClick={this.handleItemClick} />
                 <Menu.Item as={Link} to="/calendar" name="calendar" active={activeItem === 'calendar'} onClick={this.handleItemClick} />
                 <Dropdown item text="Gallery" name="gallery" onClick={this.handleItemClick}>
                   <Dropdown.Menu>
