@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import { Dropdown } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'; 
 
 class ClassCalendar extends Component {
@@ -16,6 +17,60 @@ class ClassCalendar extends Component {
     inputDate: ''
   }
 
+  classTitleOptions = [
+    {
+      name: 'title', 
+      text: 'Basic Photography: Taking Better Pictures', 
+      value: 'Basic Photography: Taking Better Pictures'
+    },
+    {
+      name: 'title', 
+      text: 'Intermediate Photography: Beyond Basics', 
+      value: 'Intermediate Photography: Beyond Basics'
+    },
+    {
+      name: 'title', 
+      text: 'Advanced Photography: Don\'t "take" photos, "make" photos', 
+      value: 'Advanced Photography: Don\'t "take" photos, "make" photos'
+    }
+  ]
+
+  classProficiencyOptions = [
+    {
+      name: 'proficiency', 
+      text:'Beginner', 
+      value:'Beginner'
+    },
+    {
+      name: 'proficiency', 
+      text:'Intermediate', 
+      value:'Intermediate'
+    },
+    {
+      name: 'proficiency', 
+      text:'Advanced', 
+      value:'Advanced'
+    }
+  ]
+
+  classDescriptionOptions = [
+    {
+      name: 'description', 
+      text: 'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.',
+      value: 'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.'
+    },
+    {
+      name: 'description', 
+      text: 'You will dive deeper into photography building your skills, personal style and your own photography portfolio.', 
+      value: 'You will dive deeper into photography building your skills, personal style and your own photography portfolio.'
+    },
+    {
+      name: 'description', 
+      text: 'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.', 
+      value: 'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.'
+    }
+  ]
+
   handleChange = (event, {name, value}) => {
     if (this.state.hasOwnProperty(name)) {
       this.setState({ [name]: value });
@@ -29,7 +84,6 @@ class ClassCalendar extends Component {
     this.setState({
       classes: res.data
     })
-    // console.log(this.state.classes)
   }
 
   createClass = async e => {
@@ -50,6 +104,7 @@ class ClassCalendar extends Component {
   }
 
   onClassInputChange = (e) => {
+    console.log(e.target)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -103,29 +158,17 @@ class ClassCalendar extends Component {
                   </div>
                   <div className="ui stacked segment">
 
-                    <div className='inline fields'>
+                    <div className='three fields'>
 
-                      <div className="field">
-                        <input
-                          onChange={this.onClassInputChange}
-                          type="text"
-                          placeholder="Title"
-                          name="title" />
+                      <div className="ten wide field">
+                        <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Title" name="title" options={this.classTitleOptions}/>
                       </div>
-                      <div className="field">
-                        <input
-                          onChange={this.onClassInputChange}
-                          type="text"
-                          placeholder="Proficiency"
-                          name="proficiency"
-                        />
+
+                      <div className="three wide field">
+                        <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Proficiency" name='proficiency' options={this.classProficiencyOptions}/>
                       </div>
-                      <div className="field">
-                        {/* <input
-                          onChange={this.onClassInputChange}
-                          type="text"
-                          placeholder="Date"
-                          name="date" /> */}
+
+                      <div className="three wide field">
                         <DateInput 
                           name='date'
                           placeholder='Date'
@@ -138,12 +181,7 @@ class ClassCalendar extends Component {
 
                     </div>
 
-                    <textarea
-                      onChange={this.onClassInputChange}
-                      name='description'
-                      placeholder="Description"
-                      rows="2" />
-                      
+                      <Dropdown clearable onChange={this.onClassInputChange} fluid selection placeholder='Class Description' name='description' options={this.classDescriptionOptions}/>
                   </div>
                 </div>
               </div>
