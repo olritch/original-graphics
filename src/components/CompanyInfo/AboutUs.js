@@ -22,7 +22,7 @@ class AboutUs extends Component {
               <p>
               We would love to meet with you by phone or in person and talk about your wedding, event, portrait session or video project.
               </p>
-              <div class="ui primary huge button">
+              <div className="ui primary huge button">
               Contact Us
               </div>
             </div>
