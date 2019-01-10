@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
-import { Dropdown } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'; 
 
 class ClassCalendar extends Component {
@@ -17,59 +16,16 @@ class ClassCalendar extends Component {
     inputDate: ''
   }
 
-  classTitleOptions = [
-    {
-      name: 'title', 
-      text: 'Basic Photography: Taking Better Pictures', 
-      value: 'Basic Photography: Taking Better Pictures'
-    },
-    {
-      name: 'title', 
-      text: 'Intermediate Photography: Beyond Basics', 
-      value: 'Intermediate Photography: Beyond Basics'
-    },
-    {
-      name: 'title', 
-      text: 'Advanced Photography: Don\'t "take" photos, "make" photos', 
-      value: 'Advanced Photography: Don\'t "take" photos, "make" photos'
-    }
-  ]
+  classTitleOptions = ['Basic Photography: Taking Better Pictures', 'Intermediate Photography: Beyond Basics', 'Advanced Photography: Don\'t "take" photos, "make" photos'];
 
-  classProficiencyOptions = [
-    {
-      name: 'proficiency', 
-      text:'Beginner', 
-      value:'Beginner'
-    },
-    {
-      name: 'proficiency', 
-      text:'Intermediate', 
-      value:'Intermediate'
-    },
-    {
-      name: 'proficiency', 
-      text:'Advanced', 
-      value:'Advanced'
-    }
-  ]
+  classProficiencyOptions = ['Beginner', 'Intermediate', 'Advanced'];
 
-  classDescriptionOptions = [
-    {
-      name: 'description', 
-      text: 'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.',
-      value: 'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.'
-    },
-    {
-      name: 'description', 
-      text: 'You will dive deeper into photography building your skills, personal style and your own photography portfolio.', 
-      value: 'You will dive deeper into photography building your skills, personal style and your own photography portfolio.'
-    },
-    {
-      name: 'description', 
-      text: 'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.', 
-      value: 'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.'
-    }
-  ]
+  classDescriptionOptions = 
+  [
+    'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.',
+    'You will dive deeper into photography building your skills, personal style and your own photography portfolio.',
+    'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.'
+  ];
 
   handleChange = (event, {name, value}) => {
     if (this.state.hasOwnProperty(name)) {
@@ -161,11 +117,22 @@ class ClassCalendar extends Component {
                     <div className='three fields'>
 
                       <div className="ten wide field">
-                        <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Title" name="title" options={this.classTitleOptions}/>
+                      
+                        <select name="title" onChange={this.onClassInputChange}>
+                          <option hidden>Class Title</option>
+                          {this.classTitleOptions.map((option, i) =>  <option key={i}>{option}</option>)}
+                        </select>
+
                       </div>
 
                       <div className="three wide field">
-                        <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Proficiency" name='proficiency' options={this.classProficiencyOptions}/>
+
+                        <select name="proficiency" onChange={this.onClassInputChange}>
+                          <option hidden>Class Proficiency</option>
+                          {this.classProficiencyOptions.map((option, i) =>  <option key={i}>{option}</option>)}
+                        </select>
+
+                        {/* <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Proficiency" name='proficiency' options={this.classProficiencyOptions}/> */}
                       </div>
 
                       <div className="three wide field">
@@ -181,7 +148,12 @@ class ClassCalendar extends Component {
 
                     </div>
 
-                      <Dropdown clearable onChange={this.onClassInputChange} fluid selection placeholder='Class Description' name='description' options={this.classDescriptionOptions}/>
+                      <select name="description" onChange={this.onClassInputChange}>
+                          <option hidden>Class Description</option>
+                          {this.classDescriptionOptions.map((option, i) =>  <option key={i}>{option}</option>)}
+                      </select>
+
+                      {/* <Dropdown clearable onChange={this.onClassInputChange} fluid selection placeholder='Class Description' name='description' options={this.classDescriptionOptions}/> */}
                   </div>
                 </div>
               </div>
