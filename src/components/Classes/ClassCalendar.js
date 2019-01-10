@@ -16,7 +16,6 @@ class ClassCalendar extends Component {
 
   onCalendarChange = async date => {
     const dateString = formatDateString(date)
-    console.log(dateString)
 
     let res = await axios.get(`/api/class?date=${dateString}`)
     this.setState({
@@ -25,24 +24,32 @@ class ClassCalendar extends Component {
     console.log(this.state.classes)
   }
 
-  createClass = async () => {
-    const course = {
-      date: formatDateString(this.state.viewDate)
-    }
-    let res = await axios.post(`/api/class`, course)
-    console.log(res.data)
-    this.showClassInput(false);
-  }
+  createClass = async e => {
+    e.preventDefault();
 
-  showClassInput = bool => {
-    this.setState({
-      showClassInput: bool
-    })
+    const { title, description, proficiency, date } = this.state;
+
+    const course = {
+      title,
+      description,
+      proficiency,
+      date
+    }
+
+    await axios.post(`/api/class`, course)
+    
+    this.showClassInput(false);
   }
 
   onClassInputChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
+    })
+  }
+
+  showClassInput = bool => {
+    this.setState({
+      showClassInput: bool
     })
   }
 
@@ -114,6 +121,20 @@ class ClassCalendar extends Component {
             onChange={this.onCalendarChange}
             value={this.state.viewDate}
           />
+
+          {
+            this.state.classes.map(course => {
+              return (
+                <div className='ui segment container' key={course._id}>
+                  <h1 className='ui header'>{course.title}</h1>
+                  <h3>{course.proficiency}</h3>
+                  <div className='ui message'><p>{course.description}</p></div>
+                  <div className='ui large red button'>Register for Class</div>
+                </div>
+              )
+            })
+          }
+
         </div>
       </div>
     )
