@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import axios from 'axios';
 
 class ClassCalendar extends Component {
+
   state = {
     classes: [],
     title: '',
@@ -26,10 +27,11 @@ class ClassCalendar extends Component {
 
   createClass = async () => {
     const course = {
-      date: formatDateString(this.state.date)
+      date: formatDateString(this.state.viewDate)
     }
     let res = await axios.post(`/api/class`, course)
     console.log(res.data)
+    this.showClassInput(false);
   }
 
   showClassInput = bool => {
@@ -50,7 +52,7 @@ class ClassCalendar extends Component {
         <div className="sixteen wide column">
           {this.state.showClassInput ? (
             <div>
-              <div className="ui form">
+              <div style={{paddingBottom: '10px'}} className="ui form">
                 <div
                   onClick={this.createClass}
                   className="ui large teal button">
@@ -62,33 +64,39 @@ class ClassCalendar extends Component {
                   Cancel
                 </div>
                 <div className="ui stacked segment">
-                  <div className="field">
-                    <input
-                      onChange={this.onClassInputChange}
-                      type="text"
-                      placeholder="Title"
-                      name="title" />
+
+                  <div className='inline fields'>
+
+                    <div className="field">
+                      <input
+                        onChange={this.onClassInputChange}
+                        type="text"
+                        placeholder="Title"
+                        name="title" />
+                    </div>
+                    <div className="field">
+                      <input
+                        onChange={this.onClassInputChange}
+                        type="text"
+                        placeholder="Proficiency"
+                        name="proficiency"
+                      />
+                    </div>
+                    <div className="field">
+                      <input
+                        onChange={this.onClassInputChange}
+                        type="text"
+                        placeholder="Date"
+                        name="date" />
+                    </div>
+
                   </div>
-                  <div className="field">
-                    <input
-                      onChange={this.onClassInputChange}
-                      type="text"
-                      placeholder="Proficiency"
-                      name="proficiency"
-                    />
-                  </div>
-                  <div className="field">
-                    <input
-                      onChange={this.onClassInputChange}
-                      type="text"
-                      placeholder="Date"
-                      name="date" />
-                  </div>
+
                   <textarea
                     onChange={this.onClassInputChange}
                     name='description'
                     placeholder="Description"
-                    rows="4" />
+                    rows="2" />
                 </div>
               </div>
             </div>
@@ -112,7 +120,7 @@ class ClassCalendar extends Component {
   }
 }
 
-const formatDateString =(date) => {
+const formatDateString = (date) => {
   return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
 }
 
