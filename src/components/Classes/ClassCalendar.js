@@ -21,7 +21,7 @@ class ClassCalendar extends Component {
     this.setState({
       classes: res.data
     })
-    console.log(this.state.classes)
+    // console.log(this.state.classes)
   }
 
   createClass = async e => {

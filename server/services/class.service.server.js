@@ -12,7 +12,7 @@ module.exports = function(app) {
 
     async function createClass(req, res) {
         const course = req.body;
-        console.log(course)
+        // console.log(course)
         const data = await classModel.createClass(course);
         res.json(data);
     }
