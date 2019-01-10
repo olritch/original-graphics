@@ -76,13 +76,13 @@ class ClassCalendar extends Component {
 
         <div className='ui container grid'>
           <aside className='five wide column'>
-            <img className='ui image' src='http://blog.dcccd.edu/wp-content/uploads/2017/11/photography-classes-in-dallas-780x390.jpg'/> 
+            <img className='ui image' alt='boka of camera' src='http://blog.dcccd.edu/wp-content/uploads/2017/11/photography-classes-in-dallas-780x390.jpg'/> 
           </aside>
           <aside className='five wide column'>
-            <img className='ui image' src='https://www.adobe.com/content/dam/acom/en/products/creativecloud/training/the-photography-starter-kit-for-beginners_800.jpg'/>
+            <img className='ui image' alt='camera options' src='https://www.adobe.com/content/dam/acom/en/products/creativecloud/training/the-photography-starter-kit-for-beginners_800.jpg'/>
           </aside>
           <aside className='five wide column'>
-            <img className='ui image' src='https://talk.dallasmakerspace.org/uploads/default/original/4/c/4cd6d7f05c8afc0c5b530b80560688353ac736e8.jpg'/>
+            <img className='ui image' alt='videography against sunset' src='https://talk.dallasmakerspace.org/uploads/default/original/4/c/4cd6d7f05c8afc0c5b530b80560688353ac736e8.jpg'/>
           </aside>
         </div>
 
