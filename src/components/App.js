@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ScrollToTop from './AlwaysShow/ScrollToTop';
 
@@ -59,7 +60,7 @@ class App extends Component {
               <Route path="/store/card" exact component={StoreCard} />
               <Route path="/store/frame" exact component={StoreFrame} />
               <Route path="/store/poster" exact component={StorePoster} />
-              
+
               <Route path="/contact" exact component={Contact} />
               <Route path="/help" exact component={Help} />
               <Route path="/privacy" exact component={Privacy} />
