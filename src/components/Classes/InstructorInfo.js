@@ -67,7 +67,7 @@ I don’t photograph things. I photograph the way they make me feel. Admittedly,
                     <div className="ui stacked segments">
 
                         <div className="ui segment">
-                        <strong><h1>Course Insrtuctor: Olritch Germain</h1></strong>
+                        <strong><h1>Course Instructor: Olritch Germain</h1></strong>
                         </div>
 
                         <div className="ui segment">
