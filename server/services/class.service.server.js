@@ -4,16 +4,10 @@ module.exports = function(app) {
     app.get('/api/class', getClasses);
     app.post('/api/class', createClass);
     app.delete('/api/class', deleteClass);
-    app.get('/api/allClasses', getAllClasses);
 
     async function getClasses(req, res) {
         const date = req.query['date']
         const data = await classModel.getClasses(date);
-        res.json(data);
-    }
-
-    async function getAllClasses(req, res) {
-        const data = await classModel.getAllClasses();
         res.json(data);
     }
 
@@ -25,7 +19,7 @@ module.exports = function(app) {
 
     async function deleteClass(req, res) {
         const cid = req.body;
-        console.log(cid);
+        // console.log(cid);
         const data = await classModel.deleteClass(cid);
         res.json(data);
     }

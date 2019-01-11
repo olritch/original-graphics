@@ -69,7 +69,11 @@ class ClassCalendar extends Component {
         date
       }
 
-      await axios.post(`/api/class`, course)
+      let res = await axios.post(`/api/class`, course)
+      this.setState({
+        classes: [...this.state.classes, res.data]
+      })
+      // console.log(this.state.classes);
       this.showClassInput(false);
     } else {
       this.showClassInput(false);
@@ -79,8 +83,11 @@ class ClassCalendar extends Component {
 
   deleteClass = async course => {
     const { _id } = course;
-    console.log(_id);
+    // console.log(_id);
     await axios.delete('/api/class', { data : {_id}})
+    this.setState({
+      classes: this.state.classes.filter(course => course._id !== _id)
+    })
   }
 
   onClassInputChange = (e) => {
