@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Link } from 'react-router-dom'
 class AboutUs extends Component {
     render() {
       return (
@@ -46,8 +46,8 @@ class AboutUs extends Component {
               <p>
               We would love to meet with you by phone or in person and talk about your wedding, event, portrait session or video project.
               </p>
-              <div className="ui primary huge button">
-              Contact Us
+              <div className="ui huge button">
+               <Link className='' to="/contact"> Contact Us</Link>
               </div>
             </div>
           </div>
