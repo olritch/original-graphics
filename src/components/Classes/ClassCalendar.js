@@ -61,6 +61,8 @@ class ClassCalendar extends Component {
 
     const { title, description, proficiency, date } = this.state;
 
+    // error checking if course already exists on this date
+
     if (title && description && proficiency && date) {
       const course = {
         title,
