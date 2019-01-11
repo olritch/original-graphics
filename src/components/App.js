@@ -6,6 +6,7 @@ import ScrollToTop from './AlwaysShow/ScrollToTop';
 import Navbar from './AlwaysShow/Navbar';
 import Footer from './AlwaysShow/Footer';
 import LandingPage from './LandingPage';
+import ProfileInput from './User/ProfileInput';
 import Profile from './User/Profile';
 import ForgotUsername from './User/ForgotUsername';
 import ForgotPassword from './User/ForgotPassword';
@@ -69,6 +70,7 @@ class App extends Component {
               <Route path="/instructor-info" exact component={InstructorInfo} />
               <Route path="/store" exact component={StoreList} />
               <Route path="/class" exact component={ClassList} />
+              <Route path="/profile-input" exact component={ProfileInput} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/forgot-username" exact component={ForgotUsername} />
               <Route path="/forgot-password" exact component={ForgotPassword} />
