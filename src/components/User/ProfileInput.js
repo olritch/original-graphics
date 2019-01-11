@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { TextArea, Form, Message } from 'semantic-ui-react';
+import { withRouter } from 'react-router-dom'
 import axios from 'axios';
 
-class Profile extends Component {
+class ProfileInput extends Component {
   state = {
     firstName: '',
     lastName: '',
@@ -76,7 +77,8 @@ class Profile extends Component {
     await axios.put('/api/user', user)
 
     this.props.history.push({
-      pathname: `profile`
+      pathname: `profile`,
+      state: { user : user }
     })
   }
 
@@ -162,4 +164,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(ProfileInput);
