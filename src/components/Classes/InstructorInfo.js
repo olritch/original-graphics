@@ -5,11 +5,11 @@ class InstructorInfo extends Component {
     render() {
         return (
 <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <Modal.Header className="ui grey center aligned header medium">
+        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
           Original Graphics
-        </Modal.Header>
+        </div>
 
-            <div>
+            <div className='ui container'>
                 <div style={{marginBottom: "20px", border: "solid", marginTop: "50px"}}>
                     <div className="ui stacked segments" >
 
@@ -22,10 +22,11 @@ class InstructorInfo extends Component {
                         </div>
 
                         <div className="ui segment">
-                            <button className="ui red button"><strong><h3>Basic Photography</h3></strong></button>
                         </div>
                         
-                        <div className="ui segment">
+                        <div className="ui text container">
+                        <button className="ui fluid red button"><strong><h3>Basic Photography</h3></strong></button>
+
                             <p>Sheila McDaniel is a photographer whose work explores stereotypes of race and gender, most often with an emphasis on African American women.
 
 My signature technique is photo-text, which involves including brief passages of text superimposed on her photographs, introducing new levels of meaning to the images. My photography typically explores the perception of African American women in American culture, and in 2007 my work was featured in a 20-year retrospective at the Whitney Museum of Art.</p>
@@ -52,7 +53,7 @@ My signature technique is photo-text, which involves including brief passages of
                         </div>
 
 
-                        <div className="ui segment">
+                        <div className="ui text container">
                             <p>My name is Hieu Tran. I’m a professional photographer-filmmaker specializing in architectural, aerial photography and video production.
 
 “Photography is my muse, my profession, and the thing that will undoubtedly drive me insane someday.
@@ -83,7 +84,7 @@ I don’t photograph things. I photograph the way they make me feel. Admittedly,
 
                         </div>
                         
-                        <div className="ui segment">
+                        <div className="ui text container">
                             <p>I am 36 years old, born and raised in New York, and currently living in Boston Mass.
 
 I studied fine art and photography in college, eventually graduating from Roxbury Community Colle in Boston with a degree in Art. Thought my emphasis was in Drawing and Painting, I took many photography classes which turned my art towards a more gritty, realistic direction. </p>
