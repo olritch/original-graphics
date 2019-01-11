@@ -2,7 +2,7 @@ module.exports = function(app) {
     const userModel = require('../models/user/user.model.server');
 
     app.post('/api/register', createUser);
-    app.get('/api/user/:uid', findUserById);
+    app.get('/api/user/id', findUserById);
     app.get('/api/user', findUser);
     app.post('/api/login', login);
     app.put('/api/user', updateUser);
@@ -14,7 +14,7 @@ module.exports = function(app) {
     }
 
     async function findUserById(req, res) {
-        const userId = req.params['uid'];
+        const userId = req.body;
         const data = await userModel.findUserById(userId);
         res.json(data);
     }
