@@ -107,7 +107,10 @@ class SignUp extends Component {
     render() {
       const { errors } = this.state;
 
-      return <div className="column" style={{ padding: '20px 5px 5px 5px' }}>
+      return  <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+      <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+        Original Graphics
+      </div><div className="column" style={{ padding: '20px 5px 5px 5px' }}>
           <Modal.Header className="ui black left aligned huge header">
             Join Original Graphics
             <h2 className="ui header grey left aligned">
@@ -160,6 +163,7 @@ class SignUp extends Component {
               </span>
             </Header>
           </div>
+        </div>
         </div>
     }
 }

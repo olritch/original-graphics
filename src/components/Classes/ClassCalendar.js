@@ -140,6 +140,12 @@ class ClassCalendar extends Component {
     const { errors } = this.state;
 
     return (
+
+      <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+          Original Graphics
+        </div>
+
       <div>
 
         <div className='ui padded vertical center aligned segment'>
@@ -258,6 +264,7 @@ class ClassCalendar extends Component {
 
           </div>
         </div>
+      </div>
       </div>
     )
   }

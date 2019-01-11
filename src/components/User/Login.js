@@ -72,7 +72,7 @@ class Login extends React.Component {
     const { errors } = this.state;
 
     return <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <Modal.Header className="ui grey center aligned header medium">
+        <Modal.Header className="ui grey center aligned header huge">
           Original Graphics
         </Modal.Header>
         <Modal.Header className="ui black center aligned header large">
