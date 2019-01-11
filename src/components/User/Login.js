@@ -31,19 +31,21 @@ class Login extends React.Component {
     }
 
     let res = await axios.get(`/api/user?username=${username}&password=${password}`);
+
     console.log(res.data);
-    if (!res.data.firstName) {
-      this.props.history.push({
-        pathname: `profile-input`,
-        state: { user: res.data }
-      });
-      this.clearModal();
-    } else if (res.data === null) {
+  
+    if (res.data === null) {
       this.setState({
         errors: {
           match: 'Username and password are not a match'
         }
       });
+    } else if (!res.data.firstName) {
+      this.props.history.push({
+        pathname: `profile-input`,
+        state: { user: res.data }
+      });
+      this.clearModal();
     } else {
       this.props.history.push({
         pathname: `profile`,
