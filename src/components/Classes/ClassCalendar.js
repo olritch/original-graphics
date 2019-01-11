@@ -80,11 +80,7 @@ class ClassCalendar extends Component {
   deleteClass = async course => {
     const { _id } = course;
     console.log(_id);
-    let res = await axios.delete('/api/class', { data : {_id}})
-    console.log(res.data);
-    this.setState({
-      classes: res.data
-    })
+    await axios.delete('/api/class', { data : {_id}})
   }
 
   onClassInputChange = (e) => {
