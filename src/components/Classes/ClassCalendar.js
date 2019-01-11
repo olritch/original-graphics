@@ -5,6 +5,7 @@
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
+import { Message } from 'semantic-ui-react';
 import { DateInput } from 'semantic-ui-calendar-react';
 
 class ClassCalendar extends Component {
@@ -17,7 +18,8 @@ class ClassCalendar extends Component {
     date: '',
     viewDate: new Date(),
     showClassInput: false,
-    inputDate: ''
+    inputDate: '',
+    errors : {}
   }
 
   classTitleOptions = [
@@ -61,12 +63,17 @@ class ClassCalendar extends Component {
 
     let res = await axios.get(`/api/class/date?date=${dateString}`)
     this.setState({
-      classes: res.data
+      classes: res.data,
+      errors: {}
     })
   }
 
   createClass = async e => {
     e.preventDefault();
+
+    this.setState({
+      errors: {}
+    })
 
     const { title, description, proficiency, date } = this.state;
 
@@ -94,10 +101,17 @@ class ClassCalendar extends Component {
       } else {
         // empty input fields
         this.showClassInput(false);
-        return false;
+        this.setState({
+          errors: { emptyField: 'Please populate the inputs with class information' }
+        })
+        return;
       }
     } else {
-      console.log('already have')
+      this.showClassInput(false);
+      this.setState({
+        errors: { classPresent: 'That course has already been created for that day' }
+      })
+      return;
     }
   }
 
@@ -123,6 +137,8 @@ class ClassCalendar extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
       <div>
 
@@ -219,6 +235,10 @@ class ClassCalendar extends Component {
               onChange={this.onCalendarChange}
               value={this.state.viewDate}
             />
+
+            {errors.emptyField && (<Message size='large' attached negative content={errors.emptyField}/>)}
+
+            {errors.classPresent && (<Message size='large' attached negative content={errors.classPresent} />)}
 
             {
               this.state.classes.map(course => {
