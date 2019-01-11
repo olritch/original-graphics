@@ -5,9 +5,9 @@ const ClassModel = mongoose.model('ClassModel', ClassSchema);
 ClassModel.createClass = createClass;
 ClassModel.updateClass = updateClass;
 ClassModel.deleteClass = deleteClass;
-ClassModel.getClasses = getClasses;
+ClassModel.getClassByDate = getClassByDate
 
-function getClasses(date) {
+function getClassByDate(date) {
     return ClassModel.find({ date: date });
 }
 

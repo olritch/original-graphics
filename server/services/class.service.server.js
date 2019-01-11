@@ -7,7 +7,7 @@ module.exports = function(app) {
 
     async function getClasses(req, res) {
         const date = req.query['date']
-        const data = await classModel.getClasses(date);
+        const data = await classModel.getClassByDate(date)
         res.json(data);
     }
 
