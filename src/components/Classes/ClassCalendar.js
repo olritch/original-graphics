@@ -47,10 +47,19 @@ class ClassCalendar extends Component {
     }
   }
 
+  componentDidMount = async () => {
+    const date = formatDateString(new Date());
+    // console.log(date)
+    let res = await axios.get(`/api/class/date?date=${date}`);
+    this.setState({
+      classes: res.data
+    })
+  }
+
   onCalendarChange = async date => {
     const dateString = formatDateString(date)
 
-    let res = await axios.get(`/api/class?date=${dateString}`)
+    let res = await axios.get(`/api/class/date?date=${dateString}`)
     this.setState({
       classes: res.data
     })
@@ -61,25 +70,34 @@ class ClassCalendar extends Component {
 
     const { title, description, proficiency, date } = this.state;
 
+    // console.log(date);
+
     // error checking if course already exists on this date
+    let res = await axios.get(`/api/class?title=${title}&date=${date}`)
+    // console.log(res)
+    if (!res.data) {
 
-    if (title && description && proficiency && date) {
-      const course = {
-        title,
-        description,
-        proficiency,
-        date
+      if (title && description && proficiency && date) {
+        const course = {
+          title,
+          description,
+          proficiency,
+          date
+        }
+
+        let res = await axios.post(`/api/class`, course)
+        this.setState({
+          classes: [...this.state.classes, res.data]
+        })
+        // console.log(this.state.classes);
+        this.showClassInput(false);
+      } else {
+        // empty input fields
+        this.showClassInput(false);
+        return false;
       }
-
-      let res = await axios.post(`/api/class`, course)
-      this.setState({
-        classes: [...this.state.classes, res.data]
-      })
-      // console.log(this.state.classes);
-      this.showClassInput(false);
     } else {
-      this.showClassInput(false);
-      return false;
+      console.log('already have')
     }
   }
 
