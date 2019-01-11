@@ -5,10 +5,10 @@ class StoreCalendar extends Component {
         return (
 
             <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
-          Original Graphics
-        </div>
-            <div>StoreCalender</div>
+                <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+                    Original Graphics
+                </div>
+                <div>StoreCalender</div>
             </div>
         )
       }
