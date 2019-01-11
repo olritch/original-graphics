@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import '../App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import ScrollToTop from './AlwaysShow/ScrollToTop';
 
 import Navbar from './AlwaysShow/Navbar';
 import Footer from './AlwaysShow/Footer';
 import LandingPage from './LandingPage';
+import ProfileInput from './User/ProfileInput';
 import Profile from './User/Profile';
 import ForgotUsername from './User/ForgotUsername';
 import ForgotPassword from './User/ForgotPassword';
@@ -43,19 +45,23 @@ class App extends Component {
             <Navbar />
             <Switch>
               <Route path="/" exact component={LandingPage} />
+
               <Route path="/gallery" exact component={GalleryList} />
               <Route path="/gallery/family" exact component={Family} />
               <Route path="/gallery/wedding" exact component={Wedding} />
               <Route path="/gallery/landscape" exact component={Landscape} />
               <Route path="/gallery/aerial" exact component={Aerial} />
               <Route path="/gallery/pet" exact component={Pet} />
+
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/calendar" exact component={ClassCalendar} />
               <Route path="/blog" exact component={Blog} />
+
               <Route path="/store/calendar" exact component={StoreCalendar} />
               <Route path="/store/card" exact component={StoreCard} />
               <Route path="/store/frame" exact component={StoreFrame} />
               <Route path="/store/poster" exact component={StorePoster} />
+
               <Route path="/contact" exact component={Contact} />
               <Route path="/help" exact component={Help} />
               <Route path="/privacy" exact component={Privacy} />
@@ -64,6 +70,7 @@ class App extends Component {
               <Route path="/instructor-info" exact component={InstructorInfo} />
               <Route path="/store" exact component={StoreList} />
               <Route path="/class" exact component={ClassList} />
+              <Route path="/profile-input" exact component={ProfileInput} />
               <Route path="/profile" exact component={Profile} />
               <Route path="/forgot-username" exact component={ForgotUsername} />
               <Route path="/forgot-password" exact component={ForgotPassword} />

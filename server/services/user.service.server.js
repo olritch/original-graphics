@@ -2,9 +2,10 @@ module.exports = function(app) {
     const userModel = require('../models/user/user.model.server');
 
     app.post('/api/register', createUser);
-    app.get('/api/user/:uid', findUserById);
+    app.get('/api/user/id', findUserById);
     app.get('/api/user', findUser);
     app.post('/api/login', login);
+    app.put('/api/user', updateUser);
 
     async function createUser(req, res) {
         const newUser = req.body;
@@ -13,7 +14,7 @@ module.exports = function(app) {
     }
 
     async function findUserById(req, res) {
-        const userId = req.params['uid'];
+        const userId = req.body;
         const data = await userModel.findUserById(userId);
         res.json(data);
     }
@@ -39,4 +40,10 @@ module.exports = function(app) {
         res.json(user);
     }
 
+    async function updateUser(req, res) {
+        const uid = req.body._id;
+        const user = req.body;
+        const data = await userModel.updateUser(uid, user);
+        res.json(data);
+    }
 }

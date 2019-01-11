@@ -24,6 +24,13 @@ class Contact extends Component {
 
   render() {
     return <div>
+
+<div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+          Original Graphics
+        </div>
+
+
         <div className="ui vertical left aligned segment">
           <div className="ui container">
             <h1 style={{ fontSize: '40px' }} className="ui header">
@@ -71,6 +78,7 @@ class Contact extends Component {
             </div>
           </div>
         </div>
+      </div>
       </div>
   }
 }

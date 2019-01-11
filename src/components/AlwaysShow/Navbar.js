@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Modal, Menu, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Login from '../User/Login';
 import SignUp from '../User/SignUp';
 import Purchase from '../User/Purchase';
@@ -8,7 +8,7 @@ import Purchase from '../User/Purchase';
 class Navbar extends Component {
 
   state = {
-      activeItem: 'home',
+      activeItem: this.props.location.pathname.slice(1),
       isLogin: false,
       isSignup: false,
       isPurchase: false
@@ -42,12 +42,11 @@ class Navbar extends Component {
 
     render() {
         const { activeItem } = this.state;
-
         return <div className="ui inverted vertical center aligned segment" style={{ padding: '1em 0em' }}>
             <div className="ui container">
               <Menu secondary inverted pointing>
                 <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to="/about-us" name="aboutUs" active={activeItem === 'aboutUs'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to="/about-us" name="about-us" active={activeItem === 'about-us'} onClick={this.handleItemClick} />
                 <Menu.Item as={Link} to="/calendar" name="calendar" active={activeItem === 'calendar'} onClick={this.handleItemClick} />
                 <Dropdown item text="Gallery" name="gallery" onClick={this.handleItemClick}>
                   <Dropdown.Menu>
@@ -111,4 +110,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
