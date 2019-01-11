@@ -7,7 +7,7 @@ class Profile extends Component {
 
         return ( 
             <div>
-
+                {firstName}
             </div>
         )
     }
