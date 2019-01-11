@@ -5,6 +5,7 @@ module.exports = function(app) {
     app.get('/api/user/:uid', findUserById);
     app.get('/api/user', findUser);
     app.post('/api/login', login);
+    app.put('/api/user', updateUser);
 
     async function createUser(req, res) {
         const newUser = req.body;
@@ -39,4 +40,7 @@ module.exports = function(app) {
         res.json(user);
     }
 
+    async function updateUser(req, res) {
+
+    }
 }
