@@ -1,20 +1,30 @@
 import React, { Component } from 'react';
 import { Modal, Menu, Dropdown } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Login from '../User/Login';
 import SignUp from '../User/SignUp';
+import Purchase from '../User/Purchase';
 
 class Navbar extends Component {
 
   state = {
-      activeItem: 'home',
+      activeItem: this.props.location.pathname.slice(1),
       isLogin: false,
-      isSignup: false
+      isSignup: false,
+      isPurchase: false
     };
 
   closeLogin = () => this.setState({ isLogin: false })
 
   closeSignup = () => this.setState({ isSignup: false })
+
+  closePurchase = () => this.setState({ isPurchase: false })
+
+  changePurchase = (bol) => {
+    this.setState({
+      isPurchase: bol
+    })
+  }
 
   changeLogin = (bol) => {
     this.setState({
@@ -32,12 +42,11 @@ class Navbar extends Component {
 
     render() {
         const { activeItem } = this.state;
-
         return <div className="ui inverted vertical center aligned segment" style={{ padding: '1em 0em' }}>
             <div className="ui container">
               <Menu secondary inverted pointing>
                 <Menu.Item as={Link} to="/" name="home" active={activeItem === 'home'} onClick={this.handleItemClick} />
-                <Menu.Item as={Link} to="/about-us" name="aboutUs" active={activeItem === 'aboutUs'} onClick={this.handleItemClick} />
+                <Menu.Item as={Link} to="/about-us" name="about-us" active={activeItem === 'about-us'} onClick={this.handleItemClick} />
                 <Menu.Item as={Link} to="/calendar" name="calendar" active={activeItem === 'calendar'} onClick={this.handleItemClick} />
                 <Dropdown item text="Gallery" name="gallery" onClick={this.handleItemClick}>
                   <Dropdown.Menu>
@@ -81,12 +90,18 @@ class Navbar extends Component {
                   </button>
                 <Modal open={this.state.isLogin} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closeLogin}>
                     <Login changeLogin={this.changeLogin} changeSignup={this.changeSignup}/>
-                  </Modal>
+                </Modal>
                 <button style={{marginLeft: '0.5em'}} onClick={this.changeSignup.bind(this, true)} className="ui inverted button">
                   Sign up
                 </button>
                 <Modal open={this.state.isSignup} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closeSignup}>
                   <SignUp changeLogin={this.changeLogin} changeSignup={this.changeSignup}/>
+                </Modal>
+                <button onClick={this.changePurchase.bind(this, true)} className="ui inverted button">
+                    Purchase
+                  </button>
+                <Modal open={this.state.isPurchase} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closePurchase}>
+                    <Purchase />
                 </Modal>
                 </div>
               </Menu>
@@ -95,4 +110,4 @@ class Navbar extends Component {
     }
 }
 
-export default Navbar;
+export default withRouter(Navbar);
