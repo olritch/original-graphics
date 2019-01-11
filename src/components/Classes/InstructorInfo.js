@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Modal } from 'semantic-ui-react';
 
 class InstructorInfo extends Component {
     render() {
@@ -25,7 +24,7 @@ class InstructorInfo extends Component {
                         </div>
                         
                         <div className="ui text container">
-                        <button className="ui fluid red button"><strong><h3>Basic Photography</h3></strong></button>
+                        <button className="ui red button"><strong><h3>Basic Photography</h3></strong></button>
 
                             <p>Sheila McDaniel is a photographer whose work explores stereotypes of race and gender, most often with an emphasis on African American women.
 
@@ -45,7 +44,7 @@ My signature technique is photo-text, which involves including brief passages of
                         <div className="ui segment">
                             <strong><h3>Tue, Thur, Sat&nbsp;&nbsp;&nbsp;&nbsp;9am - 5pm</h3></strong>
                         </div>
-                        <div className="ui segment">
+                        <div className="ui text container">
                             <button className="ui blue button"><strong><h3>Intermidiate Photography</h3></strong></button>
                             
                             <button className="ui black button"><strong><h3>Advance Photography</h3></strong></button>
@@ -75,7 +74,7 @@ I don’t photograph things. I photograph the way they make me feel. Admittedly,
                             <strong><h3>Wen, Fri, Sat, &nbsp;&nbsp;&nbsp;&nbsp;9am - 5pm</h3></strong>
                         </div>
 
-                        <div className="ui segment">
+                        <div className="ui text container">
                             <button className="ui red button"><strong><h3>Basic Photography</h3></strong></button>
                             <button className="ui blue button"><strong><h3>Intermediate Photography</h3></strong></button>
                             <button className="ui black button"><strong><h3>Advance Photography</h3></strong></button>
