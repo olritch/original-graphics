@@ -20,9 +20,49 @@ class Profile extends Component {
   onProfileSubmit = async e => {
     e.preventDefault();
 
-    // const { firstName, lastName, telephone, email, bio } = this.state;
+    const { firstName, lastName, telephone, email, bio } = this.state;
 
-    console.log(this.state);
+    if (firstName === '') {
+      this.setState({
+        errors: { firstName: 'First name is required' }
+      })
+      return;
+    }
+
+    if (lastName === '') {
+      this.setState({
+        errors: { lastName: 'Last name is required' }
+      })
+      return;
+    }
+
+    if (telephone === '') {
+      this.setState({
+        errors: { telephone: 'Phone number is required' }
+      })
+      return;
+    }
+
+    if (email === '') {
+      this.setState({
+        errors: { email: 'Email address is required' }
+      })
+      return;
+    }
+
+    if (bio === '') {
+      this.setState({
+        errors: { bio: 'Biography is required' }
+      })
+      return;
+    }
+
+    this.setState({
+      errors: {}
+    });
+
+
+
   }
 
   render() {
