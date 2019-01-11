@@ -20,7 +20,7 @@ function updateClass(cid, course) {
 }
 
 function deleteClass(cid) {
-    return ClassModel.remove({ _id: cid });
+    return ClassModel.deleteOne({ _id : cid });
 }
 
 module.exports = ClassModel;
