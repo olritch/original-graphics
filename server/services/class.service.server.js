@@ -4,10 +4,16 @@ module.exports = function(app) {
     app.get('/api/class', getClasses);
     app.post('/api/class', createClass);
     app.delete('/api/class', deleteClass);
+    app.get('/api/allClasses', getAllClasses);
 
     async function getClasses(req, res) {
         const date = req.query['date']
         const data = await classModel.getClasses(date);
+        res.json(data);
+    }
+
+    async function getAllClasses(req, res) {
+        const data = await classModel.getAllClasses();
         res.json(data);
     }
 
