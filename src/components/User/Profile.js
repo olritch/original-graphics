@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { TextArea, Form } from 'semantic-ui-react';
+import axios from 'axios';
 
 class Profile extends Component {
   state = {
@@ -8,6 +9,7 @@ class Profile extends Component {
     telephone: '',
     email: '',
     bio: '',
+    _id: this.props.state,
     errors : {}
   }
 
@@ -61,11 +63,11 @@ class Profile extends Component {
       errors: {}
     });
 
-
-
   }
 
   render() {
+    // user id when route to profile through signup or login
+    console.log(this.props.location.state.user._id)
     return (
       <div>
         <div className="ui vertical left aligned segment">
