@@ -41,6 +41,9 @@ module.exports = function(app) {
     }
 
     async function updateUser(req, res) {
-
+        const uid = req.body._id;
+        const user = req.body;
+        const data = await userModel.updateUser(uid, user);
+        res.json(data);
     }
 }
