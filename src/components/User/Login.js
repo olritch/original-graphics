@@ -33,7 +33,7 @@ class Login extends React.Component {
     let res = await axios.get(`/api/user?username=${username}&password=${password}`);
     if (res.data) {
       this.props.history.push({
-        pathname: `/profile`,
+        pathname: `profile-input`,
         state: { user: res.data }
       });
       this.clearModal();

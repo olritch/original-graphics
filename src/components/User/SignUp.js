@@ -90,7 +90,7 @@ class SignUp extends Component {
         res = await axios.post('/api/register', user);
         // navigate to profile
         this.props.history.push({
-          pathname: `profile`,
+          pathname: `profile-input`,
           state: { user: res.data }
         });
         this.props.changeSignup(false);
