@@ -8,7 +8,6 @@ class Terms extends Component {
   <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
     Original Graphics
   </div>
-      <div>Terms</div>
       </div>
 
       <div>
@@ -20,12 +19,12 @@ class Terms extends Component {
           </h1>
 
       <h2>Welcome to Original Graphics</h2>
-	    <p>These terms and conditions outline the rules and regulations for the use of Original Graphics's Website.</p> 
-      <br /> 
-	    <span style={{textTransform: 'capitalize'}}>Original Graphics</span> is located at:<br /> 
+	    <p>These terms and conditions outline the rules and regulations for the use of Original Graphics's Website.</p>
+      <br />
+	    <span style={{textTransform: 'capitalize'}}>Original Graphics</span> is located at:<br />
 	    <address> , <br /> - , <br />
 	    </address>
-	    <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Original Graphics's website 
+	    <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Original Graphics's website
 	    if you do not accept all of the terms and conditions stated on this page.</p>
 	    <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice
 	    and any or all Agreements: “Client”, “You” and “Your” refers to you, the person accessing this website
@@ -37,13 +36,13 @@ class Terms extends Component {
 	    of provision of the Company’s stated services/products, in accordance with and subject to, prevailing law
 	    of . Any use of the above terminology or other words in the singular, plural,
 	    capitalisation and/or he/she or they, are taken as interchangeable and therefore as referring to same.</p>
-  
+
       <h2>Cookies</h2>
-	    <p>We employ the use of cookies. By using Original Graphics's website you consent to the use of cookies 
+	    <p>We employ the use of cookies. By using Original Graphics's website you consent to the use of cookies
 	    in accordance with Original Graphics’s privacy    policy.</p>
       <p>Most of the modern day interactive web sites
 	    use cookies to enable us to retrieve user details for each visit. Cookies are used in some areas of our site
-	    to enable the functionality of this area and ease of use for those people visiting. Some of our 
+	    to enable the functionality of this area and ease of use for those people visiting. Some of our
 	    affiliate / advertising partners may also use cookies.</p><h2>License</h2>
 	    <p>Unless otherwise stated, Original Graphics and/or it’s licensors own the intellectual property rights for
 	    all material on Original Graphics. All intellectual property rights are reserved. You may view and/or print
@@ -157,13 +156,13 @@ class Terms extends Component {
 	we will not be liable for any loss or damage of any nature.</p>
 
 <h2>Credit & Contact Information</h2>
-	<p>This Terms and conditions page was created at 
+	<p>This Terms and conditions page was created at
     <a style={{
     color:'inherit',
     textDecoration:'none',
     cursor:'text'}}
 		href="https://termsandconditionstemplate.com">termsandconditionstemplate.com</a> generator. If you have
-	any queries regarding any of our terms, please contact us.</p>		
+	any queries regarding any of our terms, please contact us.</p>
         </div>
       </div>
     </div>

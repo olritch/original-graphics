@@ -9,7 +9,7 @@ class GalleryList extends Component {
           Original Graphics
         </div>
 
-        <div className="ui vertical left aligned segment">
+        <div className="ui vertical center aligned segment">
           <div className="ui container">
             <h1 style={{ fontSize: '40px' }} className="ui header">
               Gallery

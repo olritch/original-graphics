@@ -5,21 +5,25 @@ class AboutUs extends Component {
       return (
 
         <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
-          Original Graphics
-        </div>
+          <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+            Original Graphics
+          </div>
+
+          <div className="ui vertical center aligned segment">
+          <h1 style={{ fontSize: '40px' }} className="ui header">
+            About Us
+          </h1>
+          </div>
 
         <div>
         <div className="ui vertical left aligned segment">
         <div className="ui text container">
-          <h1 style={{ fontSize: '40px' }} className="ui header">
-            About Us
-          </h1>
+
 
           <div className='ui container grid'>
 
             <aside className='five wide column'>
-              <img className='ui image' alt='playing pup' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG68WSLMDeHSueoCLHHP5KGuprByUs7XcNJ0GeUcJh6DdtOo4p'/> 
+              <img className='ui image' alt='playing pup' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG68WSLMDeHSueoCLHHP5KGuprByUs7XcNJ0GeUcJh6DdtOo4p'/>
             </aside>
 
             <aside className='five wide column'>
@@ -29,7 +33,7 @@ class AboutUs extends Component {
             <aside className='five wide column'>
               <img className='ui image' alt='sunset beach' src='https://static1.squarespace.com/static/5538162ce4b08dd6e8cd8b8e/55513bd4e4b094c827fb399e/55513c16e4b08eb084d14c79/1431387163493/IMG_1479-1928907293-O.jpg?format=300w'/>
             </aside>
-            
+
           </div>
 
         <div>
@@ -46,9 +50,7 @@ class AboutUs extends Component {
               <p>
               We would love to meet with you by phone or in person and talk about your wedding, event, portrait session or video project.
               </p>
-              <div className="ui huge button">
-               <Link className='' to="/contact"> Contact Us</Link>
-              </div>
+               <Link to="/contact" className='ui huge primary button'> Contact Us</Link>
             </div>
           </div>
           <div className="ui divider" />

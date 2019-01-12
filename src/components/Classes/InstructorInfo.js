@@ -3,17 +3,23 @@ import React, { Component } from 'react';
 class InstructorInfo extends Component {
     render() {
         return (
-<div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
-          Original Graphics
-        </div>
+        <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+            <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+            Original Graphics
+            </div>
+
+            <div className="ui vertical center aligned segment">
+                <h1 style={{ fontSize: '40px' }} className="ui header">
+                    Instructor List
+                </h1>
+            </div>
 
             <div className='ui container'>
                 <div style={{marginBottom: "20px", border: "solid", marginTop: "50px"}}>
                     <div className="ui stacked segments" >
 
                         <div className="ui segment">
-                        <strong><h1>Course Instructor: Sheila McDaniel</h1></strong>     
+                        <strong><h1>Course Instructor: Sheila McDaniel</h1></strong>
                         </div>
 
                         <div className="ui segment">
@@ -22,7 +28,7 @@ class InstructorInfo extends Component {
 
                         <div className="ui segment">
                         </div>
-                        
+
                         <div className="ui text container">
                         <button className="ui red button"><strong><h3>Basic Photography</h3></strong></button>
 
@@ -33,22 +39,22 @@ My signature technique is photo-text, which involves including brief passages of
 
                     </div>
                 </div>
-                
+
                 <div style={{marginBottom: "20px", border: "solid", marginTop: "50px"}}>
                     <div className="ui stacked segments">
 
                         <div className="ui segment">
-                        <strong><h1>Course Instructor: Hieu Tran</h1></strong>     
+                        <strong><h1>Course Instructor: Hieu Tran</h1></strong>
                         </div>
 
                         <div className="ui segment">
                             <strong><h3>Tue, Thur, Sat&nbsp;&nbsp;&nbsp;&nbsp;9am - 5pm</h3></strong>
                         </div>
                         <div className="ui text container">
-                            <button className="ui blue button"><strong><h3>Intermidiate Photography</h3></strong></button>
-                            
+                            <button className="ui blue button"><strong><h3>Intermediate Photography</h3></strong></button>
+
                             <button className="ui black button"><strong><h3>Advance Photography</h3></strong></button>
-                        
+
                         </div>
 
 
@@ -59,7 +65,7 @@ My signature technique is photo-text, which involves including brief passages of
 
 I don’t photograph things. I photograph the way they make me feel. Admittedly, it’s a bit of a strange concept. But it’s honest – and it’s the best way to describe my approach to the craft.</p>
                         </div>
-                        
+
                     </div>
                 </div>
 
@@ -71,7 +77,7 @@ I don’t photograph things. I photograph the way they make me feel. Admittedly,
                         </div>
 
                         <div className="ui segment">
-                            <strong><h3>Wen, Fri, Sat, &nbsp;&nbsp;&nbsp;&nbsp;9am - 5pm</h3></strong>
+                            <strong><h3>Wed, Fri, Sat &nbsp;&nbsp;&nbsp;&nbsp;9am - 5pm</h3></strong>
                         </div>
 
                         <div className="ui text container">
@@ -82,13 +88,13 @@ I don’t photograph things. I photograph the way they make me feel. Admittedly,
 
 
                         </div>
-                        
+
                         <div className="ui text container">
                             <p>I am 36 years old, born and raised in New York, and currently living in Boston Mass.
 
 I studied fine art and photography in college, eventually graduating from Roxbury Community Colle in Boston with a degree in Art. Thought my emphasis was in Drawing and Painting, I took many photography classes which turned my art towards a more gritty, realistic direction. </p>
                         </div>
-                        
+
                     </div>
                 </div>
             </div>

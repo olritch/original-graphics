@@ -97,7 +97,7 @@ class Navbar extends Component {
                 <Modal open={this.state.isSignup} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closeSignup}>
                   <SignUp changeLogin={this.changeLogin} changeSignup={this.changeSignup}/>
                 </Modal>
-                <button onClick={this.changePurchase.bind(this, true)} className="ui inverted button">
+                <button style={{ marginLeft: '0.5em' }} onClick={this.changePurchase.bind(this, true)} className="ui inverted button">
                     Purchase
                   </button>
                 <Modal open={this.state.isPurchase} closeOnEscape={true} closeOnDimmerClick={true} onClose={this.closePurchase}>
