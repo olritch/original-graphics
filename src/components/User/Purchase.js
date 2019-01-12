@@ -1,12 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 class Purchase extends React.Component {
+
     componentDidMount() {
-        console.log(this.props)
+        // console.log(this.props)
     }
-    
+
     render() {
         return (
+
             // <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
 
             // {/* <!-- Identify your business so that you can collect the payments. --> */}
@@ -52,7 +54,8 @@ class Purchase extends React.Component {
             // src''US/i/scr/pixel.gif"/>
 
             // </form>
-            <div class="ui message">
+
+            <div className="ui message">
             <form className="ui form">
             <h4 className="ui dividing header">Shipping Information</h4>
             <div className="field">
@@ -455,27 +458,27 @@ class Purchase extends React.Component {
                 <div className="default text">Saved Contacts</div>
                 <div className="menu">
                     <div className="item" data-value="jenny" data-text="Jenny">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Jenny Hess
                     </div>
                     <div className="item" data-value="elliot" data-text="Elliot">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Elliot Fu
                     </div>
                     <div className="item" data-value="stevie" data-text="Stevie">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Stevie Feliciano
                     </div>
                     <div className="item" data-value="christian" data-text="Christian">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Christian
                     </div>
                     <div className="item" data-value="matt" data-text="Matt">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Matt
                     </div>
                     <div className="item" data-value="justen" data-text="Justen">
-                    <img className="ui mini avatar image" src=''/>
+                    <img className="ui mini avatar image" src='' alt=''/>
                     Justen Kitsune
                     </div>
                 </div>
