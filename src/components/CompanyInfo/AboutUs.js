@@ -45,7 +45,7 @@ class AboutUs extends Component {
               To us photography is about people being real and then letting us paint a picture of that moment to remember it forever. This is the story that matters most: real people, real stories, real moments.
               </p>
               <p>
-              <strong>We are incredibly fortunate to have a team of photographers who work with us on any given weekend. Please take a few minutes to get to know us.</strong>
+              <strong>We are incredibly fortunate to have a team of photographers who work with us on any given day. Please take a few minutes to get to know us.</strong>
               </p>
               <p>
               We would love to meet with you by phone or in person and talk about your wedding, event, portrait session or video project.
