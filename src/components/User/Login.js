@@ -31,18 +31,27 @@ class Login extends React.Component {
     }
 
     let res = await axios.get(`/api/user?username=${username}&password=${password}`);
-    if (res.data) {
-      this.props.history.push({
-        pathname: `/profile`,
-        state: { user: res.data }
-      });
-      this.clearModal();
-    } else {
+
+    console.log(res.data);
+  
+    if (res.data === null) {
       this.setState({
         errors: {
           match: 'Username and password are not a match'
         }
       });
+    } else if (!res.data.firstName) {
+      this.props.history.push({
+        pathname: `profile-input`,
+        state: { user: res.data }
+      });
+      this.clearModal();
+    } else {
+      this.props.history.push({
+        pathname: `profile`,
+        state: { user: res.data }
+      });
+      this.clearModal();
     }
   };
 
@@ -65,7 +74,7 @@ class Login extends React.Component {
     const { errors } = this.state;
 
     return <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-        <Modal.Header className="ui grey center aligned header medium">
+        <Modal.Header className="ui grey center aligned header huge">
           Original Graphics
         </Modal.Header>
         <Modal.Header className="ui black center aligned header large">

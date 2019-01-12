@@ -90,7 +90,7 @@ class SignUp extends Component {
         res = await axios.post('/api/register', user);
         // navigate to profile
         this.props.history.push({
-          pathname: `profile`,
+          pathname: `profile-input`,
           state: { user: res.data }
         });
         this.props.changeSignup(false);
@@ -107,13 +107,17 @@ class SignUp extends Component {
     render() {
       const { errors } = this.state;
 
-      return <div className="column" style={{ padding: '20px 5px 5px 5px' }}>
+      return  <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+      <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+        Original Graphics
+      </div><div className="column" style={{ padding: '20px 5px 5px 5px' }}>
           <Modal.Header className="ui black left aligned huge header">
             Join Original Graphics
             <h2 className="ui header grey left aligned">
               The best place for all of your photography and videography
               needs.
             </h2>
+            <div className='ui divider'></div>
           </Modal.Header>
           <Modal.Header className="ui black left aligned header medium">
             Create your Original Graphics Account
@@ -159,6 +163,7 @@ class SignUp extends Component {
               </span>
             </Header>
           </div>
+        </div>
         </div>
     }
 }

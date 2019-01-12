@@ -5,10 +5,15 @@ const ClassModel = mongoose.model('ClassModel', ClassSchema);
 ClassModel.createClass = createClass;
 ClassModel.updateClass = updateClass;
 ClassModel.deleteClass = deleteClass;
-ClassModel.getClasses = getClasses;
+ClassModel.getClassByDate = getClassByDate;
+ClassModel.getClassByTitleAndDate = getClassByTitleAndDate;
 
-function getClasses(date) {
+function getClassByDate(date) {
     return ClassModel.find({ date: date });
+}
+
+function getClassByTitleAndDate(title, date) {
+    return ClassModel.findOne({ title : title, date : date });
 }
 
 function createClass(course) {
@@ -20,7 +25,7 @@ function updateClass(cid, course) {
 }
 
 function deleteClass(cid) {
-    return ClassModel.remove({ _id: cid });
+    return ClassModel.deleteOne({ _id : cid });
 }
 
 module.exports = ClassModel;

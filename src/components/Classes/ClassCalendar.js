@@ -1,7 +1,12 @@
+// Implement the delete class button
+// Fix class.model to remove based on date and title
+// In class.service will call classModel.deleteClass(title, date)
+
 import React, { Component } from 'react';
 import Calendar from 'react-calendar';
 import axios from 'axios';
-import { DateInput } from 'semantic-ui-calendar-react'; 
+import { Message } from 'semantic-ui-react';
+import { DateInput } from 'semantic-ui-calendar-react';
 
 class ClassCalendar extends Component {
 
@@ -13,18 +18,29 @@ class ClassCalendar extends Component {
     date: '',
     viewDate: new Date(),
     showClassInput: false,
-    inputDate: ''
+    inputDate: '',
+    errors : {}
   }
 
-  classTitleOptions = ['Basic Photography: Taking Better Pictures', 'Intermediate Photography: Beyond Basics', 'Advanced Photography: Don\'t "take" photos, "make" photos'];
+  classTitleOptions = [
+    'Basic Photography: Taking Better Pictures',
+    'Intermediate Photography: Beyond Basics',
+    'Advanced Photography: Don\'t "take" photos, "make" photos'
+  ];
 
-  classProficiencyOptions = ['Beginner', 'Intermediate', 'Advanced'];
+  classProficiencyOptions = [
+    'Beginner',
+    'Intermediate',
+    'Advanced'
+  ];
 
-  classDescriptionOptions = 
+  classDescriptionOptions =
   [
-    'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning.',
-    'You will dive deeper into photography building your skills, personal style and your own photography portfolio.',
-    'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing.'
+    'In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It\'s easy, fun and the best way to start learning. Understanding photography\'s basics is essential to making great images. Start with basic photographic principles and camera controls and expand to composition, color theory and issues of visual perception.',
+
+    'You will dive deeper into photography building your skills, personal style and your own photography portfolio. Brush up on technical issues and camera use. Improve lighting, composition, approach to subject matter.',
+
+    'Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing. Learn to use your camera to better tell your intended story through exploring more complex camera techniques and thinking processes.'
   ];
 
   handleChange = (event, {name, value}) => {
@@ -33,34 +49,82 @@ class ClassCalendar extends Component {
     }
   }
 
+  componentDidMount = async () => {
+    const date = formatDateString(new Date());
+    // console.log(date)
+    let res = await axios.get(`/api/class/date?date=${date}`);
+    this.setState({
+      classes: res.data
+    })
+  }
+
   onCalendarChange = async date => {
     const dateString = formatDateString(date)
 
-    let res = await axios.get(`/api/class?date=${dateString}`)
+    let res = await axios.get(`/api/class/date?date=${dateString}`)
     this.setState({
-      classes: res.data
+      classes: res.data,
+      errors: {}
     })
   }
 
   createClass = async e => {
     e.preventDefault();
 
+    this.setState({
+      errors: {}
+    })
+
     const { title, description, proficiency, date } = this.state;
 
-    const course = {
-      title,
-      description,
-      proficiency,
-      date
-    }
+    // console.log(date);
 
-    await axios.post(`/api/class`, course)
-    
-    this.showClassInput(false);
+    // error checking if course already exists on this date
+    let res = await axios.get(`/api/class?title=${title}&date=${date}`)
+    // console.log(res)
+    if (!res.data) {
+
+      if (title && description && proficiency && date) {
+        const course = {
+          title,
+          description,
+          proficiency,
+          date
+        }
+
+        let res = await axios.post(`/api/class`, course)
+        this.setState({
+          classes: [...this.state.classes, res.data]
+        })
+        // console.log(this.state.classes);
+        this.showClassInput(false);
+      } else {
+        // empty input fields
+        this.showClassInput(false);
+        this.setState({
+          errors: { emptyField: 'Please populate the inputs with class information' }
+        })
+        return;
+      }
+    } else {
+      this.showClassInput(false);
+      this.setState({
+        errors: { classPresent: 'That course has already been created for that day' }
+      })
+      return;
+    }
+  }
+
+  deleteClass = async course => {
+    const { _id } = course;
+    // console.log(_id);
+    await axios.delete('/api/class', { data : {_id}})
+    this.setState({
+      classes: this.state.classes.filter(course => course._id !== _id)
+    })
   }
 
   onClassInputChange = (e) => {
-    console.log(e.target)
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -73,7 +137,15 @@ class ClassCalendar extends Component {
   }
 
   render() {
+    const { errors } = this.state;
+
     return (
+
+      <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+        <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+          Original Graphics
+        </div>
+
       <div>
 
         <div className='ui padded vertical center aligned segment'>
@@ -87,7 +159,7 @@ class ClassCalendar extends Component {
 
         <div className='ui container grid'>
           <aside className='five wide column'>
-            <img className='ui image' alt='boka of camera' src='http://blog.dcccd.edu/wp-content/uploads/2017/11/photography-classes-in-dallas-780x390.jpg'/> 
+            <img className='ui image' alt='boka of camera' src='http://blog.dcccd.edu/wp-content/uploads/2017/11/photography-classes-in-dallas-780x390.jpg'/>
           </aside>
           <aside className='five wide column'>
             <img className='ui image' alt='camera options' src='https://www.adobe.com/content/dam/acom/en/products/creativecloud/training/the-photography-starter-kit-for-beginners_800.jpg'/>
@@ -117,7 +189,7 @@ class ClassCalendar extends Component {
                     <div className='three fields'>
 
                       <div className="ten wide field">
-                      
+
                         <select name="title" onChange={this.onClassInputChange}>
                           <option hidden>Class Title</option>
                           {this.classTitleOptions.map((option, i) =>  <option key={i}>{option}</option>)}
@@ -129,14 +201,13 @@ class ClassCalendar extends Component {
 
                         <select name="proficiency" onChange={this.onClassInputChange}>
                           <option hidden>Class Proficiency</option>
-                          {this.classProficiencyOptions.map((option, i) =>  <option key={i}>{option}</option>)}
+                          {this.classProficiencyOptions.map((option, i) => <option key={i}>{option}</option>)}
                         </select>
 
-                        {/* <Dropdown clearable onChange={this.onClassInputChange} selection placeholder="Class Proficiency" name='proficiency' options={this.classProficiencyOptions}/> */}
                       </div>
 
                       <div className="three wide field">
-                        <DateInput 
+                        <DateInput
                           name='date'
                           placeholder='Date'
                           value={this.state.date}
@@ -153,7 +224,6 @@ class ClassCalendar extends Component {
                           {this.classDescriptionOptions.map((option, i) =>  <option key={i}>{option}</option>)}
                       </select>
 
-                      {/* <Dropdown clearable onChange={this.onClassInputChange} fluid selection placeholder='Class Description' name='description' options={this.classDescriptionOptions}/> */}
                   </div>
                 </div>
               </div>
@@ -172,6 +242,10 @@ class ClassCalendar extends Component {
               value={this.state.viewDate}
             />
 
+            {errors.emptyField && (<Message size='large' attached negative content={errors.emptyField}/>)}
+
+            {errors.classPresent && (<Message size='large' attached negative content={errors.classPresent} />)}
+
             {
               this.state.classes.map(course => {
                 return (
@@ -179,7 +253,10 @@ class ClassCalendar extends Component {
                     <h1 className='ui header'>{course.title}</h1>
                     <h3>{course.proficiency}</h3>
                     <div className='ui message'><p>{course.description}</p></div>
-                    <div className='ui large red button'>Register for Class</div>
+                    <div className='ui stackable two buttons'>
+                      <div className='ui large primary button'>Register for Class</div>
+                      <div onClick={this.deleteClass.bind(null, course)} className='ui large red button'>Delete Class</div>
+                    </div>
                   </div>
                 )
               })
@@ -187,6 +264,7 @@ class ClassCalendar extends Component {
 
           </div>
         </div>
+      </div>
       </div>
     )
   }
