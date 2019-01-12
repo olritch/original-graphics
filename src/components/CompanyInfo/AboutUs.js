@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+
 class AboutUs extends Component {
+
   render() {
     return (
       <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
@@ -73,7 +75,7 @@ class AboutUs extends Component {
                   We would love to meet with you by phone or in person and talk
                   about your wedding, event, portrait session or video project.
                 </p>
-                <Link to="/contact" className="ui huge primary button">
+                <Link to="/contact" className="ui fluid huge primary button">
                   {' '}
                   Contact Us
                 </Link>
