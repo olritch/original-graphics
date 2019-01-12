@@ -5,27 +5,29 @@ class Terms extends Component {
     return (
 			<div>
       <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
-  <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
-    Original Graphics
-  </div>
+				<div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
+					Original Graphics
+				</div>
       </div>
+
+			<div className='ui vertical center aligned segment'>
+					<h1 style={{ fontSize: '40px' }} className="ui header">
+						Terms & Conditions
+          </h1>
+			</div>
 
       <div>
       <div>
       <div className="ui vertical left aligned segment">
-            <div className="ui text container">
-          <h1 style={{ fontSize: '40px' }} className="ui header">
-            Terms & Conditions
-          </h1>
+			<div className="ui text container">
 
       <h2>Welcome to Original Graphics</h2>
-	    <p>These terms and conditions outline the rules and regulations for the use of Original Graphics's Website.</p>
-      <br />
+	    <p>These terms and conditions outline the rules and regulations for the use of this website.</p>
 	    <span style={{textTransform: 'capitalize'}}>Original Graphics</span> is located at:<br />
 	    <address> , <br /> - , <br />
-	    </address>
-	    <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Original Graphics's website
-	    if you do not accept all of the terms and conditions stated on this page.</p>
+	    </address> <br />
+
+	    <p>By accessing this website we assume you accept these terms and conditions in full. Do not continue to use Original Graphics's website if you do not accept all of the terms and conditions stated below.</p>
 	    <p>The following terminology applies to these Terms and Conditions, Privacy Statement and Disclaimer Notice
 	    and any or all Agreements: “Client”, “You” and “Your” refers to you, the person accessing this website
 	    and accepting the Company’s terms and conditions. “The Company”, “Ourselves”, “We”, “Our” and “Us”, refers
