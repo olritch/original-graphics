@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
+
+
 class Blog extends Component {
   state = {
     author: "",
@@ -15,7 +17,7 @@ class Blog extends Component {
     this.setState({
       comments: res.data
     });
-    console.log(this.state.comments);
+    // console.log(this.state.comments);
   };
 
   createComment = async e => {
@@ -29,7 +31,7 @@ class Blog extends Component {
     };
 
     let res = await axios.post(`/api/blog`, comment);
-    console.log(res.data);
+    // console.log(res.data);
     this.setState({
       comments: [...this.state.comments, res.data],
       showBlogInput: false
@@ -49,6 +51,14 @@ class Blog extends Component {
     });
   };
 
+  deleteComment = async course => {
+    // console.log(course)
+    const { _id } = course;
+    await axios.delete('/api/blog', { data: { _id } });
+    this.setState({
+      comments: this.state.comments.filter(comment => comment._id !== _id)
+    });
+  }
 
   render() {
     return (
@@ -59,6 +69,12 @@ class Blog extends Component {
         >
           Original Graphics
         </div>
+
+        <div className="ui padded vertical center aligned segment">
+            <h1 style={{ fontSize: "40px" }} className="ui header">
+              Blog List
+            </h1>
+          </div>
 
         <div className='ui grid segment container'>
           <div className='sixteen wide column'>
@@ -107,7 +123,7 @@ class Blog extends Component {
                       onClick={this.showBlogInput.bind(this, true)}
                       className="ui large teal button"
                     >
-                      Create Blog
+                      Create Blog Comment
                   </div>
                   </div>
                 </div>
@@ -117,6 +133,7 @@ class Blog extends Component {
 
         <div className="ui text container">
           <div className="ui comments">
+            <h3 className='ui dividing header'>Comments</h3>
             {this.state.comments.map(comment => {
               return (
                 <div className="comment" key={comment._id}>
@@ -129,11 +146,13 @@ class Blog extends Component {
                     </div>
                     <div className="text">{comment.content}</div>
                     <div className="actions">
-                      <a href="" className="reply active">
+                      <button className='ui small basic button reply'>
                         Reply
-                      </a>
+                      </button>
+                      <div onClick={this.deleteComment.bind(null, comment)} className='ui mini red basic button'>Delete</div>
                     </div>
                   </div>
+                  <div className='ui divider'/>
                 </div>
               );
             })}
