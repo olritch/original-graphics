@@ -1,16 +1,55 @@
-module.exports = function(app) {
+module.exports = function (app) {
     const userModel = require('../models/user/user.model.server');
+    const passport = require('passport');
+    const LocalStrategy = require('passport-local').Strategy;
+    const bcrypt = require('bcrypt-nodejs');
 
-    app.post('/api/register', createUser);
+    passport.serializeUser(serializeUser);
+    passport.use(new LocalStrategy(localStrategy));
+
+
+    app.post('/api/register', register);
     app.get('/api/user/id', findUserById);
     app.get('/api/user', findUser);
-    app.post('/api/login', login);
+    app.post('/api/login', passport.authenticate('local'), login);
+    app.post("/api/logout", logout);
+    app.post("/api/loggedIn", loggedIn);
     app.put('/api/user', updateUser);
 
-    async function createUser(req, res) {
+    function serializeUser(user, done) {
+        done(null, user);
+    }
+
+    passport.deserializeUser(deserializeUser);
+
+    function deserializeUser(user, done) {
+        userModel.findUserById(user._id).then(
+            function (user) {
+                done(null, user)
+            },
+            function (err) {
+                done(err, null);
+            }
+        )
+    }
+
+    async function localStrategy(username, password, done) {
+        const data = await userModel.findUserByUsername(username);
+        if (data && bcrypt.compareSync(password, data.password)) {
+            return done(null, data);
+        } else {
+            return done(null, false);
+        }
+    }
+
+
+    async function register(req, res) {
         const newUser = req.body;
+        newUser.password = bcrypt.hashSync(newUser.password);
         const data = await userModel.createUser(newUser);
-        res.json(data);
+        req.login(data, function(err) {
+            res.json(data);
+        });
     }
 
     async function findUserById(req, res) {
@@ -40,9 +79,18 @@ module.exports = function(app) {
         res.json(user);
     }
 
+    function logout(req, res) {
+        req.logOut();
+        res.send(200);
+    }
+
+    function loggedIn(req, res) {
+        res.send(req.isAuthenticated() ? req.user : '0');
+    }
+
     async function updateUser(req, res) {
-        const uid = req.body._id;
         const user = req.body;
+        const uid = user._id;
         const data = await userModel.updateUser(uid, user);
         res.json(data);
     }
