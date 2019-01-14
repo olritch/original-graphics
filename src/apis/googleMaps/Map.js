@@ -1,64 +1,34 @@
-import React, { Component } from 'react'
-import { Map, GoogleApiWrapper, Marker, InfoWindow } from 'google-maps-react'
+import React, { Component } from "react";
+import GoogleMapReact from "google-map-react";
 
-const mapStyles = {
-  width: '100%',
-  height: '100%'
-}
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export class MapContainer extends Component {
-  state = {
-    showingInfoWindow: false,
-    activeMarker: {},
-    selectedPlace: {}
-  }
-
-  onMarkerClick = (props, marker, e) => {
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
-    })
-  }
-
-  onClose = props => {
-    if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-        activeMarker: null
-      })
-    }
-  }
+class Map extends Component {
+  static defaultProps = {
+    center: { 
+      lat: 42.3279, 
+      lng: -71.0828 
+    },
+    zoom: 11
+  };
 
   render() {
     return (
-      <Map
-        google={this.props.google}
-        zoom={14}
-        style={mapStyles}
-        initialCenter={{
-          lat: -1.2884,
-          lng: 36.8233
-        }}
-      >
-        <Marker
-          onClick={this.onMarkerClick}
-          name={'Kenyatta International Convention Centre'}
-        />
-        <InfoWindow
-          marker={this.state.activeMarker}
-          visible={this.state.showingInfoWindow}
-          onClose={this.onClose}
+      <div style={{ height: '500px', width: '800px' }}>
+        <GoogleMapReact
+        bootstrapURLKeys={{ key: 'AIzaSyC0mSSdwlJ6IjDk56fm35A-Osuaf68Wzok' }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
         >
-          <div>
-            <h4>{this.state.selectedPlace.name}</h4>
-          </div>
-        </InfoWindow>
-      </Map>
-    )
+          <AnyReactComponent
+            lat={42.3279}
+            lng={-71.0828}
+            text={"Urban League of Eastern Massachusetts"}
+          />
+        </GoogleMapReact>
+      </div>
+    );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyC0mSSdwlJ6IjDk56fm35A-Osuaf68Wzok'
-})(MapContainer)
+export default Map;

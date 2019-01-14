@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import Map from '../../apis/googleMaps/Map';
 
 class AboutUs extends Component {
 
@@ -81,7 +82,8 @@ class AboutUs extends Component {
                 </Link>
               </div>
             </div>
-            <div className="ui divider" />
+            <div className="ui horizontal divider">Or</div>
+            <Map />
           </div>
         </div>
       </div>
