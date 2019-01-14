@@ -15,6 +15,7 @@ class Login extends React.Component {
     e.preventDefault();
 
     const { username, password } = this.state;
+    const user = { username, password };
 
     if (username === '') {
       this.setState({
@@ -30,7 +31,7 @@ class Login extends React.Component {
       return;
     }
 
-    let res = await axios.get(`/api/user?username=${username}&password=${password}`);
+    let res = await axios.post('/api/login', user);
 
     console.log(res.data);
   
