@@ -10,7 +10,8 @@ const UserSchema = mongoose.Schema(
         admin : { type: Boolean, default: false },
         bio : { type: String, default: '' },
         telephone : { type: String, default: ''},
-        dateCreated : { type: Date, default: Date.now }
+        dateCreated : { type: Date, default: Date.now },
+        classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassModel"}]
     },
     { collection: 'user' }
 );

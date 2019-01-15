@@ -56,7 +56,7 @@ class ClassCalendar extends Component {
     if (user.data) {
       this.setState({
         isLoggedIn: true,
-        user: user
+        user: user.data
       });
     }
   };
@@ -136,6 +136,17 @@ class ClassCalendar extends Component {
       showClassInput: bool
     });
   };
+
+  onRegisterClick = async (course) => {
+    console.log(course._id)
+    this.setState(prevState => ({
+      user: {
+        ...prevState.user,
+        classes: [...this.state.user.classes, course._id]
+      }
+    }))
+    console.log(this.state.user)
+  }
 
   render() {
     const { errors } = this.state;
@@ -294,10 +305,10 @@ class ClassCalendar extends Component {
                     </div>
                     {this.state.isLoggedIn ? (
                       <div className="ui stackable two buttons">
-                        <div className="ui large primary button">
+                        <div onClick={this.onRegisterClick.bind(null, course)} className="ui large primary button">
                           Register for Class
                         </div>
-                        {this.state.isLoggedIn && this.state.user.data.admin ? (
+                        {this.state.isLoggedIn && this.state.user.admin ? (
                           <div
                             onClick={this.deleteClass.bind(null, course)}
                             className="ui large red button"
