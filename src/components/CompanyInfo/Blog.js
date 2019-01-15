@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { format } from "util";
 
 class Blog extends Component {
   state = {
@@ -41,7 +42,6 @@ class Blog extends Component {
     // console.log(res.data);
     this.setState({
       comments: [res.data, ...this.state.comments],
-      showBlogInput: false
     });
   };
 
@@ -99,7 +99,7 @@ class Blog extends Component {
                         {comment.author}
                       </Link>
                       <div className="metadata">
-                        <span className="date">{comment.dateCreated}</span>
+                        <span className="date">{formatDate(comment.dateCreated)}</span>
                       </div>
                       <div className="text">{comment.content}</div>
                       <div className="actions">
@@ -124,6 +124,16 @@ class Blog extends Component {
       </div>
     );
   }
+}
+
+function formatDate(timeNow) {
+  timeNow = new Date();
+  let hours   = timeNow.getHours();
+  let minutes = timeNow.getMinutes();
+  let timeString = "" + ((hours > 12) ? hours - 12 : hours);
+  timeString  += ((minutes < 10) ? ":0" : ":") + minutes;
+  timeString  += (hours >= 12) ? " P.M." : " A.M.";
+  return `${new Date().toDateString()} ${timeString}`
 }
 
 export default Blog;
