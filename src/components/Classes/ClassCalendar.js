@@ -7,6 +7,7 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Message } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
+import $ from 'jquery';
 
 class ClassCalendar extends Component {
   state = {
@@ -137,18 +138,37 @@ class ClassCalendar extends Component {
     });
   };
 
-  onRegisterClick = async (course) => {
-    console.log(course._id)
-    this.setState(prevState => ({
-      user: {
-        ...prevState.user,
-        classes: [...this.state.user.classes, course._id]
+  onRegisterClick = async (course, e) => {
+
+    const {user} = this.state
+    console.log(e.target.innerHTML);
+    if (e.target.innerHTML === 'Register for Class') {
+      e.target.innerHTML = 'Unregister for Class';
+      e.target.classList.replace('primary', 'red')
+      await this.setState({
+          user: {...user, classes: [...user.classes, course._id]}
+        });
+      axios.put('/api/user', user);
+
+    } else if (e.target.innerHTML === 'Unregister for Class') {
+      e.target.innerHTML = 'Register for Class';
+      e.target.classList.replace('red', 'primary');
+      await this.setState({
+        user: {...user, classes: user.classes.filter(
+          (currentCourse) => {
+            // console.log(currentCourse);
+            // console.log(course._id);
+            return currentCourse !== course._id
+          }
+        )}
+      })
+      axios.put('/api/user', user);
+
       }
-    }))
-    console.log(this.state.user)
-  }
+    }
 
   render() {
+    console.log(this.state.user)
     const { errors } = this.state;
 
     return (
@@ -262,15 +282,15 @@ class ClassCalendar extends Component {
                   </div>
                 </div>
               ) : (
-                <div style={{ paddingBottom: "10px" }}>
-                  <div
-                    onClick={this.showClassInput.bind(this, true)}
-                    className="ui large teal button"
-                  >
-                    Create Class
+                  <div style={{ paddingBottom: "10px" }}>
+                    <div
+                      onClick={this.showClassInput.bind(this, true)}
+                      className="ui large teal button"
+                    >
+                      Create Class
                   </div>
-                </div>
-              )}
+                  </div>
+                )}
 
               <Calendar
                 onChange={this.onCalendarChange}
@@ -305,7 +325,7 @@ class ClassCalendar extends Component {
                     </div>
                     {this.state.isLoggedIn ? (
                       <div className="ui stackable two buttons">
-                        <div onClick={this.onRegisterClick.bind(null, course)} className="ui large primary button">
+                        <div onClick={this.onRegisterClick.bind(this, course)} className="ui large primary button">
                           Register for Class
                         </div>
                         {this.state.isLoggedIn && this.state.user.admin ? (
@@ -316,12 +336,12 @@ class ClassCalendar extends Component {
                             Delete Class
                           </div>
                         ) : (
-                          <div />
-                        )}
+                            <div />
+                          )}
                       </div>
                     ) : (
-                      <div />
-                    )}
+                        <div />
+                      )}
                   </div>
                 );
               })}
