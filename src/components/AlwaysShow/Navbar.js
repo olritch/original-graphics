@@ -15,13 +15,32 @@ class Navbar extends Component {
     isLoggedIn: false
   }
 
-  componentWillReceiveProps = async nextProps => {
-    let res = await axios.post('/api/loggedIn')
+  // componentWillReceiveProps = async () => {
+  //   let res = await axios.post('/api/loggedIn')
+  //   console.log(res.data)
+  //   if (res.data) {
+  //     this.setState({
+  //       isLoggedIn: true
+  //     })
+  //   }
+  // }
+
+  componentDidMount = async () => {
+    let res = await this.props.isLoggedIn();
     if (res.data) {
       this.setState({
         isLoggedIn: true
       })
     }
+  }
+
+  componentWillReceiveProps = async () => {
+    let res = await this.props.isLoggedIn();
+    if (res.data) {
+      this.setState({
+        isLoggedIn: true
+      })
+    } 
   }
 
   closeLogin = () => this.setState({ isLogin: false })
@@ -61,7 +80,6 @@ class Navbar extends Component {
   }
 
   render() {
-
     const { activeItem } = this.state
 
     return (
@@ -155,59 +173,59 @@ class Navbar extends Component {
                 </button>
               </div>
             ) : (
-              <div className="right item">
-                <button
-                  onClick={this.changeLogin.bind(this, true)}
-                  className="ui inverted button"
-                >
-                  Log in
+                <div className="right item">
+                  <button
+                    onClick={this.changeLogin.bind(this, true)}
+                    className="ui inverted button"
+                  >
+                    Log in
                 </button>
-                <Modal
-                  open={this.state.isLogin}
-                  closeOnEscape={true}
-                  closeOnDimmerClick={true}
-                  onClose={this.closeLogin}
-                >
-                  <Login
-                    changeLogin={this.changeLogin}
-                    changeSignup={this.changeSignup}
-                  />
-                </Modal>
-                <button
-                  style={{ marginLeft: '0.5em' }}
-                  onClick={this.changeSignup.bind(this, true)}
-                  className="ui inverted button"
-                >
-                  Sign up
+                  <Modal
+                    open={this.state.isLogin}
+                    closeOnEscape={true}
+                    closeOnDimmerClick={true}
+                    onClose={this.closeLogin}
+                  >
+                    <Login
+                      changeLogin={this.changeLogin}
+                      changeSignup={this.changeSignup}
+                    />
+                  </Modal>
+                  <button
+                    style={{ marginLeft: '0.5em' }}
+                    onClick={this.changeSignup.bind(this, true)}
+                    className="ui inverted button"
+                  >
+                    Sign up
                 </button>
-                <Modal
-                  open={this.state.isSignup}
-                  closeOnEscape={true}
-                  closeOnDimmerClick={true}
-                  onClose={this.closeSignup}
-                >
-                  <SignUp
-                    changeLogin={this.changeLogin}
-                    changeSignup={this.changeSignup}
-                  />
-                </Modal>
-                <button
-                  style={{ marginLeft: '0.5em' }}
-                  onClick={this.changePurchase.bind(this, true)}
-                  className="ui inverted button"
-                >
-                  Purchase
+                  <Modal
+                    open={this.state.isSignup}
+                    closeOnEscape={true}
+                    closeOnDimmerClick={true}
+                    onClose={this.closeSignup}
+                  >
+                    <SignUp
+                      changeLogin={this.changeLogin}
+                      changeSignup={this.changeSignup}
+                    />
+                  </Modal>
+                  <button
+                    style={{ marginLeft: '0.5em' }}
+                    onClick={this.changePurchase.bind(this, true)}
+                    className="ui inverted button"
+                  >
+                    Purchase
                 </button>
-                <Modal
-                  open={this.state.isPurchase}
-                  closeOnEscape={true}
-                  closeOnDimmerClick={true}
-                  onClose={this.closePurchase}
-                >
-                  <Purchase />
-                </Modal>
-              </div>
-            )}
+                  <Modal
+                    open={this.state.isPurchase}
+                    closeOnEscape={true}
+                    closeOnDimmerClick={true}
+                    onClose={this.closePurchase}
+                  >
+                    <Purchase />
+                  </Modal>
+                </div>
+              )}
           </Menu>
         </div>
       </div>
