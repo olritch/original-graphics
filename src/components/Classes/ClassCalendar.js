@@ -18,7 +18,9 @@ class ClassCalendar extends Component {
     viewDate: new Date(),
     showClassInput: false,
     inputDate: "",
-    errors: {}
+    errors: {},
+    isLoggedIn: false,
+    user: {}
   };
 
   classTitleOptions = [
@@ -45,11 +47,18 @@ class ClassCalendar extends Component {
 
   componentDidMount = async () => {
     const date = formatDateString(new Date());
-    // console.log(date)
     let res = await axios.get(`/api/class/date?date=${date}`);
     this.setState({
       classes: res.data
     });
+
+    let user = await this.props.isLoggedIn();
+    if (user.data) {
+      this.setState({
+        isLoggedIn: true,
+        user: user
+      });
+    }
   };
 
   onCalendarChange = async date => {
@@ -71,11 +80,8 @@ class ClassCalendar extends Component {
 
     const { title, description, proficiency, date } = this.state;
 
-    // console.log(date);
-
     // error checking if course already exists on this date
     let res = await axios.get(`/api/class?title=${title}&date=${date}`);
-    // console.log(res)
     if (!res.data) {
       if (title && description && proficiency && date) {
         const course = {
@@ -89,7 +95,6 @@ class ClassCalendar extends Component {
         this.setState({
           classes: [...this.state.classes, res.data]
         });
-        // console.log(this.state.classes);
         this.showClassInput(false);
       } else {
         // empty input fields
@@ -114,7 +119,6 @@ class ClassCalendar extends Component {
 
   deleteClass = async course => {
     const { _id } = course;
-    // console.log(_id);
     await axios.delete("/api/class", { data: { _id } });
     this.setState({
       classes: this.state.classes.filter(course => course._id !== _id)
@@ -288,23 +292,30 @@ class ClassCalendar extends Component {
                     <div className="ui message">
                       <p>{course.description}</p>
                     </div>
-                    <div className="ui stackable two buttons">
-                      <div className="ui large primary button">
-                        Register for Class
+                    {this.state.isLoggedIn ? (
+                      <div className="ui stackable two buttons">
+                        <div className="ui large primary button">
+                          Register for Class
+                        </div>
+                        {this.state.isLoggedIn && this.state.user.data.admin ? (
+                          <div
+                            onClick={this.deleteClass.bind(null, course)}
+                            className="ui large red button"
+                          >
+                            Delete Class
+                          </div>
+                        ) : (
+                          <div />
+                        )}
                       </div>
-                      <div
-                        onClick={this.deleteClass.bind(null, course)}
-                        className="ui large red button"
-                      >
-                        Delete Class
-                      </div>
-                    </div>
+                    ) : (
+                      <div />
+                    )}
                   </div>
                 );
               })}
             </div>
           </div>
-          
         </div>
       </div>
     );
