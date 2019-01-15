@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
-
 class Blog extends Component {
   state = {
     author: "",
     content: "",
-    comments: [],
+    comments: []
   };
 
   componentDidMount = async () => {
@@ -68,11 +66,11 @@ class Blog extends Component {
           Original Graphics
         </div>
 
-       <div className="ui padded vertical center aligned segment">
-           <h1 style={{ fontSize: "40px" }} className="ui header">
-             Blog List
-           </h1>
-         </div>
+        <div className="ui padded vertical center aligned segment">
+          <h1 style={{ fontSize: "40px" }} className="ui header">
+            Blog List
+          </h1>
+        </div>
 
         {/* // <div className='ui grid segment container'>
         //   <div className='sixteen wide column'>
@@ -118,13 +116,11 @@ class Blog extends Component {
             <div style={{ paddingBottom: "10px" }}>
               <div className="ui text container form">
                 <div className="field">
-                  <textarea 
-                    name='content'
-                  />
+                  <textarea name="content" />
                 </div>
                 <div className="ui fluid large teal button">Click Me!</div>
               </div>
-        {/* //     ) : (
+              {/* //     ) : (
         //         <div>
         //           <div style={{ paddingBottom: "10px" }}>
         //             <div
@@ -166,7 +162,6 @@ class Blog extends Component {
         //     })}
         //   </div>
         // </div> */}
-
             </div>
           </div>
         </div>
