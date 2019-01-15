@@ -60,7 +60,7 @@ class App extends Component {
 
               <Route path="/about-us" exact component={AboutUs} />
               <Route path="/calendar" exact render={(props) => <ClassCalendar {...props} isLoggedIn={this.isLoggedIn}/>}/>
-              <Route path="/blog" exact component={Blog} />
+              <Route path="/blog" exact render={(props) => <Blog {...props} isLoggedIn={this.isLoggedIn}/>}/>
 
               <Route path="/store/calendar" exact component={StoreCalendar} />
               <Route path="/store/card" exact component={StoreCard} />
