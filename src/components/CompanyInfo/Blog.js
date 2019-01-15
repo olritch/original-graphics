@@ -30,9 +30,9 @@ class Blog extends Component {
     let res = await axios.post(`/api/blog`, comment);
     // console.log(res.data);
     this.setState({
-      comments: [...this.state.comments, res.data],
+      comments: [res.data, ...this.state.comments],
       showBlogInput: false
-    });
+    })
   };
 
   onInputChange = e => {
