@@ -35,14 +35,19 @@ import Help from './Help/Help';
 import Privacy from './Help/Privacy';
 import Terms from './Help/Terms';
 import Sitemap from './Help/Sitemap';
+import axios from 'axios';
 
 class App extends Component {
+  isLoggedIn = async () => {
+    return await axios.post("/api/loggedIn");
+  };
 
   render() {
-    return <BrowserRouter>
+    return (
+      <BrowserRouter>
         <ScrollToTop>
           <div>
-            <Navbar />
+            <Navbar isLoggedIn={this.isLoggedIn}/>
             <Switch>
               <Route path="/" exact component={LandingPage} />
 
@@ -54,7 +59,7 @@ class App extends Component {
               <Route path="/gallery/pet" exact component={Pet} />
 
               <Route path="/about-us" exact component={AboutUs} />
-              <Route path="/calendar" exact component={ClassCalendar} />
+              <Route path="/calendar" exact render={(props) => <ClassCalendar {...props} isLoggedIn={this.isLoggedIn}/>}/>
               <Route path="/blog" exact component={Blog} />
 
               <Route path="/store/calendar" exact component={StoreCalendar} />
@@ -79,6 +84,7 @@ class App extends Component {
           </div>
         </ScrollToTop>
       </BrowserRouter>
+    );
   }
 }
 
