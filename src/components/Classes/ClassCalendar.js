@@ -13,21 +13,14 @@ class ClassCalendar extends Component {
     user: {},
     errors: {},
     classes: [],
-    user: {},
-    errors: {},
     title: "",
     description: "",
     proficiency: "",
     date: "",
     viewDate: new Date(),
-<<<<<<< HEAD
-    isLoggedIn: false,
-    showClassInput: false
-=======
     showClassInput: false,
     isLoggedIn: false,
     hasRegistered: []
->>>>>>> 9e1622a0efc0ec35a21f9f675e8a89d64763a342
   };
 
   classTitleOptions = [
