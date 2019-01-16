@@ -9,6 +9,12 @@ UserModel.findUsers = findUsers;
 UserModel.findUserByUsername = findUserByUsername;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
+UserModel.populateClasses = populateClasses;
+
+function populateClasses(uid) {
+    return UserModel.findOne({ _id: uid })
+                    .populate('classes').exec();
+}
 
 function createUser(user) {
     return UserModel.create(user);

@@ -31,7 +31,7 @@ class Navbar extends Component {
         isLoggedIn: true
       })
     }
-    this.checkHistory()
+    this.checkHistory();
   }
 
   componentWillReceiveProps = async () => {
@@ -165,7 +165,14 @@ class Navbar extends Component {
 
             {this.state.isLoggedIn ? (
               <div className="right item">
+                <Link
+                  to='/profile'
+                  className='ui inverted button'
+                >
+                  Profile
+                </Link>
                 <button
+                  style={{marginLeft: '0.5em'}}
                   onClick={this.onLogoutClick}
                   className="ui inverted button"
                 >
