@@ -26,7 +26,7 @@ class ProfileInput extends Component {
 
     const { firstName, lastName, telephone, email, bio } = this.state;
 
-    let user = { 
+    let user = {
       firstName: firstName,
       lastName: lastName,
       telephone: telephone,
@@ -145,7 +145,7 @@ class ProfileInput extends Component {
                 <TextArea
                   onChange={this.onChangeInput}
                   name='bio'
-                  rows={5}
+                  rows={2}
                   placeholder="Tell us more"
                 />
                 <div className="ui divider" />
