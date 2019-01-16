@@ -10,6 +10,8 @@ import { DateInput } from "semantic-ui-calendar-react";
 
 class ClassCalendar extends Component {
   state = {
+    user: {},
+    errors: {},
     classes: [],
     user: {},
     errors: {},
@@ -18,8 +20,14 @@ class ClassCalendar extends Component {
     proficiency: "",
     date: "",
     viewDate: new Date(),
+<<<<<<< HEAD
     isLoggedIn: false,
     showClassInput: false
+=======
+    showClassInput: false,
+    isLoggedIn: false,
+    hasRegistered: []
+>>>>>>> 9e1622a0efc0ec35a21f9f675e8a89d64763a342
   };
 
   classTitleOptions = [
@@ -55,7 +63,8 @@ class ClassCalendar extends Component {
     if (user.data) {
       this.setState({
         isLoggedIn: true,
-        user: user.data
+        user: user.data,
+        hasRegistered: user.data.classes
       });
     }
   };
@@ -136,37 +145,33 @@ class ClassCalendar extends Component {
     });
   };
 
-  onRegisterClick = async (course, e) => {
+  onRegisterClick = async (course) => {
+    const { user } = this.state
+    this.setState({
+      user: { ...user, classes: [...user.classes, course._id] },
+      hasRegistered: [...this.state.hasRegistered, course._id]
+    });
+    axios.put('/api/user', this.state.user);
+  }
 
-    const {user} = this.state
-    console.log(e.target.innerHTML);
-    if (e.target.innerHTML === 'Register for Class') {
-      e.target.innerHTML = 'Unregister for Class';
-      e.target.classList.replace('primary', 'red')
-      await this.setState({
-          user: {...user, classes: [...user.classes, course._id]}
-        });
-      axios.put('/api/user', user);
-
-    } else if (e.target.innerHTML === 'Unregister for Class') {
-      e.target.innerHTML = 'Register for Class';
-      e.target.classList.replace('red', 'primary');
-      await this.setState({
-        user: {...user, classes: user.classes.filter(
+  onDeregisterClick = async (course) => {
+    const { user } = this.state;
+    await this.setState({
+      user: {
+        ...user, classes: user.classes.filter(
           (currentCourse) => {
-            // console.log(currentCourse);
-            // console.log(course._id);
             return currentCourse !== course._id
           }
-        )}
-      })
-      axios.put('/api/user', user);
-
-      }
-    }
+        )
+      },
+      hasRegistered: this.state.hasRegistered.filter(currentCourse => currentCourse !== course._id)
+    });
+    axios.put('/api/user', this.state.user);
+  }
 
   render() {
     console.log(this.state.user)
+    console.log(this.state.hasRegistered)
     const { errors } = this.state;
 
     return (
@@ -323,9 +328,15 @@ class ClassCalendar extends Component {
                     </div>
                     {this.state.isLoggedIn ? (
                       <div className="ui stackable two buttons">
-                        <div onClick={this.onRegisterClick.bind(this, course)} className="ui large primary button">
-                          Register for Class
-                        </div>
+                        {this.state.hasRegistered.includes(course._id) ?
+                          (
+                            <div onClick={this.onDeregisterClick.bind(null, course)} className='ui large red button'>Deregister for Class</div>
+                          ) :
+                          (<div onClick={this.onRegisterClick.bind(null, course)} className="ui large primary button">
+                            Register for Class
+                          </div>
+                          )
+                        }
                         {this.state.isLoggedIn && this.state.user.admin ? (
                           <div
                             onClick={this.deleteClass.bind(null, course)}

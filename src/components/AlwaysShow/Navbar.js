@@ -15,15 +15,14 @@ class Navbar extends Component {
     isLoggedIn: false
   }
 
-  // componentWillReceiveProps = async () => {
-  //   let res = await axios.post('/api/loggedIn')
-  //   console.log(res.data)
-  //   if (res.data) {
-  //     this.setState({
-  //       isLoggedIn: true
-  //     })
-  //   }
-  // }
+  // Will open up login modal if user goes to profile and is not logged in
+  checkHistory = () => {
+    if(this.props.location.pathname === "/profile" && !this.state.isLoggedIn) {
+      this.setState({
+        isLogin: true
+      })
+    }
+  }
 
   componentDidMount = async () => {
     let res = await this.props.isLoggedIn();
@@ -32,6 +31,7 @@ class Navbar extends Component {
         isLoggedIn: true
       })
     }
+    this.checkHistory()
   }
 
   componentWillReceiveProps = async () => {
