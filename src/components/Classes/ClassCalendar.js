@@ -7,21 +7,19 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Message } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
-import $ from 'jquery';
 
 class ClassCalendar extends Component {
   state = {
     classes: [],
+    user: {},
+    errors: {},
     title: "",
     description: "",
     proficiency: "",
     date: "",
     viewDate: new Date(),
-    showClassInput: false,
-    inputDate: "",
-    errors: {},
     isLoggedIn: false,
-    user: {}
+    showClassInput: false
   };
 
   classTitleOptions = [
