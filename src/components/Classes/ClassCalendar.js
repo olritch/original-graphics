@@ -140,7 +140,7 @@ class ClassCalendar extends Component {
 
   onRegisterClick = async (course) => {
     const { user } = this.state
-    await this.setState({
+    this.setState({
       user: { ...user, classes: [...user.classes, course._id] },
       hasRegistered: [...this.state.hasRegistered, course._id]
     });

@@ -76,7 +76,7 @@ class App extends Component {
               <Route path="/store" exact component={StoreList} />
               <Route path="/class" exact component={ClassList} />
               <Route path="/profile-input" exact component={ProfileInput} />
-              <Route path="/profile" exact component={Profile} />
+              <Route path="/profile" exact render={(props) => <Profile {...props} isLoggedIn={this.isLoggedIn}/>}/>
               <Route path="/forgot-username" exact component={ForgotUsername} />
               <Route path="/forgot-password" exact component={ForgotPassword} />
             </Switch>
