@@ -39,7 +39,7 @@ class Pet extends Component {
               <i className="fa fa-remove" />
             </a>
             <img
-              src="/w3images/avatar_g2.jpg"
+              src="https://scontent.fbos1-2.fna.fbcdn.net/v/t1.0-1/c0.0.160.160a/p160x160/1918955_10209093121264612_4732586498449505511_n.jpg?_nc_cat=104&_nc_ht=scontent.fbos1-2.fna&oh=c9c271e471193643ca4050cae0e4dec6&oe=5CC3066E"
               style={{width:'45%'}}
               className="w3-round"
             />
@@ -129,55 +129,49 @@ class Pet extends Component {
           <div className="w3-row-padding">
             <div className="w3-third w3-container w3-margin-bottom">
               <img
-                src="/w3images/mountains.jpg"
+                src="http://www.neetashankar.com/photography/wp-content/uploads/2017/08/Neeta-Shankar-Photography-Best-Fashion-Portfolio-Shoot-Femina-Miss-India-Diva-Earth-Universe-World-28-1024x683.jpg"
                 alt="Norway"
                 style={{width:'100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>Photo Shoots </b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
+                Portrait photography is all about capturing a person’s personality. It is the art of capturing a subject (in this case, a person or a group of people) in which the face, facial features as well as facial expressions are made predominant.
                 </p>
               </div>
             </div>
             <div className="w3-third w3-container w3-margin-bottom">
               <img
-                src="/w3images/lights.jpg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoV2blN5Z1WoyzxXjeHBL9FDLpV2pQCcs9b3_ymrryyHLAA5tp7w"
                 alt="Norway"
                 style={{width: '100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>Weddings / Anniversary </b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
-                </p>
+                Wedding photography encompasses photographs of the couple before marriage as well as coverage of the wedding and reception.
+               </p>
               </div>
             </div>
             <div className="w3-third w3-container">
               <img
-                src="/w3images/nature.jpg"
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOxhKIJMfsWGjqcpHxm8Wlhf9KVzCP3OZnhKa1_z3vQH68tvd"
                 alt="Norway"
                 style={{width: '100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>Landscape / Nature </b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
+                Nature photography refers to a wide range of photography taken outdoors and devoted to displaying natural elements such as landscapes, wildlife, plants, and close-ups of natural scenes and textures. 
                 </p>
               </div>
             </div>
@@ -186,55 +180,49 @@ class Pet extends Component {
           <div className="w3-row-padding">
             <div className="w3-third w3-container w3-margin-bottom">
               <img
-                src="/w3images/p1.jpg"
+                src="https://cmgpbppostonpolitics.files.wordpress.com/2018/09/091718-roger-stone-camera.jpg?w=640&h=427"
                 alt="Norway"
                 style={{width: '100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>News / Events</b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
+              “I’m ready. I will never roll on Donald Trump. Michael Cohen I am not,” Stone said. “One reporter asked me last week ‘Are you worried?’ I don’t worry. I make other people worry.”
                 </p>
               </div>
             </div>
             <div className="w3-third w3-container w3-margin-bottom">
               <img
-                src="/w3images/p2.jpg"
+                src="https://cdn.lynda.com/course/429031/429031-635905339675845661-16x9.jpg"
                 alt="Norway"
                 style={{width: '100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>Multy-Cam Video shoot</b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
+                A multicamera setup is the next big step in video production. Multicam helps you record different angels simultaneously and shoot faster than with a single camera.
                 </p>
               </div>
             </div>
             <div className="w3-third w3-container">
               <img
-                src="/w3images/p3.jpg"
+                src="https://i.pinimg.com/originals/5d/f5/ee/5df5ee9385604c7515b4974aa37ad081.jpg"
                 alt="Norway"
                 style={{width: '100%'}}
                 className="w3-hover-opacity"
               />
               <div className="w3-container w3-white">
                 <p>
-                  <b>Lorem Ipsum</b>
+                  <b>B-Day / Anniversary</b>
                 </p>
                 <p>
-                  Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
-                  condimentum, porta lectus vitae, ultricies congue gravida diam
-                  non fringilla.
+                Capturing irreplaceable moments and translating them into pictures and producing photographs that commemorates a once-in-a-lifetime experience.
                 </p>
               </div>
             </div>
@@ -475,7 +463,7 @@ class Pet extends Component {
                 <ul className="w3-ul w3-hoverable">
                   <li className="w3-padding-16">
                     <img
-                      src="/w3images/workshop.jpg"
+                      src="https://cmgpbppostonpolitics.files.wordpress.com/2018/09/091718-roger-stone-camera.jpg?w=640"
                       className="w3-left w3-margin-right"
                       style={{width:'50px'}}
                     />

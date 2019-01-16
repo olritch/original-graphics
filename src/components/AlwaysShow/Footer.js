@@ -60,7 +60,7 @@ class Footer extends Component {
                         </div>
                         <div className='seven wide column'>
                             <div className='ui icon inverted menu'>
-                                <Link to='/' className='item'>
+                                <Link to='https://www.facebook.com/Original-Graphics-1997060387077873/ ' className='item'>
                                     <i className='facebook icon'></i>
                                 </Link>
                                 <Link to='/' className='item'>
