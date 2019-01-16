@@ -12,6 +12,7 @@ class Profile extends Component {
       dateCreated: "",
       classes: []
     },
+    showInfo: '',
     isLoggedIn: false
   };
 
@@ -73,6 +74,12 @@ class Profile extends Component {
       user: userClasses.data
     });
   };
+
+  onInfoClick = (e) => {
+    this.setState({
+      showInfo: e.target.id
+    })
+  }
 
   render() {
     // console.log(this.state.user)
@@ -205,7 +212,14 @@ class Profile extends Component {
                     >
                       <strong>{course.date}</strong>
                     </div>
-                    <button className='ui large fluid grey button'>Info</button>
+                    {this.state.showInfo === course._id ? 
+                    (
+                      <div className='ui container'>{course.description}</div>
+                    ) 
+                    : 
+                    (
+                      <button id={course._id} onClick={this.onInfoClick.bind(this)} className='ui large fluid grey button'>Info</button>
+                    )}
                   </div>
                 );
               })}
