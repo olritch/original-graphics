@@ -105,7 +105,7 @@ class Profile extends Component {
       this.setState({
         interests: [...this.state.interests, data.value.slice(-1)[0]]
       })
-      return
+      return;
     }
 
     this.setState({
@@ -280,6 +280,9 @@ class Profile extends Component {
                 <i className="pencil icon" /> Post
               </button>
             </div>
+            <div className='ui segment'>
+                <div className='ui large header center aligned'>Our Recommended Blogs and Articles Based on Your Interests</div>
+            </div>
           </div>
           <div className="five wide column">
             <div style={{ marginBottom: '10px' }} className="ui segment">
@@ -293,7 +296,7 @@ class Profile extends Component {
                 return (
                   <div className="ui segment" key={i}>
                     <div className="ui small center aligned header">
-                      <strong>{course.title}</strong>
+                      <span><strong>{course.title}</strong></span>
                     </div>
                     <div style={{ textAlign: 'center' }}>
                       <strong>{course.proficiency}</strong>
