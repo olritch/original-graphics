@@ -16,13 +16,20 @@ module.exports = function (app) {
     app.post("/api/loggedIn", loggedIn);
     app.put('/api/user', updateUser);
     app.get('/api/userClasses', getUserWithClasses);
+    app.put('/api/interests', addInterest);
+
+    async function addInterest(req, res) {
+        const uid = req.query['uid'];
+        const interests = req.query['interests'];
+        const data = await userModel.addInterest(uid, interests);
+        res.json(data);
+    }
 
 
     async function getUserWithClasses(req, res) {
         const userId = req.query['uid'];
         const data = await userModel.populateClasses(userId);
         res.json(data);
-        console.log(data)
     }
 
     function serializeUser(user, done) {

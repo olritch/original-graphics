@@ -11,6 +11,7 @@ const UserSchema = mongoose.Schema(
         bio : { type: String, default: '' },
         telephone : { type: String, default: ''},
         dateCreated : { type: Date, default: Date.now },
+        interests: [ { type: String } ],
         classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassModel"}]
     },
     { collection: 'user' }

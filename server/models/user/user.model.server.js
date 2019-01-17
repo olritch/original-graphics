@@ -10,6 +10,14 @@ UserModel.findUserByUsername = findUserByUsername;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.populateClasses = populateClasses;
+UserModel.addInterest = addInterest;
+
+function addInterest(uid, interest) {
+    return UserModel.update(
+        { _id : uid },
+        { $addToSet: { interests: [ interest ] } }
+    )
+}
 
 function populateClasses(uid) {
     return UserModel.findOne({ _id: uid })
