@@ -113,10 +113,20 @@ class Profile extends Component {
     })
   }
 
-  addInterest = async () => {}
+  addInterest = async () => {
+
+  }
 
   deleteInterest = async i => {
     console.log(i)
+  }
+
+  addReminder = async () => {
+
+  }
+
+  deleteReminder = async () => {
+
   }
 
   render() {
@@ -263,13 +273,16 @@ class Profile extends Component {
               >
                 <input type="text" placeholder="I need to..." />
               </div>
-              <button className="ui labeled icon button">
+              <button
+                onCLick={this.addReminder}
+                className="ui labeled icon button"
+              >
                 <i className="pencil icon" /> Post
               </button>
             </div>
           </div>
           <div className="five wide column">
-            <div className="ui segment">
+            <div style={{ marginBottom: '10px' }} className="ui segment">
               <div
                 style={{ paddingBottom: '10px' }}
                 className="ui center aligned header"
