@@ -17,6 +17,14 @@ module.exports = function (app) {
     app.put('/api/user', updateUser);
     app.get('/api/userClasses', getUserWithClasses);
     app.put('/api/interests', addInterest);
+    app.put('/api/reminders', addReminder);
+
+    async function addReminder(req, res) {
+        const uid = req.query['uid'];
+        const reminders = req.query['reminders'];
+        const data = await userModel.addReminder(uid, reminders);
+        res.json(data);
+    }
 
     async function addInterest(req, res) {
         const uid = req.query['uid'];

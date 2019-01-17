@@ -12,6 +12,7 @@ const UserSchema = mongoose.Schema(
         telephone : { type: String, default: ''},
         dateCreated : { type: Date, default: Date.now },
         interests: [ { type: String } ],
+        reminders: [ { type: String } ],
         classes: [{ type: mongoose.Schema.Types.ObjectId, ref: "ClassModel"}]
     },
     { collection: 'user' }
