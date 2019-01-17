@@ -1,5 +1,7 @@
+// If have time, implement a friends list for user based on people they took the class with
+
 import React, { Component } from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Message } from 'semantic-ui-react'
 import axios from 'axios'
 
 function formatDate(date) {
@@ -14,53 +16,54 @@ class Profile extends Component {
     },
     showInfo: '',
     interests: [],
+    errors: {},
     isLoggedIn: false
   }
 
   options = [
     {
       key: 'food-photography',
-      value: 'food-photography',
+      value: 'Food Photography',
       text: 'Food Photography'
     },
     {
       key: 'nature-photography',
-      value: 'nature-photography',
+      value: 'Nature Photography',
       text: 'Nature Photography'
     },
     {
       key: 'landscape-photography',
-      value: 'landscape-photography',
+      value: 'Landscape Photography',
       text: 'Landscape Photography'
     },
     {
       key: 'wedding-photography',
-      value: 'wedding-photography',
+      value: 'Wedding Photography',
       text: 'Wedding Photography'
     },
     {
       key: 'aerial-photography',
-      value: 'aerial-photography',
+      value: 'Aerial Photography',
       text: 'Aerial Photography'
     },
     {
       key: 'family-photography',
-      value: 'family-photography',
+      value: 'Family Photography',
       text: 'Family Photography'
     },
     {
       key: 'pet-photography',
-      value: 'pet-photography',
+      value: 'Pet Photography',
       text: 'Pet Photography'
     },
     {
       key: 'videography',
-      value: 'videography',
+      value: 'Videography',
       text: 'Videography'
     },
     {
       key: 'photoshop',
-      value: 'photoshop',
+      value: 'Photoshop',
       text: 'Photoshop'
     }
   ]
@@ -92,12 +95,28 @@ class Profile extends Component {
   }
 
   onDropdownInputChange = async (e, data) => {
-    console.log(data.value)
     await axios.put(
       `/api/interests?uid=${this.state.user._id}&interests=${
         data.value.slice(-1)[0]
       }`
     )
+
+    if (this.state.interests.includes(data.value.slice(-1)[0] === false)) {
+      this.setState({
+        interests: [...this.state.interests, data.value.slice(-1)[0]]
+      })
+      return
+    }
+
+    this.setState({
+      errors: { interestExist: "You've already added this interest." }
+    })
+  }
+
+  addInterest = async () => {}
+
+  deleteInterest = async i => {
+    console.log(i)
   }
 
   render() {
@@ -111,6 +130,8 @@ class Profile extends Component {
       classes,
       dateCreated
     } = this.state.user
+
+    const { errors } = this.state
 
     return (
       <div>
@@ -170,14 +191,14 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui vertical buttons">
               <button
-                style={{ width: '290px', marginBottom: '10px' }}
+                style={{ width: '210px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="calendar alternate icon" />
                 My Events
               </button>
               <button
-                style={{ width: '290px', marginBottom: '10px' }}
+                style={{ width: '210px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="camera icon" />
@@ -187,7 +208,15 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui segment">
               <div className="ui header">My Interests</div>
-              <form className="ui form">
+              {errors.interestExist && (
+                <Message
+                  size="small"
+                  attached
+                  negative
+                  content={errors.interestExist}
+                />
+              )}
+              <form style={{ paddingBottom: '10px' }} className="ui form">
                 <div className="field">
                   <Dropdown
                     placeholder="Interests"
@@ -199,13 +228,33 @@ class Profile extends Component {
                   />
                 </div>
               </form>
+
               {this.state.interests.map((interest, i) => (
-                <div key={i}>{interest}</div>
+                <div
+                  style={{ marginBottom: '10px', marginRight: '5px' }}
+                  className="ui label"
+                  key={i}
+                >
+                  {interest}
+                  <i
+                    onClick={this.deleteInterest.bind(null, i)}
+                    className="red delete icon"
+                  />
+                </div>
               ))}
+
+              <div
+                onClick={this.addInterest}
+                style={{ width: '150px' }}
+                className="ui inverted blue button"
+              >
+                Add
+              </div>
             </div>
+
             <div className="ui divider" />
           </div>
-          <div className="six wide column">
+          <div className="seven wide column">
             <div className="ui segment">
               <div className="ui header">My Reminders</div>
               <div
@@ -219,7 +268,7 @@ class Profile extends Component {
               </button>
             </div>
           </div>
-          <div className="six wide column">
+          <div className="five wide column">
             <div className="ui segment">
               <div
                 style={{ paddingBottom: '10px' }}
