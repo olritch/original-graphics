@@ -16,7 +16,8 @@ module.exports = function (app) {
     app.post("/api/loggedIn", loggedIn);
     app.put('/api/user', updateUser);
     app.get('/api/userClasses', getUserWithClasses);
-    app.put('/api/interests', addInterest);
+    app.put('/api/interests/add', addInterest);
+    app.put('/api/interests/remove', deleteInterest);
     app.put('/api/reminders', addReminder);
 
     async function addReminder(req, res) {
@@ -33,6 +34,12 @@ module.exports = function (app) {
         res.json(data);
     }
 
+    async function deleteInterest(req, res) {
+        const uid = req.query['uid'];
+        const interests = req.query['interests'];
+        const data = await userModel.deleteInterest(uid, interests);
+        res.json(data);
+    }
 
     async function getUserWithClasses(req, res) {
         const userId = req.query['uid'];
