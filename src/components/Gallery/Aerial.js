@@ -10,7 +10,7 @@ class Aerial extends Component {
         </div>
             <div className="ui vertical center aligned segment">
           <h1 style={{ fontSize: "40px" }} className="ui header">
-            Family
+            Aerial
           </h1>
         </div>
 
@@ -28,16 +28,16 @@ class Aerial extends Component {
         <div className="ui medium images">
           <img
             className="ui image"
-            alt="family"
-            src="https://www.condoncharles.com.au/wp-content/uploads/2016/06/family-pictures-19-300x200.jpg"
+            alt="over the cape"
+            src="https://fedora.digitalcommonwealth.org/fedora/objects/commonwealth:kh04mj288/datastreams/access800/content"
           />
         </div>
 
         <div className="ui medium images">
           <img
             className="ui image"
-            alt="family"
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRrmLBG2qYPoS31N_Ht10D2uIw2ucbQATvHMbfe6x3eyDciJg99ZA"
+            alt="maine"
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT0wObhyRvZHzpTJvUN1Cdp_LBQh_Y9IwXWu8TmZKnYZLYqBMt5bg"
           />
         </div>
       </div>
