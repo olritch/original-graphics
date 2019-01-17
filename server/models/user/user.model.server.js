@@ -13,7 +13,7 @@ UserModel.populateClasses = populateClasses;
 UserModel.addInterest = addInterest;
 
 function addInterest(uid, interest) {
-    return UserModel.update(
+    return UserModel.updateOne(
         { _id : uid },
         { $addToSet: { interests: [ interest ] } }
     )
