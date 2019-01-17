@@ -1,84 +1,103 @@
-import React, { Component } from "react";
-import { Dropdown } from "semantic-ui-react";
-import axios from "axios";
+import React, { Component } from 'react'
+import { Dropdown } from 'semantic-ui-react'
+import axios from 'axios'
 
 function formatDate(date) {
-  return date.substring(0, 4);
+  return date.substring(0, 4)
 }
 
 class Profile extends Component {
   state = {
     user: {
-      dateCreated: "",
+      dateCreated: '',
       classes: []
     },
     showInfo: '',
+    interests: [],
     isLoggedIn: false
-  };
+  }
 
   options = [
     {
-      key: "food-photography",
-      value: "food-photography",
-      text: "Food Photography"
+      key: 'food-photography',
+      value: 'food-photography',
+      text: 'Food Photography'
     },
     {
-      key: "nature-photography",
-      value: "nature-photography",
-      text: "Nature Photography"
+      key: 'nature-photography',
+      value: 'nature-photography',
+      text: 'Nature Photography'
     },
     {
-      key: "landscape-photography",
-      value: "landscape-photography",
-      text: "Landscape Photography"
+      key: 'landscape-photography',
+      value: 'landscape-photography',
+      text: 'Landscape Photography'
     },
     {
-      key: "wedding-photography",
-      value: "wedding-photography",
-      text: "Wedding Photography"
+      key: 'wedding-photography',
+      value: 'wedding-photography',
+      text: 'Wedding Photography'
     },
     {
-      key: "aerial-photography",
-      value: "aerial-photography",
-      text: "Aerial Photography"
+      key: 'aerial-photography',
+      value: 'aerial-photography',
+      text: 'Aerial Photography'
     },
     {
-      key: "family-photography",
-      value: "family-photography",
-      text: "Family Photography"
+      key: 'family-photography',
+      value: 'family-photography',
+      text: 'Family Photography'
     },
     {
-      key: "pet-photography",
-      value: "pet-photography",
-      text: "Pet Photography"
+      key: 'pet-photography',
+      value: 'pet-photography',
+      text: 'Pet Photography'
     },
-    { key: "videography", value: "videography", text: "Videography" },
-    { key: "photoshop", value: "photoshop", text: "Photoshop" }
-  ];
+    {
+      key: 'videography',
+      value: 'videography',
+      text: 'Videography'
+    },
+    {
+      key: 'photoshop',
+      value: 'photoshop',
+      text: 'Photoshop'
+    }
+  ]
 
   componentDidMount = async () => {
-    let user = await this.props.isLoggedIn();
+    let user = await this.props.isLoggedIn()
     if (user.data) {
       this.setState({
         user: user.data,
         isLoggedIn: true
-      });
+      })
     } else {
-      this.props.history.push("/");
+      this.props.history.push('/')
     }
 
     let userClasses = await axios.get(
       `/api/userClasses?uid=${this.state.user._id}`
-    );
+    )
     this.setState({
-      user: userClasses.data
-    });
-  };
+      user: userClasses.data,
+      interests: userClasses.data.interests
+    })
+  }
 
-  onInfoClick = (e) => {
+  onInfoClick = e => {
     this.setState({
       showInfo: e.target.id
     })
+  }
+
+  onDropdownInputChange = async (e, data) => {
+    console.log(data.value)
+    await axios.put(
+      `/api/interests?uid=${this.state.user._id}&interests=${
+        data.value.slice(-1)[0]
+      }`
+    )
   }
 
   render() {
@@ -91,13 +110,13 @@ class Profile extends Component {
       telephone,
       classes,
       dateCreated
-    } = this.state.user;
+    } = this.state.user
 
     return (
       <div>
-        <div className="column" style={{ padding: "15px 5px 75px 5px" }}>
+        <div className="column" style={{ padding: '15px 5px 75px 5px' }}>
           <div
-            style={{ fontSize: "50px" }}
+            style={{ fontSize: '50px' }}
             className="ui grey center aligned huge header"
           >
             Original Graphics
@@ -125,7 +144,7 @@ class Profile extends Component {
                 <div className="description">
                   <div>
                     <i
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: '20px' }}
                       className="envelope icon"
                     />
                     {email}
@@ -133,14 +152,14 @@ class Profile extends Component {
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: "20px" }} className="phone icon" />
+                    <i style={{ marginRight: '20px' }} className="phone icon" />
                     {telephone}
                   </div>
                 </div>
                 <div className="description">
                   <div>
                     <i
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: '20px' }}
                       className="info circle icon"
                     />
                     {bio}
@@ -151,14 +170,14 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui vertical buttons">
               <button
-                style={{ width: "290px", marginBottom: "10px" }}
+                style={{ width: '290px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="calendar alternate icon" />
                 My Events
               </button>
               <button
-                style={{ width: "290px", marginBottom: "10px" }}
+                style={{ width: '290px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="camera icon" />
@@ -168,13 +187,21 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui segment">
               <div className="ui header">My Interests</div>
-              <Dropdown
-                placeholder="Interests"
-                fluid
-                multiple
-                selection
-                options={this.options}
-              />
+              <form className="ui form">
+                <div className="field">
+                  <Dropdown
+                    placeholder="Interests"
+                    fluid
+                    multiple
+                    selection
+                    options={this.options}
+                    onChange={this.onDropdownInputChange}
+                  />
+                </div>
+              </form>
+              {this.state.interests.map((interest, i) => (
+                <div key={i}>{interest}</div>
+              ))}
             </div>
             <div className="ui divider" />
           </div>
@@ -182,7 +209,7 @@ class Profile extends Component {
             <div className="ui segment">
               <div className="ui header">My Reminders</div>
               <div
-                style={{ paddingBottom: "15px" }}
+                style={{ paddingBottom: '15px' }}
                 className="ui fluid input focus"
               >
                 <input type="text" placeholder="I need to..." />
@@ -195,7 +222,7 @@ class Profile extends Component {
           <div className="six wide column">
             <div className="ui segment">
               <div
-                style={{ paddingBottom: "10px" }}
+                style={{ paddingBottom: '10px' }}
                 className="ui center aligned header"
               >
                 Upcoming Classes:
@@ -206,29 +233,32 @@ class Profile extends Component {
                     <div className="ui small center aligned header">
                       <strong>{course.title}</strong>
                     </div>
-                    <div style={{textAlign: 'center'}}><strong>{course.proficiency}</strong></div>
-                    <div
-                      style={{ paddingBottom: "25px", textAlign: 'center' }}
-                    >
+                    <div style={{ textAlign: 'center' }}>
+                      <strong>{course.proficiency}</strong>
+                    </div>
+                    <div style={{ paddingBottom: '25px', textAlign: 'center' }}>
                       <strong>{course.date}</strong>
                     </div>
-                    {this.state.showInfo === course._id ? 
-                    (
-                      <div className='ui container'>{course.description}</div>
-                    ) 
-                    : 
-                    (
-                      <button id={course._id} onClick={this.onInfoClick.bind(this)} className='ui large fluid grey button'>Info</button>
+                    {this.state.showInfo === course._id ? (
+                      <div className="ui container">{course.description}</div>
+                    ) : (
+                      <button
+                        id={course._id}
+                        onClick={this.onInfoClick.bind(this)}
+                        className="ui large fluid blue basic button"
+                      >
+                        Info
+                      </button>
                     )}
                   </div>
-                );
+                )
               })}
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Profile;
+export default Profile
