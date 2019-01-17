@@ -7,7 +7,7 @@ import axios from "axios";
 const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
 const baseURL =
   "https://newsapi.org/v2/everything?" +
-  'pageSize=5&' +
+  "pageSize=2&" +
   "sortBy=relevancy&" +
   "apiKey=" +
   API_KEY +
@@ -30,7 +30,7 @@ class Profile extends Component {
     errors: {},
     isLoggedIn: false,
     newInterests: [],
-    interestInfo : []
+    interestInfo: []
   };
 
   options = [
@@ -75,6 +75,11 @@ class Profile extends Component {
       text: "Videography"
     },
     {
+      key: "night-photography",
+      value: "Night Photography",
+      text: "Night Photography"
+    },
+    {
       key: "photoshop",
       value: "Photoshop",
       text: "Photoshop"
@@ -96,24 +101,23 @@ class Profile extends Component {
       `/api/userClasses?uid=${this.state.user._id}`
     );
 
-    this.setState(
-      {
-        user: userClasses.data,
-        interests: userClasses.data.interests
-      }
-    );
+    this.setState({
+      user: userClasses.data,
+      interests: userClasses.data.interests
+    });
 
-    this.state.user.interests.map(interest => this.getInterestsInfo(interest))
+    this.state.user.interests.map(interest => this.getInterestsInfo(interest));
   };
 
   getInterestsInfo = async interest => {
-    let url = `${baseURL}"${interest}"`
+    let url = `${baseURL}"${interest}"`;
     // console.log(url);
     let res = await axios.get(url);
-    res.data.articles.map(article => 
-    this.setState({
-      interestInfo: [...this.state.interestInfo, article]
-    }))
+    res.data.articles.map(article =>
+      this.setState({
+        interestInfo: [...this.state.interestInfo, article]
+      })
+    );
   };
 
   onInfoClick = e => {
@@ -147,13 +151,21 @@ class Profile extends Component {
     });
   };
 
-  addInterest = () => {
+  addInterest = async () => {
     let user = { ...this.state.user };
     user.interests = this.state.interests;
+
+    await this.state.newInterests.map(
+      (newInterest) => {
+        this.getInterestsInfo(newInterest)
+      }
+    )
+
     this.setState({
       user,
       newInterests: []
     });
+
   };
 
   deleteInterest = async currentInterest => {
@@ -177,7 +189,7 @@ class Profile extends Component {
   deleteReminder = async () => {};
 
   render() {
-    console.log(this.state.interestInfo)
+    console.log(this.state.interestInfo);
     const {
       firstName,
       lastName,
@@ -332,8 +344,23 @@ class Profile extends Component {
               <div className="ui large header center aligned">
                 Our Recommended Blogs and Articles Based on Your Interests
               </div>
+
               {this.state.user.interests.length ? (
-                this.state.user.interests.map(interest => <div>{interest}</div>)
+                this.state.interestInfo.map(interest => (
+                  <a href={interest.url} alt={interest.description} target="_blank">
+                    <div className="ui segment">
+                      <img
+                        className="ui fluid rounded image"
+                        src={interest.urlToImage}
+                      />
+                      <div className="ui large header">{interest.title}</div>
+                      <div className="ui red tiny header">
+                        By {interest.author}{" "}
+                      </div>{" "}
+                      <span>Published {formatDate(interest.publishedAt)}</span>
+                    </div>
+                  </a>
+                ))
               ) : (
                 <Message
                   size="small"
