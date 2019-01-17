@@ -7,11 +7,12 @@ import axios from "axios";
 const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
 const baseURL =
   "https://newsapi.org/v2/everything?" +
+  'pageSize=5&' +
   "sortBy=relevancy&" +
   "apiKey=" +
   API_KEY +
   "&" +
-  'q=+"Food Photography"';
+  "q=+";
 
 function formatDate(date) {
   return date.substring(0, 4);
@@ -28,7 +29,8 @@ class Profile extends Component {
     interests: [],
     errors: {},
     isLoggedIn: false,
-    newInterests: []
+    newInterests: [],
+    interestInfo : []
   };
 
   options = [
@@ -93,10 +95,25 @@ class Profile extends Component {
     let userClasses = await axios.get(
       `/api/userClasses?uid=${this.state.user._id}`
     );
+
+    this.setState(
+      {
+        user: userClasses.data,
+        interests: userClasses.data.interests
+      }
+    );
+
+    this.state.user.interests.map(interest => this.getInterestsInfo(interest))
+  };
+
+  getInterestsInfo = async interest => {
+    let url = `${baseURL}"${interest}"`
+    // console.log(url);
+    let res = await axios.get(url);
+    res.data.articles.map(article => 
     this.setState({
-      user: userClasses.data,
-      interests: userClasses.data.interests
-    });
+      interestInfo: [...this.state.interestInfo, article]
+    }))
   };
 
   onInfoClick = e => {
@@ -160,7 +177,7 @@ class Profile extends Component {
   deleteReminder = async () => {};
 
   render() {
-    console.log(baseURL);
+    console.log(this.state.interestInfo)
     const {
       firstName,
       lastName,
