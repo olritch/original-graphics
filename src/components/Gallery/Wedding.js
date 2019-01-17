@@ -10,31 +10,38 @@ class Wedding extends Component {
         >
           Original Graphics
         </div>
-        <div className="ui horizontal center aligned segment">
+        <div className="ui vertical center aligned segment">
           <h1 style={{ fontSize: "40px" }} className="ui header">
-            Family
+            Wedding
           </h1>
         </div>
         <div>
-          <div className="ui three column grid">
+          <div className="ui medium images">
             <img
               className="ui image"
-              alt="family"
+              alt="the big day"
               src="https://cdn.essensedesigns.com/wp-content/uploads/2018/05/D2457-1-530x845.jpg"
             />
           </div>
         </div>
 
-        <div className="ui three column grid">
+        <div className="ui medium images">
           <img
             className="ui image"
-            alt="family"
+            alt="true love"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRL4BzgIgpOg93-cRpvxJT823-JQuj5GpUpJKAHbUkIxM8j_6fd"
           />
         </div>
 
-        <div className="ui three column grid">
-          <img className="ui image" alt="family" src="http://www.webdesignjoy.com/wp-content/uploads/2017/09/wedding-Photography-17.jpg" />
+        <div
+          className="ui medium images
+        "
+        >
+          <img
+            className="ui image"
+            alt="the only one"
+            src="http://www.webdesignjoy.com/wp-content/uploads/2017/09/wedding-Photography-17.jpg"
+          />
         </div>
       </div>
     );
