@@ -4,6 +4,15 @@ import React, { Component } from "react";
 import { Dropdown, Message } from "semantic-ui-react";
 import axios from "axios";
 
+const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
+const baseURL =
+  "https://newsapi.org/v2/everything?" +
+  "sortBy=relevancy&" +
+  "apiKey=" +
+  API_KEY +
+  "&" +
+  'q=+"Food Photography"';
+
 function formatDate(date) {
   return date.substring(0, 4);
 }
@@ -137,10 +146,8 @@ class Profile extends Component {
     );
 
     await axios.put(
-      `/api/interests/remove?uid=${user._id}&interests=${
-      currentInterest
-      }`
-    )
+      `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
+    );
 
     this.setState({
       user,
@@ -153,7 +160,16 @@ class Profile extends Component {
   deleteReminder = async () => {};
 
   render() {
-    const { firstName, lastName, bio, email, telephone, classes, dateCreated } = this.state.user;
+    console.log(baseURL);
+    const {
+      firstName,
+      lastName,
+      bio,
+      email,
+      telephone,
+      classes,
+      dateCreated
+    } = this.state.user;
 
     const { errors } = this.state;
 
@@ -300,7 +316,7 @@ class Profile extends Component {
                 Our Recommended Blogs and Articles Based on Your Interests
               </div>
               {this.state.user.interests.length ? (
-                <div />
+                this.state.user.interests.map(interest => <div>{interest}</div>)
               ) : (
                 <Message
                   size="small"
