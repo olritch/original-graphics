@@ -15,4 +15,24 @@ link {
   .ui.stackable.buttons > .button{
     width: 100%;
   }
+
+
+}
+
+
+@media screen and (max-width: 400px) {
+  .margin-top {
+    margin-top: 10px;
+  }
+  .w3-button{
+    padding: 10px 10px
+  }
+}
+
+@media screen and (min-width: 401px) {
+  .margin-top {
+    display: inline;
+    float: right;
+    margin-right: 20px
+  }
 }
