@@ -10,7 +10,7 @@ class Aerial extends Component {
         </div>
             <div className="ui vertical center aligned segment">
           <h1 style={{ fontSize: "40px" }} className="ui header">
-            Family
+            Aerial
           </h1>
         </div>
 
