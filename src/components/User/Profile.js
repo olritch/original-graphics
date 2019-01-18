@@ -6,15 +6,15 @@ import Unsplash, { toJson } from 'unsplash-js';
 import { Dropdown, Message } from "semantic-ui-react";
 
 // NewsAPI
-const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
-const baseURL =
-  "https://newsapi.org/v2/everything?" +
-  "pageSize=2&" +
-  "sortBy=relevancy&" +
-  "apiKey=" +
-  API_KEY +
-  "&" +
-  "q=+";
+// const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
+// const baseURL =
+//   "https://newsapi.org/v2/everything?" +
+//   "pageSize=2&" +
+//   "sortBy=relevancy&" +
+//   "apiKey=" +
+//   API_KEY +
+//   "&" +
+//   "q=+";
 
 // Unsplash API
 const unsplash = new Unsplash({
@@ -24,14 +24,12 @@ const unsplash = new Unsplash({
   callbackUrl: 'http://web-maker-ht.herokuapp.com/'
 })
 
-unsplash.search.photos('night photography', 1)
-  .then(toJson)
-  .then(json => {
-    console.log(json);
-  });
-
 function formatDate(date) {
   return date.substring(0, 4);
+}
+
+function formatDescription(description) {
+  return description.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1)).join(' ')
 }
 
 class Profile extends Component {
@@ -53,47 +51,62 @@ class Profile extends Component {
     {
       key: "food-photography",
       value: "Food Photography",
-      text: "Food Photography"
+      text: "Food"
     },
     {
       key: "nature-photography",
       value: "Nature Photography",
-      text: "Nature Photography"
+      text: "Nature"
     },
     {
       key: "landscape-photography",
       value: "Landscape Photography",
-      text: "Landscape Photography"
+      text: "Landscape"
     },
     {
       key: "wedding-photography",
       value: "Wedding Photography",
-      text: "Wedding Photography"
+      text: "Wedding"
     },
     {
       key: "aerial-photography",
       value: "Aerial Photography",
-      text: "Aerial Photography"
+      text: "Aerial"
     },
     {
       key: "family-photography",
       value: "Family Photography",
-      text: "Family Photography"
+      text: "Family"
     },
     {
       key: "pet-photography",
       value: "Pet Photography",
-      text: "Pet Photography"
+      text: "Pet"
+    },
+    {
+      key: "night-photography",
+      value: "Night Photography",
+      text: "Night"
+    },
+    {
+      key: "sport-photography",
+      value: "Sport Photography",
+      text: "Sport"
+    },
+    {
+      key: "fashion-photography",
+      value: "Fashion Photography",
+      text: "Fashion"
+    },
+    {
+      key: "street-photography",
+      value: "Street Photography",
+      text: "Street"
     },
     {
       key: "videography",
       value: "Videography",
       text: "Videography"
-    },
-    {
-      key: "night-photography",
-      value: "Night Photography",
-      text: "Night Photography"
     },
     {
       key: "photoshop",
@@ -125,15 +138,18 @@ class Profile extends Component {
     this.state.user.interests.map(interest => this.getInterestsInfo(interest));
   };
 
-  getInterestsInfo = async interest => {
-    let url = `${baseURL}"${interest}"`;
-    // console.log(url);
-    let res = await axios.get(url);
-    res.data.articles.map(article =>
-      this.setState({
-        interestInfo: [...this.state.interestInfo, article]
-      })
-    );
+  getInterestsInfo = interest => {
+    unsplash.search
+      .photos(interest, 1, 2)
+      .then(toJson)
+      .then(json => {
+        const photos = json.results;
+        photos.map(photo => {
+          this.setState({
+            interestInfo: [photo, ...this.state.interestInfo]
+          });
+        });
+      });
   };
 
   onInfoClick = e => {
@@ -171,17 +187,14 @@ class Profile extends Component {
     let user = { ...this.state.user };
     user.interests = this.state.interests;
 
-    await this.state.newInterests.map(
-      (newInterest) => (
-        this.getInterestsInfo(newInterest)
-      )
-    )
+    await this.state.newInterests.map(newInterest =>
+      this.getInterestsInfo(newInterest)
+    );
 
     this.setState({
       user,
       newInterests: []
     });
-
   };
 
   deleteInterest = async currentInterest => {
@@ -205,7 +218,7 @@ class Profile extends Component {
   deleteReminder = async () => {};
 
   render() {
-    // console.log(this.state.interestInfo);
+    console.log(this.state.interestInfo);
     const {
       firstName,
       lastName,
@@ -218,9 +231,13 @@ class Profile extends Component {
 
     const { errors } = this.state;
 
-    return <div>
-        <div className="column" style={{ padding: '15px 5px 75px 5px' }}>
-          <div style={{ fontSize: '50px' }} className="ui grey center aligned huge header">
+    return (
+      <div>
+        <div className="column" style={{ padding: "15px 5px 75px 5px" }}>
+          <div
+            style={{ fontSize: "50px" }}
+            className="ui grey center aligned huge header"
+          >
             Original Graphics
           </div>
         </div>
@@ -229,7 +246,10 @@ class Profile extends Component {
           <div className="four wide column">
             <div className="ui blue card">
               <div className="image">
-                <img src="https://cdt.org/files/2015/10/2015-10-06-FB-person.png" alt="default male user with no provided icon" />
+                <img
+                  src="https://cdt.org/files/2015/10/2015-10-06-FB-person.png"
+                  alt="default male user with no provided icon"
+                />
               </div>
               <div className="content">
                 <div className="header">
@@ -242,19 +262,25 @@ class Profile extends Component {
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: '20px' }} className="envelope icon" />
+                    <i
+                      style={{ marginRight: "20px" }}
+                      className="envelope icon"
+                    />
                     {email}
                   </div>
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: '20px' }} className="phone icon" />
+                    <i style={{ marginRight: "20px" }} className="phone icon" />
                     {telephone}
                   </div>
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: '20px' }} className="info circle icon" />
+                    <i
+                      style={{ marginRight: "20px" }}
+                      className="info circle icon"
+                    />
                     {bio}
                   </div>
                 </div>
@@ -262,11 +288,17 @@ class Profile extends Component {
             </div>
             <div className="ui divider" />
             <div className="ui vertical buttons">
-              <button style={{ width: '210px', marginBottom: '10px' }} className="ui large inverted blue button">
+              <button
+                style={{ width: "210px", marginBottom: "10px" }}
+                className="ui large inverted blue button"
+              >
                 <i className="calendar alternate icon" />
                 My Events
               </button>
-              <button style={{ width: '210px', marginBottom: '10px' }} className="ui large inverted blue button">
+              <button
+                style={{ width: "210px", marginBottom: "10px" }}
+                className="ui large inverted blue button"
+              >
                 <i className="camera icon" />
                 My Photos
               </button>
@@ -274,19 +306,39 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui segment">
               <div className="ui header">My Interests</div>
-              {errors.interestExist && <Message size="small" attached negative content={errors.interestExist} />}
-              <form style={{ paddingBottom: '10px' }} className="ui form">
+              {errors.interestExist && (
+                <Message
+                  size="small"
+                  attached
+                  negative
+                  content={errors.interestExist}
+                />
+              )}
+              <form style={{ paddingBottom: "10px" }} className="ui form">
                 <div className="field">
-                  <Dropdown placeholder="Interests" fluid name="test" multiple selection options={this.options} onChange={this.onDropdownInputChange} value={this.state.newInterests} />
+                  <Dropdown
+                    placeholder="Interests"
+                    fluid
+                    name="test"
+                    multiple
+                    selection
+                    options={this.options}
+                    onChange={this.onDropdownInputChange}
+                    value={this.state.newInterests}
+                  />
                 </div>
-                <div onClick={this.addInterest} style={{ width: '150px' }} className="ui inverted blue button">
+                <div
+                  onClick={this.addInterest}
+                  style={{ width: "150px" }}
+                  className="ui inverted blue button"
+                >
                   Add
                 </div>
               </form>
 
               {this.state.user.interests.map((interest, i) => (
                 <div
-                  style={{ marginBottom: '10px', marginRight: '5px' }}
+                  style={{ marginBottom: "10px", marginRight: "5px" }}
                   className="ui large label"
                   key={i}
                 >
@@ -304,77 +356,102 @@ class Profile extends Component {
           <div className="seven wide column">
             <div className="ui segment">
               <div className="ui header">My Reminders</div>
-              <div style={{ paddingBottom: '15px' }} className="ui fluid input focus">
+              <div
+                style={{ paddingBottom: "15px" }}
+                className="ui fluid input focus"
+              >
                 <input type="text" placeholder="I need to..." />
               </div>
-              <button onClick={this.addReminder} className="ui labeled icon button">
+              <button
+                onClick={this.addReminder}
+                className="ui labeled icon button"
+              >
                 <i className="pencil icon" /> Post
               </button>
             </div>
             <div className="ui segment">
               <div className="ui large header center aligned">
-                Our Recommended Blogs and Articles Based on Your Interests
+                Inspirational Photos Based on Your Selected Interests
               </div>
 
-              {this.state.user.interests.length ? this.state.interestInfo.map(
-                  (interest, i) => (
-                    <a
-                      key={i}
-                      href={interest.url}
-                      alt={interest.description}
-                      rel="noopener noreferrer"
-                      target="_blank"
-                    >
-                      <div className="ui segment">
-                        <img
-                          className="ui fluid rounded image"
-                          alt={interest.description}
-                          src={interest.urlToImage}
-                        />
-                        <div className="ui large header">
-                          {interest.title}
-                        </div>
-                        <div className="ui red tiny header">
-                          By {interest.author}{' '}
-                        </div>{' '}
-                        <span>
-                          Published {formatDate(interest.publishedAt)}
-                        </span>
+              {this.state.user.interests.length ? (
+                this.state.interestInfo.map((interest, i) => (
+                  <a
+                    key={i}
+                    href={interest.links.html}
+                    alt={interest.description}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <div className="ui segment">
+                      <img
+                        className="ui fluid rounded image"
+                        alt={interest.description}
+                        src={interest.urls.full}
+                      />
+                      <div className="ui medium header">
+                        {interest.description === null ? (<span></span>) : (
+                          <span>{formatDescription(interest.description)}</span>
+                        )}
                       </div>
-                    </a>
-                  )
-                ) : <Message size="small" attached negative content="Please update your interests to see our recommended list" />}
+                      <div className="ui red tiny header">
+                        By {interest.user.first_name}{" "}
+                      </div>{" "}
+                      <span>Published {formatDate(interest.created_at)}</span>
+                    </div>
+                  </a>
+                ))
+              ) : (
+                <Message
+                  size="small"
+                  attached
+                  negative
+                  content="Please update your interests to see our recommended list"
+                />
+              )}
             </div>
           </div>
           <div className="five wide column">
-            <div style={{ marginBottom: '10px' }} className="ui segment">
-              <div style={{ paddingBottom: '10px' }} className="ui center aligned header">
+            <div style={{ marginBottom: "10px" }} className="ui segment">
+              <div
+                style={{ paddingBottom: "10px" }}
+                className="ui center aligned header"
+              >
                 Upcoming Classes:
               </div>
               {classes.map((course, i) => {
-                return <div className="ui segment" key={i}>
+                return (
+                  <div className="ui segment" key={i}>
                     <div className="ui small center aligned header">
                       <span>
                         <strong>{course.title}</strong>
                       </span>
                     </div>
-                    <div style={{ textAlign: 'center' }}>
+                    <div style={{ textAlign: "center" }}>
                       <strong>{course.proficiency}</strong>
                     </div>
-                    <div style={{ paddingBottom: '25px', textAlign: 'center' }}>
+                    <div style={{ paddingBottom: "25px", textAlign: "center" }}>
                       <strong>{course.date}</strong>
                     </div>
-                    {this.state.showInfo === course._id ? <div className="ui container">
-                        {course.description}
-                      </div> : <button id={course._id} onClick={this.onInfoClick.bind(this)} className="ui large fluid blue basic button">
+                    {this.state.showInfo === course._id ? (
+                      <div className="ui container">{course.description}</div>
+                    ) : (
+                      <button
+                        id={course._id}
+                        onClick={this.onInfoClick.bind(this)}
+                        className="ui large fluid blue basic button"
+                      >
                         Info
-                      </button>}
+                      </button>
+                    )}
                   </div>
+                );
               })}
             </div>
           </div>
         </div>
       </div>
+    );
   }
 }
 
