@@ -48,7 +48,7 @@ class Family extends Component {
         </div>
 
         <div className="ui medium images">
-          <img className="ui image" alt="child's love" src="https://violencefreefamilies.org.au/web/wp-content/uploads/2015/08/father-and-daughter-1.jpg" />
+          <img className="ui image" alt="a child's love" src="https://violencefreefamilies.org.au/web/wp-content/uploads/2015/08/father-and-daughter-1.jpg" />
         </div>
 
         <div className="ui medium images">
