@@ -11,6 +11,11 @@ class Landscape extends Component {
           Original Graphics
         </div>
         <div>
+          <div className="ui vertical center aligned segment">
+            <h1 style={{ fontSize: "40px" }} className="ui header">
+              Landscape
+            </h1>
+          </div>
           <div className="ui medium images">
             <img
               className="ui image"
