@@ -52,64 +52,54 @@ class Profile extends Component {
 
   options = [
     {
-      key: "food-photography",
-      value: "Food Photography",
-      text: "Food"
-    },
-    {
       key: "nature-photography",
-      value: "Nature Photography",
+      value: "Nature",
       text: "Nature"
     },
     {
       key: "landscape-photography",
-      value: "Landscape Photography",
+      value: "Landscape",
       text: "Landscape"
     },
     {
       key: "wedding-photography",
-      value: "Wedding Photography",
+      value: "Wedding",
       text: "Wedding"
     },
     {
       key: "aerial-photography",
-      value: "Aerial Photography",
+      value: "Aerial",
       text: "Aerial"
     },
     {
       key: "family-photography",
-      value: "Family Photography",
+      value: "Family",
       text: "Family"
     },
     {
       key: "pet-photography",
-      value: "Pet Photography",
+      value: "Pet",
       text: "Pet"
     },
     {
       key: "night-photography",
-      value: "Night Photography",
+      value: "Night",
       text: "Night"
     },
     {
       key: "sport-photography",
-      value: "Sport Photography",
+      value: "Sport",
       text: "Sport"
     },
     {
       key: "fashion-photography",
-      value: "Fashion Photography",
+      value: "Fashion",
       text: "Fashion"
     },
     {
       key: "street-photography",
-      value: "Street Photography",
+      value: "Street",
       text: "Street"
-    },
-    {
-      key: "videography",
-      value: "Videography",
-      text: "Videography"
     },
     {
       key: "photoshop",
@@ -148,7 +138,7 @@ class Profile extends Component {
       .then(json => {
         const photos = json.results;
         photos.map(photo => {
-          photo.type = interest
+          photo.type = interest;
           this.setState({
             interestInfo: [photo, ...this.state.interestInfo]
           });
@@ -211,13 +201,30 @@ class Profile extends Component {
       `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
     );
 
-    let interestInfo = this.state.interestInfo.filter(interest => interest.type !== currentInterest)
+    let interestInfo = this.state.interestInfo.filter(
+      interest => interest.type !== currentInterest
+    );
 
     this.setState({
       user,
       interests: user.interests,
       interestInfo
     });
+  };
+
+  clearAllInterests = async () => {
+    let user = {...this.state.user};
+    user.interests = [];
+    let interestInfo = [];
+
+    await axios.put(
+      `/api/interests/clearAll?uid=${user._id}`
+    );
+    
+    this.setState({
+      user,
+      interestInfo
+    })
   };
 
   addReminder = async () => {};
@@ -356,6 +363,16 @@ class Profile extends Component {
                   />
                 </div>
               ))}
+              {this.state.user.interests.length > 1 ? (
+                <div
+                  onClick={this.clearAllInterests}
+                  className="ui mini inverted red button"
+                >
+                  Clear All
+                </div>
+              ) : (
+                <span />
+              )}
             </div>
 
             <div className="ui divider" />

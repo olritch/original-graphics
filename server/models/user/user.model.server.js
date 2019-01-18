@@ -13,6 +13,7 @@ UserModel.populateClasses = populateClasses;
 UserModel.addInterest = addInterest;
 UserModel.deleteInterest = deleteInterest;
 UserModel.addReminder = addReminder;
+UserModel.clearAllInterests = clearAllInterests;
 
 function addReminder(uid, reminder) {
     return UserModel.updateOne(
@@ -32,6 +33,13 @@ function deleteInterest(uid, interest) {
     return UserModel.updateOne(
         { _id : uid },
         { $pull: { 'interests': interest } }
+    )
+}
+
+function clearAllInterests(uid) {
+    return UserModel.updateOne(
+        { _id : uid },
+        { $set: { 'interests': [] } }
     )
 }
 
