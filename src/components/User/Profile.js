@@ -126,13 +126,13 @@ class Profile extends Component {
       this.props.history.push("/");
     }
 
-    let userClasses = await axios.get(
+    let userInfo = await axios.get(
       `/api/userClasses?uid=${this.state.user._id}`
     );
 
     this.setState({
-      user: userClasses.data,
-      interests: userClasses.data.interests
+      user: userInfo.data,
+      interests: userInfo.data.interests
     });
 
     this.state.user.interests.map(interest => this.getInterestsInfo(interest));
@@ -209,7 +209,8 @@ class Profile extends Component {
 
     this.setState({
       user,
-      interests: user.interests
+      interests: user.interests,
+      interestInfo: user.interests
     });
   };
 
