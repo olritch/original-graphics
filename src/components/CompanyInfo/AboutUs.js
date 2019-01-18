@@ -11,7 +11,15 @@ class AboutUs extends Component {
         >
           Original Graphics
         </div>
-
+        
+            <img
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              style={{ width: "6%" }}
+              className="w3-round"
+            />
+              <img src="https://thumbs.dreamstime.com/z/og-o-g-black-white-lines-letter-logo-design-vertical-horizontal-93518357.jpg"
+              style={{ width: "45%",  }}
+              />
         <div className="ui vertical center aligned segment">
           <h1 style={{ fontSize: "40px" }} className="ui header">
             About Us
