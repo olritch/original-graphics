@@ -15,3 +15,4 @@ class StoreCard extends Component {
 }
 
 export default StoreCard;
+
