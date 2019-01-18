@@ -1,21 +1,38 @@
 // If have time, implement a friends list for user based on people they took the class with
 
 import React, { Component } from "react";
-import { Dropdown, Message } from "semantic-ui-react";
 import axios from "axios";
+import Unsplash, { toJson } from "unsplash-js";
+import { Dropdown, Message } from "semantic-ui-react";
 
-const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
-const baseURL =
-  "https://newsapi.org/v2/everything?" +
-  "pageSize=2&" +
-  "sortBy=relevancy&" +
-  "apiKey=" +
-  API_KEY +
-  "&" +
-  "q=+";
+// NewsAPI
+// const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
+// const baseURL =
+//   "https://newsapi.org/v2/everything?" +
+//   "pageSize=2&" +
+//   "sortBy=relevancy&" +
+//   "apiKey=" +
+//   API_KEY +
+//   "&" +
+//   "q=+";
+
+// Unsplash API
+const unsplash = new Unsplash({
+  applicationId:
+    "448df5c63ad4abd2633e2f7b430dda63f0108e1befdb9da26f764875fe848c07",
+  secret: "598dc741c4d713658f81a9184b11cae4cade89223787a5125e59960944666146",
+  callbackUrl: "http://web-maker-ht.herokuapp.com/"
+});
 
 function formatDate(date) {
   return date.substring(0, 4);
+}
+
+function formatDescription(description) {
+  return description
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.substr(1))
+    .join(" ");
 }
 
 class Profile extends Component {
@@ -35,49 +52,54 @@ class Profile extends Component {
 
   options = [
     {
-      key: "food-photography",
-      value: "Food Photography",
-      text: "Food Photography"
-    },
-    {
       key: "nature-photography",
-      value: "Nature Photography",
-      text: "Nature Photography"
+      value: "Nature",
+      text: "Nature"
     },
     {
       key: "landscape-photography",
-      value: "Landscape Photography",
-      text: "Landscape Photography"
+      value: "Landscape",
+      text: "Landscape"
     },
     {
       key: "wedding-photography",
-      value: "Wedding Photography",
-      text: "Wedding Photography"
+      value: "Wedding",
+      text: "Wedding"
     },
     {
       key: "aerial-photography",
-      value: "Aerial Photography",
-      text: "Aerial Photography"
+      value: "Aerial",
+      text: "Aerial"
     },
     {
       key: "family-photography",
-      value: "Family Photography",
-      text: "Family Photography"
+      value: "Family",
+      text: "Family"
     },
     {
       key: "pet-photography",
-      value: "Pet Photography",
-      text: "Pet Photography"
-    },
-    {
-      key: "videography",
-      value: "Videography",
-      text: "Videography"
+      value: "Pet",
+      text: "Pet"
     },
     {
       key: "night-photography",
-      value: "Night Photography",
-      text: "Night Photography"
+      value: "Night",
+      text: "Night"
+    },
+    {
+      key: "sport-photography",
+      value: "Sport",
+      text: "Sport"
+    },
+    {
+      key: "fashion-photography",
+      value: "Fashion",
+      text: "Fashion"
+    },
+    {
+      key: "street-photography",
+      value: "Street",
+      text: "Street"
     },
     {
       key: "photoshop",
@@ -97,27 +119,31 @@ class Profile extends Component {
       this.props.history.push("/");
     }
 
-    let userClasses = await axios.get(
+    let userInfo = await axios.get(
       `/api/userClasses?uid=${this.state.user._id}`
     );
 
     this.setState({
-      user: userClasses.data,
-      interests: userClasses.data.interests
+      user: userInfo.data,
+      interests: userInfo.data.interests
     });
 
     this.state.user.interests.map(interest => this.getInterestsInfo(interest));
   };
 
-  getInterestsInfo = async interest => {
-    let url = `${baseURL}"${interest}"`;
-    // console.log(url);
-    let res = await axios.get(url);
-    res.data.articles.map(article =>
-      this.setState({
-        interestInfo: [...this.state.interestInfo, article]
-      })
-    );
+  getInterestsInfo = interest => {
+    unsplash.search
+      .photos(interest, 1, 2)
+      .then(toJson)
+      .then(json => {
+        const photos = json.results;
+        photos.map(photo => {
+          photo.type = interest;
+          this.setState({
+            interestInfo: [photo, ...this.state.interestInfo]
+          });
+        });
+      });
   };
 
   onInfoClick = e => {
@@ -155,17 +181,14 @@ class Profile extends Component {
     let user = { ...this.state.user };
     user.interests = this.state.interests;
 
-    await this.state.newInterests.map(
-      (newInterest) => {
-        this.getInterestsInfo(newInterest)
-      }
-    )
+    await this.state.newInterests.map(newInterest =>
+      this.getInterestsInfo(newInterest)
+    );
 
     this.setState({
       user,
       newInterests: []
     });
-
   };
 
   deleteInterest = async currentInterest => {
@@ -178,10 +201,32 @@ class Profile extends Component {
       `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
     );
 
+    let interestInfo = this.state.interestInfo.filter(
+      interest => interest.type !== currentInterest
+    );
+
     this.setState({
       user,
-      interests: user.interests
+      interests: user.interests,
+      interestInfo
     });
+  };
+
+  clearAllInterests = async () => {
+    let user = {...this.state.user};
+    user.interests = [];
+    let interestInfo = [];
+    let interests = [];
+
+    await axios.put(
+      `/api/interests/clearAll?uid=${user._id}`
+    );
+    
+    this.setState({
+      user,
+      interestInfo,
+      interests
+    })
   };
 
   addReminder = async () => {};
@@ -320,6 +365,16 @@ class Profile extends Component {
                   />
                 </div>
               ))}
+              {this.state.user.interests.length > 1 ? (
+                <div
+                  onClick={this.clearAllInterests}
+                  className="ui mini inverted red button"
+                >
+                  Clear All
+                </div>
+              ) : (
+                <span />
+              )}
             </div>
 
             <div className="ui divider" />
@@ -342,22 +397,34 @@ class Profile extends Component {
             </div>
             <div className="ui segment">
               <div className="ui large header center aligned">
-                Our Recommended Blogs and Articles Based on Your Interests
+                Inspirational Photos Based on Your Selected Interests
               </div>
-
               {this.state.user.interests.length ? (
-                this.state.interestInfo.map(interest => (
-                  <a href={interest.url} alt={interest.description} target="_blank">
+                this.state.interestInfo.map((interest, i) => (
+                  <a
+                    key={i}
+                    href={interest.links.html}
+                    alt={interest.description}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
                     <div className="ui segment">
                       <img
                         className="ui fluid rounded image"
-                        src={interest.urlToImage}
+                        alt={interest.description}
+                        src={interest.urls.small}
                       />
-                      <div className="ui large header">{interest.title}</div>
+                      <div className="ui medium header">
+                        {interest.description === null ? (
+                          <span />
+                        ) : (
+                          <span>{formatDescription(interest.description)}</span>
+                        )}
+                      </div>
                       <div className="ui red tiny header">
-                        By {interest.author}{" "}
+                        By {interest.user.first_name}{" "}
                       </div>{" "}
-                      <span>Published {formatDate(interest.publishedAt)}</span>
+                      <span>Published {formatDate(interest.created_at)}</span>
                     </div>
                   </a>
                 ))
