@@ -2,7 +2,7 @@
 
 import React, { Component } from "react";
 import axios from "axios";
-import Unsplash, { toJson } from 'unsplash-js';
+import Unsplash, { toJson } from "unsplash-js";
 import { Dropdown, Message } from "semantic-ui-react";
 
 // NewsAPI
@@ -19,17 +19,20 @@ import { Dropdown, Message } from "semantic-ui-react";
 // Unsplash API
 const unsplash = new Unsplash({
   applicationId:
-    '448df5c63ad4abd2633e2f7b430dda63f0108e1befdb9da26f764875fe848c07',
-  secret: '598dc741c4d713658f81a9184b11cae4cade89223787a5125e59960944666146',
-  callbackUrl: 'http://web-maker-ht.herokuapp.com/'
-})
+    "448df5c63ad4abd2633e2f7b430dda63f0108e1befdb9da26f764875fe848c07",
+  secret: "598dc741c4d713658f81a9184b11cae4cade89223787a5125e59960944666146",
+  callbackUrl: "http://web-maker-ht.herokuapp.com/"
+});
 
 function formatDate(date) {
   return date.substring(0, 4);
 }
 
 function formatDescription(description) {
-  return description.split(' ').map(word => word.charAt(0).toUpperCase() + word.substr(1)).join(' ')
+  return description
+    .split(" ")
+    .map(word => word.charAt(0).toUpperCase() + word.substr(1))
+    .join(" ");
 }
 
 class Profile extends Component {
@@ -145,6 +148,7 @@ class Profile extends Component {
       .then(json => {
         const photos = json.results;
         photos.map(photo => {
+          photo.type = interest
           this.setState({
             interestInfo: [photo, ...this.state.interestInfo]
           });
@@ -207,10 +211,12 @@ class Profile extends Component {
       `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
     );
 
+    let interestInfo = this.state.interestInfo.filter(interest => interest.type !== currentInterest)
+
     this.setState({
       user,
       interests: user.interests,
-      interestInfo: user.interests
+      interestInfo
     });
   };
 
@@ -374,7 +380,6 @@ class Profile extends Component {
               <div className="ui large header center aligned">
                 Inspirational Photos Based on Your Selected Interests
               </div>
-
               {this.state.user.interests.length ? (
                 this.state.interestInfo.map((interest, i) => (
                   <a
@@ -388,10 +393,12 @@ class Profile extends Component {
                       <img
                         className="ui fluid rounded image"
                         alt={interest.description}
-                        src={interest.urls.full}
+                        src={interest.urls.small}
                       />
                       <div className="ui medium header">
-                        {interest.description === null ? (<span></span>) : (
+                        {interest.description === null ? (
+                          <span />
+                        ) : (
                           <span>{formatDescription(interest.description)}</span>
                         )}
                       </div>
