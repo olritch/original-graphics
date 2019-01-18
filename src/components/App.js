@@ -31,10 +31,8 @@ import StoreFrame from './Store/StoreFrame';
 import StorePoster from './Store/StorePoster';
 
 import Contact from './Help/Contact';
-import Help from './Help/Help';
 import Privacy from './Help/Privacy';
 import Terms from './Help/Terms';
-import Sitemap from './Help/Sitemap';
 import axios from 'axios';
 
 class App extends Component {
@@ -68,10 +66,8 @@ class App extends Component {
               <Route path="/store/poster" exact component={StorePoster} />
 
               <Route path="/contact" exact component={Contact} />
-              <Route path="/help" exact component={Help} />
               <Route path="/privacy" exact component={Privacy} />
               <Route path="/terms" exact component={Terms} />
-              <Route path="/sitemap" exact component={Sitemap} />
               <Route path="/instructor-info" exact component={InstructorInfo} />
               <Route path="/store" exact component={StoreList} />
               <Route path="/class" exact component={ClassList} />
