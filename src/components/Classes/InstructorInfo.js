@@ -19,9 +19,9 @@ class InstructorInfo extends Component {
 
         <div className="ui container">
           <div
-            style={{ marginBottom: "20px", border: "solid", marginTop: "50px" }}
+            style={{ marginBottom: "20px", marginTop: "50px" }}
           >
-            <div className="ui stacked segments">
+            <div className="ui segments">
               <div className="ui segment">
                 <strong>
                   <h1>Course Instructor: Sheila McDaniel</h1>
@@ -43,7 +43,7 @@ class InstructorInfo extends Component {
                   </strong>
                 </button>
 
-                <p>
+                <p style={{paddingBottom: '20px'}}>
                   Sheila McDaniel is a photographer whose work explores
                   stereotypes of race and gender, most often with an emphasis on
                   African American women. My signature technique is photo-text,
@@ -59,9 +59,9 @@ class InstructorInfo extends Component {
           </div>
 
           <div
-            style={{ marginBottom: "20px", border: "solid", marginTop: "50px" }}
+            style={{ marginBottom: "20px", marginTop: "50px" }}
           >
-            <div className="ui stacked segments">
+            <div className="ui segments">
               <div className="ui segment">
                 <strong>
                   <h1>Course Instructor: Hieu Tran</h1>
@@ -88,7 +88,7 @@ class InstructorInfo extends Component {
               </div>
 
               <div className="ui text container">
-                <p>
+                <p style={{paddingBottom: '20px'}}>
                   My name is Hieu Tran. I’m a professional
                   photographer-filmmaker specializing in architectural, aerial
                   photography and video production. “Photography is my muse, my
@@ -103,9 +103,9 @@ class InstructorInfo extends Component {
           </div>
 
           <div
-            style={{ marginBottom: "20px", border: "solid", marginTop: "50px" }}
+            style={{ marginBottom: "20px", marginTop: "50px" }}
           >
-            <div className="ui stacked segments">
+            <div className="ui segments">
               <div className="ui segment">
                 <strong>
                   <h1>Course Instructor: Olritch Germain</h1>
@@ -137,7 +137,7 @@ class InstructorInfo extends Component {
               </div>
 
               <div className="ui text container">
-                <p>
+                <p style={{paddingBottom: '20px'}}>
                   I am 36 years old, born and raised in New York, and currently
                   living in Boston Mass. I studied fine art and photography in
                   college, eventually graduating from Roxbury Community Colle in

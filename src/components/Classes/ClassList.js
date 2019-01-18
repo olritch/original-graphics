@@ -17,7 +17,7 @@ class ClassList extends Component {
 
             <div>
                 <div className='ui text container'>
-                    <div className="ui stacked segments">
+                    <div style={{marginBottom: '20px'}} className="ui segments">
 
                         <div className="ui segment">
                         <strong><h1>Beginner</h1></strong>
@@ -35,7 +35,7 @@ class ClassList extends Component {
                 </div>
 
                     <div className='ui text container'>
-                    <div className="ui stacked segments">
+                    <div style={{marginBottom: '20px'}} className="ui segments">
 
                         <div className="ui segment">
                         <strong><h1>Intermediate</h1></strong>
@@ -53,7 +53,7 @@ class ClassList extends Component {
                 </div>
 
                     <div className='ui text container'>
-                    <div className="ui stacked segments">
+                    <div style={{marginBottom: '20px'}} className="ui segments">
 
                         <div className="ui segment">
                         <strong><h1>Advanced</h1></strong>
