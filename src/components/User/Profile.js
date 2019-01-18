@@ -216,6 +216,7 @@ class Profile extends Component {
     let user = {...this.state.user};
     user.interests = [];
     let interestInfo = [];
+    let interests = [];
 
     await axios.put(
       `/api/interests/clearAll?uid=${user._id}`
@@ -223,7 +224,8 @@ class Profile extends Component {
     
     this.setState({
       user,
-      interestInfo
+      interestInfo,
+      interests
     })
   };
 
