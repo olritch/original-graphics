@@ -84,8 +84,8 @@ class AboutUs extends Component {
             <div className='ui container google-maps'>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.747229973736!2d-71.0828303!3d42.3278784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9d13b52f5a486d1e!2sUrban+League+of+Eastern+Massachusetts+(ULEM)!5e0!3m2!1sen!2sus!4v1547830801476"
-              width="700"
-              height="450"
+              width="300"
+              height="200"
               frameBorder="0"
               style={{border:'0'}}
               allowFullScreen
