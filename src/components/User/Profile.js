@@ -233,6 +233,8 @@ class Profile extends Component {
 
   deleteReminder = async () => {};
 
+  clearAllReminders = async () => {};
+
   render() {
     console.log(this.state.interestInfo);
     const {

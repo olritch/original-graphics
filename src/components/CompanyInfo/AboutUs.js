@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Map from "../../apis/googleMaps/Map";
 
 class AboutUs extends Component {
   render() {
@@ -81,15 +80,15 @@ class AboutUs extends Component {
                 </Link>
               </div>
             </div>
-            <div className="ui horizontal divider">Or</div>
-            <div className='ui text container'>
+            <div style={{paddingTop: '50px', fontSize: '30px'}} className="ui horizontal divider">Or Come Visit Our Boston Location</div>
+            <div className='ui container google-maps'>
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.747229973736!2d-71.0828303!3d42.3278784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9d13b52f5a486d1e!2sUrban+League+of+Eastern+Massachusetts+(ULEM)!5e0!3m2!1sen!2sus!4v1547830801476"
-              width="600"
+              width="700"
               height="450"
-              frameborder="0"
+              frameBorder="0"
               style={{border:'0'}}
-              allowfullscreen
+              allowFullScreen
             />
             </div>
           </div>
