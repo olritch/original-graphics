@@ -1,9 +1,11 @@
 // If have time, implement a friends list for user based on people they took the class with
 
 import React, { Component } from "react";
-import { Dropdown, Message } from "semantic-ui-react";
 import axios from "axios";
+import Unsplash, { toJson } from 'unsplash-js';
+import { Dropdown, Message } from "semantic-ui-react";
 
+// NewsAPI
 const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
 const baseURL =
   "https://newsapi.org/v2/everything?" +
@@ -13,6 +15,20 @@ const baseURL =
   API_KEY +
   "&" +
   "q=+";
+
+// Unsplash API
+const unsplash = new Unsplash({
+  applicationId:
+    '448df5c63ad4abd2633e2f7b430dda63f0108e1befdb9da26f764875fe848c07',
+  secret: '598dc741c4d713658f81a9184b11cae4cade89223787a5125e59960944666146',
+  callbackUrl: 'http://web-maker-ht.herokuapp.com/'
+})
+
+unsplash.search.photos('night photography', 1)
+  .then(toJson)
+  .then(json => {
+    console.log(json);
+  });
 
 function formatDate(date) {
   return date.substring(0, 4);
@@ -156,9 +172,9 @@ class Profile extends Component {
     user.interests = this.state.interests;
 
     await this.state.newInterests.map(
-      (newInterest) => {
+      (newInterest) => (
         this.getInterestsInfo(newInterest)
-      }
+      )
     )
 
     this.setState({
@@ -189,7 +205,7 @@ class Profile extends Component {
   deleteReminder = async () => {};
 
   render() {
-    console.log(this.state.interestInfo);
+    // console.log(this.state.interestInfo);
     const {
       firstName,
       lastName,
@@ -202,13 +218,9 @@ class Profile extends Component {
 
     const { errors } = this.state;
 
-    return (
-      <div>
-        <div className="column" style={{ padding: "15px 5px 75px 5px" }}>
-          <div
-            style={{ fontSize: "50px" }}
-            className="ui grey center aligned huge header"
-          >
+    return <div>
+        <div className="column" style={{ padding: '15px 5px 75px 5px' }}>
+          <div style={{ fontSize: '50px' }} className="ui grey center aligned huge header">
             Original Graphics
           </div>
         </div>
@@ -217,10 +229,7 @@ class Profile extends Component {
           <div className="four wide column">
             <div className="ui blue card">
               <div className="image">
-                <img
-                  src="https://cdt.org/files/2015/10/2015-10-06-FB-person.png"
-                  alt="default male user with no provided icon"
-                />
+                <img src="https://cdt.org/files/2015/10/2015-10-06-FB-person.png" alt="default male user with no provided icon" />
               </div>
               <div className="content">
                 <div className="header">
@@ -233,25 +242,19 @@ class Profile extends Component {
                 </div>
                 <div className="description">
                   <div>
-                    <i
-                      style={{ marginRight: "20px" }}
-                      className="envelope icon"
-                    />
+                    <i style={{ marginRight: '20px' }} className="envelope icon" />
                     {email}
                   </div>
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: "20px" }} className="phone icon" />
+                    <i style={{ marginRight: '20px' }} className="phone icon" />
                     {telephone}
                   </div>
                 </div>
                 <div className="description">
                   <div>
-                    <i
-                      style={{ marginRight: "20px" }}
-                      className="info circle icon"
-                    />
+                    <i style={{ marginRight: '20px' }} className="info circle icon" />
                     {bio}
                   </div>
                 </div>
@@ -259,17 +262,11 @@ class Profile extends Component {
             </div>
             <div className="ui divider" />
             <div className="ui vertical buttons">
-              <button
-                style={{ width: "210px", marginBottom: "10px" }}
-                className="ui large inverted blue button"
-              >
+              <button style={{ width: '210px', marginBottom: '10px' }} className="ui large inverted blue button">
                 <i className="calendar alternate icon" />
                 My Events
               </button>
-              <button
-                style={{ width: "210px", marginBottom: "10px" }}
-                className="ui large inverted blue button"
-              >
+              <button style={{ width: '210px', marginBottom: '10px' }} className="ui large inverted blue button">
                 <i className="camera icon" />
                 My Photos
               </button>
@@ -277,39 +274,19 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui segment">
               <div className="ui header">My Interests</div>
-              {errors.interestExist && (
-                <Message
-                  size="small"
-                  attached
-                  negative
-                  content={errors.interestExist}
-                />
-              )}
-              <form style={{ paddingBottom: "10px" }} className="ui form">
+              {errors.interestExist && <Message size="small" attached negative content={errors.interestExist} />}
+              <form style={{ paddingBottom: '10px' }} className="ui form">
                 <div className="field">
-                  <Dropdown
-                    placeholder="Interests"
-                    fluid
-                    name="test"
-                    multiple
-                    selection
-                    options={this.options}
-                    onChange={this.onDropdownInputChange}
-                    value={this.state.newInterests}
-                  />
+                  <Dropdown placeholder="Interests" fluid name="test" multiple selection options={this.options} onChange={this.onDropdownInputChange} value={this.state.newInterests} />
                 </div>
-                <div
-                  onClick={this.addInterest}
-                  style={{ width: "150px" }}
-                  className="ui inverted blue button"
-                >
+                <div onClick={this.addInterest} style={{ width: '150px' }} className="ui inverted blue button">
                   Add
                 </div>
               </form>
 
               {this.state.user.interests.map((interest, i) => (
                 <div
-                  style={{ marginBottom: "10px", marginRight: "5px" }}
+                  style={{ marginBottom: '10px', marginRight: '5px' }}
                   className="ui large label"
                   key={i}
                 >
@@ -327,16 +304,10 @@ class Profile extends Component {
           <div className="seven wide column">
             <div className="ui segment">
               <div className="ui header">My Reminders</div>
-              <div
-                style={{ paddingBottom: "15px" }}
-                className="ui fluid input focus"
-              >
+              <div style={{ paddingBottom: '15px' }} className="ui fluid input focus">
                 <input type="text" placeholder="I need to..." />
               </div>
-              <button
-                onClick={this.addReminder}
-                className="ui labeled icon button"
-              >
+              <button onClick={this.addReminder} className="ui labeled icon button">
                 <i className="pencil icon" /> Post
               </button>
             </div>
@@ -345,73 +316,65 @@ class Profile extends Component {
                 Our Recommended Blogs and Articles Based on Your Interests
               </div>
 
-              {this.state.user.interests.length ? (
-                this.state.interestInfo.map(interest => (
-                  <a href={interest.url} alt={interest.description} target="_blank">
-                    <div className="ui segment">
-                      <img
-                        className="ui fluid rounded image"
-                        src={interest.urlToImage}
-                      />
-                      <div className="ui large header">{interest.title}</div>
-                      <div className="ui red tiny header">
-                        By {interest.author}{" "}
-                      </div>{" "}
-                      <span>Published {formatDate(interest.publishedAt)}</span>
-                    </div>
-                  </a>
-                ))
-              ) : (
-                <Message
-                  size="small"
-                  attached
-                  negative
-                  content="Please update your interests to see our recommended list"
-                />
-              )}
+              {this.state.user.interests.length ? this.state.interestInfo.map(
+                  (interest, i) => (
+                    <a
+                      key={i}
+                      href={interest.url}
+                      alt={interest.description}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      <div className="ui segment">
+                        <img
+                          className="ui fluid rounded image"
+                          alt={interest.description}
+                          src={interest.urlToImage}
+                        />
+                        <div className="ui large header">
+                          {interest.title}
+                        </div>
+                        <div className="ui red tiny header">
+                          By {interest.author}{' '}
+                        </div>{' '}
+                        <span>
+                          Published {formatDate(interest.publishedAt)}
+                        </span>
+                      </div>
+                    </a>
+                  )
+                ) : <Message size="small" attached negative content="Please update your interests to see our recommended list" />}
             </div>
           </div>
           <div className="five wide column">
-            <div style={{ marginBottom: "10px" }} className="ui segment">
-              <div
-                style={{ paddingBottom: "10px" }}
-                className="ui center aligned header"
-              >
+            <div style={{ marginBottom: '10px' }} className="ui segment">
+              <div style={{ paddingBottom: '10px' }} className="ui center aligned header">
                 Upcoming Classes:
               </div>
               {classes.map((course, i) => {
-                return (
-                  <div className="ui segment" key={i}>
+                return <div className="ui segment" key={i}>
                     <div className="ui small center aligned header">
                       <span>
                         <strong>{course.title}</strong>
                       </span>
                     </div>
-                    <div style={{ textAlign: "center" }}>
+                    <div style={{ textAlign: 'center' }}>
                       <strong>{course.proficiency}</strong>
                     </div>
-                    <div style={{ paddingBottom: "25px", textAlign: "center" }}>
+                    <div style={{ paddingBottom: '25px', textAlign: 'center' }}>
                       <strong>{course.date}</strong>
                     </div>
-                    {this.state.showInfo === course._id ? (
-                      <div className="ui container">{course.description}</div>
-                    ) : (
-                      <button
-                        id={course._id}
-                        onClick={this.onInfoClick.bind(this)}
-                        className="ui large fluid blue basic button"
-                      >
+                    {this.state.showInfo === course._id ? <div className="ui container">
+                        {course.description}
+                      </div> : <button id={course._id} onClick={this.onInfoClick.bind(this)} className="ui large fluid blue basic button">
                         Info
-                      </button>
-                    )}
+                      </button>}
                   </div>
-                );
               })}
             </div>
           </div>
         </div>
       </div>
-    );
   }
 }
 
