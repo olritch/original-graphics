@@ -1,21 +1,20 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Map from '../../apis/googleMaps/Map';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Map from "../../apis/googleMaps/Map";
 
 class AboutUs extends Component {
-
   render() {
     return (
-      <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
+      <div className="column" style={{ padding: "15px 5px 5px 5px" }}>
         <div
-          style={{ fontSize: '50px' }}
+          style={{ fontSize: "50px" }}
           className="ui grey center aligned huge header"
         >
           Original Graphics
         </div>
 
         <div className="ui vertical center aligned segment">
-          <h1 style={{ fontSize: '40px' }} className="ui header">
+          <h1 style={{ fontSize: "40px" }} className="ui header">
             About Us
           </h1>
         </div>
@@ -77,18 +76,27 @@ class AboutUs extends Component {
                   about your wedding, event, portrait session or video project.
                 </p>
                 <Link to="/contact" className="ui fluid huge primary button">
-                  {' '}
+                  {" "}
                   Contact Us
                 </Link>
               </div>
             </div>
             <div className="ui horizontal divider">Or</div>
-            <Map />
+            <div className='ui text container'>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d11798.747229973736!2d-71.0828303!3d42.3278784!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x9d13b52f5a486d1e!2sUrban+League+of+Eastern+Massachusetts+(ULEM)!5e0!3m2!1sen!2sus!4v1547830801476"
+              width="600"
+              height="450"
+              frameborder="0"
+              style={{border:'0'}}
+              allowfullscreen
+            />
+            </div>
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-export default AboutUs
+export default AboutUs;
