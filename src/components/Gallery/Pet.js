@@ -39,7 +39,7 @@ class Pet extends Component {
               <i className="fa fa-remove" />
             </a>
             <img
-              src="https://scontent.fbos1-2.fna.fbcdn.net/v/t1.0-1/c0.0.160.160a/p160x160/1918955_10209093121264612_4732586498449505511_n.jpg?_nc_cat=104&_nc_ht=scontent.fbos1-2.fna&oh=c9c271e471193643ca4050cae0e4dec6&oe=5CC3066E"
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
               style={{ width: "45%" }}
               className="w3-round"
             />
@@ -48,7 +48,7 @@ class Pet extends Component {
             <h4>
               <b>PORTFOLIO</b>
             </h4>
-            <p className="w3-text-grey">Template by W3.CSS</p>
+           
           </div>
           <div className="w3-bar-block">
             <a
@@ -128,8 +128,8 @@ class Pet extends Component {
                   Art
                 </button>
                 <div className="margin-top">
-                  <span>Upload:</span>
-                  <button className="w3-button w3-black">Video / Photo</button>
+                  <span style= {{paddingRight:"20px"}}>Upload:</span>
+                  <button className="w3-button ui red button ">Video / Photo</button>
                   {/* <button className="w3-button w3-white">
                     <i className="fa fa-diamond w3-margin-right" />
                     Videos
@@ -504,7 +504,7 @@ class Pet extends Component {
           <footer className="w3-container w3-padding-32 w3-dark-grey">
             <div className="w3-row-padding">
               <div className="w3-third">
-                <h3>FOOTER</h3>
+                <h3>EVENTS</h3>
                 <p>
                   Praesent tincidunt sed tellus ut rutrum. Sed vitae justo
                   condimentum, porta lectus vitae, ultricies congue gravida diam
@@ -554,25 +554,25 @@ class Pet extends Component {
                     Travel
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    New York
+                    Fashion
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    London
+                    Portrait
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    IKEA
+                    Food
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    NORWAY
+                    Landscape
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    DIY
+                    Liberal art
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    Ideas
+                    Wedding
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
-                    Baby
+                    Nature
                   </span>{" "}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Family
