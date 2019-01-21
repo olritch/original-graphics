@@ -31,7 +31,7 @@ export const interestOptions = [
     },
     {
         key: "sport-photography",
-        value: "Sport",
+        value: "Sport Photography",
         text: "Sport"
     },
     {
