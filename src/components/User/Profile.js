@@ -35,6 +35,8 @@ class Profile extends Component {
     showInfo: '',
     description: '',
     interests: [],
+    reminders: [],
+    showReminderInput: false,
     errors: {},
     reminderErrors: {},
     isLoggedIn: false,
@@ -169,6 +171,12 @@ class Profile extends Component {
     })
   }
 
+  showReminderInput = bool => {
+    this.setState({
+      showReminderInput: bool
+    })
+  }
+
   addReminder = async e => {
     e.preventDefault();
 
@@ -184,7 +192,18 @@ class Profile extends Component {
     };
 
     let res = await axios.post(`/api/user/reminder`, reminder);
-    console.log(res);
+    if (!res.data) {
+      this.setState({
+        reminders: [...this.state.reminders, res.data.description]
+      });
+      this.showReminderInput(false);
+    } else {
+      this.setState({
+        reminderErrors: {
+          emptyField: 'Please provide a reminder'
+        }
+      });
+    }
   }
 
   deleteReminder = async () => {}
