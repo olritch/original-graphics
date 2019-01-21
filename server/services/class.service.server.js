@@ -1,5 +1,5 @@
 module.exports = function(app) {
-    const classModel = require('../models/class/class.model.server');
+    const classModel = require('../models/user/class/class.model.server');
 
     app.get('/api/class/date', getClassesOnDate);
     app.get('/api/class', getClassByTitleAndDate);
