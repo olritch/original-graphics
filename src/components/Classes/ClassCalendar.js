@@ -7,6 +7,9 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Message } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
+import { classTitleOptions } from '../../utils/ClassTitleOptions';
+import { classProficiencyOptions } from '../../utils/ClassProficiencyOptions';
+import { classDescriptionOptions } from '../../utils/ClassDescriptionOptions';
 
 class ClassCalendar extends Component {
   state = {
@@ -23,21 +26,11 @@ class ClassCalendar extends Component {
     hasRegistered: []
   };
 
-  classTitleOptions = [
-    "Basic Photography: Taking Better Pictures",
-    "Intermediate Photography: Beyond Basics",
-    'Advanced Photography: Don\'t "take" photos, "make" photos'
-  ];
+  classTitleOptions = classTitleOptions;
 
-  classProficiencyOptions = ["Beginner", "Intermediate", "Advanced"];
+  classProficiencyOptions = classProficiencyOptions;
 
-  classDescriptionOptions = [
-    "In this class you will learn camera basics as we explain how to use your camera correctly and take better pictures. It's easy, fun and the best way to start learning. Understanding photography's basics is essential to making great images. Start with basic photographic principles and camera controls and expand to composition, color theory and issues of visual perception.",
-
-    "You will dive deeper into photography building your skills, personal style and your own photography portfolio. Brush up on technical issues and camera use. Improve lighting, composition, approach to subject matter.",
-
-    "Explore our advanced level class you will learn how to control every detail of your photographs while shooting and editing. Learn to use your camera to better tell your intended story through exploring more complex camera techniques and thinking processes."
-  ];
+  classDescriptionOptions = classDescriptionOptions;
 
   handleChange = (event, { name, value }) => {
     if (this.state.hasOwnProperty(name)) {

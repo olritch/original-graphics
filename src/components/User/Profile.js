@@ -4,6 +4,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import Unsplash, { toJson } from "unsplash-js";
 import { Dropdown, Message } from "semantic-ui-react";
+import { interestOptions } from '../../utils/InterestOptions';
 
 // NewsAPI
 // const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
@@ -50,63 +51,7 @@ class Profile extends Component {
     interestInfo: []
   };
 
-  options = [
-    {
-      key: "nature-photography",
-      value: "Nature",
-      text: "Nature"
-    },
-    {
-      key: "landscape-photography",
-      value: "Landscape",
-      text: "Landscape"
-    },
-    {
-      key: "wedding-photography",
-      value: "Wedding",
-      text: "Wedding"
-    },
-    {
-      key: "aerial-photography",
-      value: "Aerial",
-      text: "Aerial"
-    },
-    {
-      key: "family-photography",
-      value: "Family",
-      text: "Family"
-    },
-    {
-      key: "pet-photography",
-      value: "Pet",
-      text: "Pet"
-    },
-    {
-      key: "night-photography",
-      value: "Night",
-      text: "Night"
-    },
-    {
-      key: "sport-photography",
-      value: "Sport",
-      text: "Sport"
-    },
-    {
-      key: "fashion-photography",
-      value: "Fashion",
-      text: "Fashion"
-    },
-    {
-      key: "street-photography",
-      value: "Street",
-      text: "Street"
-    },
-    {
-      key: "photoshop",
-      value: "Photoshop",
-      text: "Photoshop"
-    }
-  ];
+  options = interestOptions;
 
   componentDidMount = async () => {
     let user = await this.props.isLoggedIn();
@@ -221,7 +166,7 @@ class Profile extends Component {
     await axios.put(
       `/api/interests/clearAll?uid=${user._id}`
     );
-    
+
     this.setState({
       user,
       interestInfo,
