@@ -33,8 +33,10 @@ class Profile extends Component {
       interests: []
     },
     showInfo: '',
+    description: '',
     interests: [],
     errors: {},
+    reminderErrors: {},
     isLoggedIn: false,
     newInterests: [],
     interestInfo: []
@@ -161,7 +163,29 @@ class Profile extends Component {
     })
   }
 
-  addReminder = async () => {}
+  onChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  addReminder = async e => {
+    e.preventDefault();
+
+    // Set up errors if there is no description
+    this.setState({
+      reminderErrors: {}
+    });
+
+    const { description } = this.state;
+
+    const reminder = {
+      description
+    };
+
+    let res = await axios.post(`/api/user/reminder`, reminder);
+    console.log(res);
+  }
 
   deleteReminder = async () => {}
 
@@ -319,7 +343,7 @@ class Profile extends Component {
                 style={{ paddingBottom: '5px' }}
                 className="ui fluid input focus"
               >
-                <input type="text" placeholder="I need to..." />
+                <input onChange={this.onChange} name='description' type="text" placeholder="I need to..." />
               </div>
               <button
                 onClick={this.addReminder}
