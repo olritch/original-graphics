@@ -10,17 +10,10 @@ UserModel.findUserByUsername = findUserByUsername;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
 UserModel.populateClasses = populateClasses;
+UserModel.populateReminders = populateReminders;
 UserModel.addInterest = addInterest;
 UserModel.deleteInterest = deleteInterest;
-UserModel.addReminder = addReminder;
 UserModel.clearAllInterests = clearAllInterests;
-
-function addReminder(uid, reminder) {
-    return UserModel.updateOne(
-        { _id : uid },
-        { $addToSet: { reminders: [ reminder ] } }
-    )
-}
 
 function addInterest(uid, interest) {
     return UserModel.updateOne(
@@ -46,6 +39,11 @@ function clearAllInterests(uid) {
 function populateClasses(uid) {
     return UserModel.findOne({ _id: uid })
                     .populate('classes').exec();
+}
+
+function populateReminders(uid) {
+    return UserModel.findOne({ _id : uid })
+                    .populate('reminders').exec();
 }
 
 function createUser(user) {

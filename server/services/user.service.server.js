@@ -16,17 +16,10 @@ module.exports = function (app) {
     app.post("/api/loggedIn", loggedIn);
     app.put('/api/user', updateUser);
     app.get('/api/userClasses', getUserWithClasses);
+    app.get('/api/userReminders', getUserWithReminders);
     app.put('/api/interests/add', addInterest);
     app.put('/api/interests/remove', deleteInterest);
     app.put('/api/interests/clearAll', clearAllInterests);
-    app.put('/api/reminders', addReminder);
-
-    async function addReminder(req, res) {
-        const uid = req.query['uid'];
-        const reminders = req.query['reminders'];
-        const data = await userModel.addReminder(uid, reminders);
-        res.json(data);
-    }
 
     async function addInterest(req, res) {
         const uid = req.query['uid'];
@@ -51,6 +44,12 @@ module.exports = function (app) {
     async function getUserWithClasses(req, res) {
         const userId = req.query['uid'];
         const data = await userModel.populateClasses(userId);
+        res.json(data);
+    }
+
+    async function getUserWithReminders(req, res) {
+        const userId = req.query['uid'];
+        const data = await userModel.populateReminders(userId);
         res.json(data);
     }
 
