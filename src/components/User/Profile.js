@@ -5,24 +5,13 @@ import axios from "axios";
 import Unsplash, { toJson } from "unsplash-js";
 import { Dropdown, Message } from "semantic-ui-react";
 import { interestOptions } from '../../utils/InterestOptions';
-
-// NewsAPI
-// const API_KEY = "5170a50ca07541dc9d39bfa2df0564f1";
-// const baseURL =
-//   "https://newsapi.org/v2/everything?" +
-//   "pageSize=2&" +
-//   "sortBy=relevancy&" +
-//   "apiKey=" +
-//   API_KEY +
-//   "&" +
-//   "q=+";
+import { API_KEY } from '../../apis/unplash/Unsplash';
 
 // Unsplash API
 const unsplash = new Unsplash({
-  applicationId:
-    "448df5c63ad4abd2633e2f7b430dda63f0108e1befdb9da26f764875fe848c07",
-  secret: "598dc741c4d713658f81a9184b11cae4cade89223787a5125e59960944666146",
-  callbackUrl: "http://web-maker-ht.herokuapp.com/"
+  applicationId: API_KEY.applicationId,
+  secret: API_KEY.secret,
+  callbackUrl: API_KEY.callbackUrl
 });
 
 function formatDate(date) {
