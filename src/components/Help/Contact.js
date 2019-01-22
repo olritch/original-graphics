@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TextArea, Dropdown, Form, Message } from "semantic-ui-react";
+var mandrill = require('node-mandrill')('lEcov9c39Cj4O26ihmKeKg');
 
 class Contact extends Component {
   state = {
@@ -32,72 +33,83 @@ class Contact extends Component {
     }
   ];
 
-  onInputChange = (e) => {
+  onInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    })
-  }
+    });
+  };
 
   onDropdownInputChange = (e, data) => {
     this.setState({
       commentTopic: data.value
-    })
-  }
+    });
+  };
 
-  formSubmit = e => {
+  formSubmit = async e => {
     e.preventDefault();
 
-    const { firstName, lastName, email, phoneNumber, commentTopic, feedback } = this.state;
+    this.setState({
+      errors: {}
+    })
 
-    if (firstName === '') {
+    const {
+      firstName,
+      lastName,
+      email,
+      phoneNumber,
+      commentTopic,
+      feedback
+    } = this.state;
+
+    if (firstName === "") {
       this.setState({
         errors: {
-          firstName: 'First name is required'
+          firstName: "First name is required"
         }
       });
       return;
     }
 
-    if (lastName === '') {
+    if (lastName === "") {
       this.setState({
         errors: {
-          lastName: 'Last name is required'
-        }
-      });
-      return;
-    }
-    
-    if (email === '') {
-      this.setState({
-        errors: {
-          email: 'Email is required'
+          lastName: "Last name is required"
         }
       });
       return;
     }
 
-    if (phoneNumber === '') {
+    if (email === "") {
       this.setState({
         errors: {
-          phoneNumber: 'Phone number is required'
+          email: "Email is required"
         }
       });
       return;
     }
 
-    if (!commentTopic) {
+    if (phoneNumber === "") {
       this.setState({
         errors: {
-          firstName: 'Comment topic is required'
+          phoneNumber: "Phone number is required"
         }
       });
       return;
     }
 
-    if (feedback === '') {
+    if (commentTopic === '') {
       this.setState({
         errors: {
-          feedback: 'Feedback is required'
+          commentTopic: "Comment topic is required"
+        }
+      });
+      return;
+    }
+
+    if (feedback === "") {
+      this.setState({
+        errors: {
+          feedback: "Feedback is required"
         }
       });
       return;
@@ -106,6 +118,23 @@ class Contact extends Component {
     this.setState({
       showContactForm: true
     });
+
+    // send email with mandrill
+    mandrill('/messages/send', {
+      message: {
+        to: [{ email: email, name: `${firstName} ${lastName}` }],
+        from_email: 'originalgraphics.contact@gmail.com',
+        subject: "Response to your Original Graphics Concerns",
+        text: "Hello, We have received your feedback and have decided to..."
+      }
+    }, function (error, response) {
+        //uh oh, there was an error
+        if (error) console.log(JSON.stringify(error));
+
+        //everything's good, lets see what mandrill said
+        else console.log(response);
+      });
+  
   };
 
   render() {
@@ -130,6 +159,10 @@ class Contact extends Component {
                 </div>
               </h1>
 
+              {Object.keys(errors).map((keyName, i) => {
+                return <Message key={i} compact size='large' attached negative content={errors[keyName]} />
+              })}
+
               {this.state.showContactForm ? (
                 <Message size="large">
                   Thank you for contacting us! We will get back to you soon.
@@ -139,19 +172,39 @@ class Contact extends Component {
                   <Form>
                     <Form.Field>
                       <label>First Name</label>
-                      <input onChange={this.onInputChange} name='firstName' type="text" placeholder="First Name" />
+                      <input
+                        onChange={this.onInputChange}
+                        name="firstName"
+                        type="text"
+                        placeholder="First Name"
+                      />
                     </Form.Field>
                     <Form.Field>
                       <label>Last Name</label>
-                      <input onChange={this.onInputChange} name='lastName' type="text" placeholder="Last Name" />
+                      <input
+                        onChange={this.onInputChange}
+                        name="lastName"
+                        type="text"
+                        placeholder="Last Name"
+                      />
                     </Form.Field>
                     <Form.Field>
                       <label>Email</label>
-                      <input onChange={this.onInputChange} name='email' type="text" placeholder="Email Address" />
+                      <input
+                        onChange={this.onInputChange}
+                        name="email"
+                        type="text"
+                        placeholder="Email Address"
+                      />
                     </Form.Field>
                     <Form.Field>
                       <label>Phone Number</label>
-                      <input onChange={this.onInputChange} name='phoneNumber' type="tel" placeholder="Phone Number" />
+                      <input
+                        onChange={this.onInputChange}
+                        name="phoneNumber"
+                        type="tel"
+                        placeholder="Phone Number"
+                      />
                     </Form.Field>
                     <h1
                       className="ui header"
@@ -177,7 +230,12 @@ class Contact extends Component {
                         Send us your feedback, questions or concerns.
                       </div>
                     </h1>
-                    <TextArea onChange={this.onInputChange} name='feedback' rows={10} placeholder="Tell us more" />
+                    <TextArea
+                      onChange={this.onInputChange}
+                      name="feedback"
+                      rows={5}
+                      placeholder="Tell us more"
+                    />
                     <div className="ui divider" />
                     <button
                       onClick={this.formSubmit}
