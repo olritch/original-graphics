@@ -1,7 +1,18 @@
 import React, { Component } from "react";
-import { TextArea, Dropdown, Form } from "semantic-ui-react";
+import { TextArea, Dropdown, Form, Message } from "semantic-ui-react";
 
 class Contact extends Component {
+  state = {
+    errors: {},
+    showContactForm: false,
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    commentTopic: "",
+    feedback: ""
+  };
+
   commentTopics = [
     {
       text: "Customer Service",
@@ -21,7 +32,84 @@ class Contact extends Component {
     }
   ];
 
+  onInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value
+    })
+  }
+
+  onDropdownInputChange = (e, data) => {
+    this.setState({
+      commentTopic: data.value
+    })
+  }
+
+  formSubmit = e => {
+    e.preventDefault();
+
+    const { firstName, lastName, email, phoneNumber, commentTopic, feedback } = this.state;
+
+    if (firstName === '') {
+      this.setState({
+        errors: {
+          firstName: 'First name is required'
+        }
+      });
+      return;
+    }
+
+    if (lastName === '') {
+      this.setState({
+        errors: {
+          lastName: 'Last name is required'
+        }
+      });
+      return;
+    }
+    
+    if (email === '') {
+      this.setState({
+        errors: {
+          email: 'Email is required'
+        }
+      });
+      return;
+    }
+
+    if (phoneNumber === '') {
+      this.setState({
+        errors: {
+          phoneNumber: 'Phone number is required'
+        }
+      });
+      return;
+    }
+
+    if (!commentTopic) {
+      this.setState({
+        errors: {
+          firstName: 'Comment topic is required'
+        }
+      });
+      return;
+    }
+
+    if (feedback === '') {
+      this.setState({
+        errors: {
+          feedback: 'Feedback is required'
+        }
+      });
+      return;
+    }
+
+    this.setState({
+      showContactForm: true
+    });
+  };
+
   render() {
+    const { errors } = this.state;
     return (
       <div>
         <div className="column" style={{ padding: "15px 5px 5px 5px" }}>
@@ -41,57 +129,66 @@ class Contact extends Component {
                   below and we'll get back to you as soon as we can.
                 </div>
               </h1>
-              <div className="ui message">
-                <Form>
-                  <Form.Field>
-                    <label>First Name</label>
-                    <input type="text" placeholder="First Name" />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Last Name</label>
-                    <input type="text" placeholder="Last Name" />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Email</label>
-                    <input type="text" placeholder="Email Address" />
-                  </Form.Field>
-                  <Form.Field>
-                    <label>Phone Number</label>
-                    <input type="tel" placeholder="Phone Number" />
-                  </Form.Field>
-                  <h1
-                    className="ui header"
-                    style={{ paddingBottom: "10px", paddingTop: "25px" }}
-                  >
-                    <div className="sub header">
-                      What's on your mind? Choose a topic and add your comments
-                      below.
-                    </div>
-                  </h1>
-                  <Dropdown
-                    placeholder="Select Topic of Concern"
-                    fluid
-                    selection
-                    options={this.commentTopics}
-                  />
-                  <h1
-                    className="ui header"
-                    style={{ paddingBottom: "10px", paddingTop: "25px" }}
-                  >
-                    <div className="sub header">
-                      Send us your feedback, questions or concerns.
-                    </div>
-                  </h1>
-                  <TextArea rows={10} placeholder="Tell us more" />
-                  <div className="ui divider" />
-                  <button
-                    style={{ paddingTop: "20px" }}
-                    className="ui fluid primary huge button"
-                  >
-                    Submit
-                  </button>
-                </Form>
-              </div>
+
+              {this.state.showContactForm ? (
+                <Message size="large">
+                  Thank you for contacting us! We will get back to you soon.
+                </Message>
+              ) : (
+                <div className="ui message">
+                  <Form>
+                    <Form.Field>
+                      <label>First Name</label>
+                      <input onChange={this.onInputChange} name='firstName' type="text" placeholder="First Name" />
+                    </Form.Field>
+                    <Form.Field>
+                      <label>Last Name</label>
+                      <input onChange={this.onInputChange} name='lastName' type="text" placeholder="Last Name" />
+                    </Form.Field>
+                    <Form.Field>
+                      <label>Email</label>
+                      <input onChange={this.onInputChange} name='email' type="text" placeholder="Email Address" />
+                    </Form.Field>
+                    <Form.Field>
+                      <label>Phone Number</label>
+                      <input onChange={this.onInputChange} name='phoneNumber' type="tel" placeholder="Phone Number" />
+                    </Form.Field>
+                    <h1
+                      className="ui header"
+                      style={{ paddingBottom: "10px", paddingTop: "25px" }}
+                    >
+                      <div className="sub header">
+                        What's on your mind? Choose a topic and add your
+                        comments below.
+                      </div>
+                    </h1>
+                    <Dropdown
+                      placeholder="Select Topic of Concern"
+                      onChange={this.onDropdownInputChange}
+                      fluid
+                      selection
+                      options={this.commentTopics}
+                    />
+                    <h1
+                      className="ui header"
+                      style={{ paddingBottom: "10px", paddingTop: "25px" }}
+                    >
+                      <div className="sub header">
+                        Send us your feedback, questions or concerns.
+                      </div>
+                    </h1>
+                    <TextArea onChange={this.onInputChange} name='feedback' rows={10} placeholder="Tell us more" />
+                    <div className="ui divider" />
+                    <button
+                      onClick={this.formSubmit}
+                      style={{ paddingTop: "20px" }}
+                      className="ui fluid primary huge button"
+                    >
+                      Submit
+                    </button>
+                  </Form>
+                </div>
+              )}
             </div>
           </div>
         </div>
