@@ -197,7 +197,8 @@ class Profile extends Component {
         reminders: [...this.state.reminders, res.data.description]
       });
       this.showReminderInput(false);
-    } else {
+    } else if (res.data.description === '') {
+      this.showReminderInput(true);
       this.setState({
         reminderErrors: {
           emptyField: 'Please provide a reminder'
@@ -371,6 +372,21 @@ class Profile extends Component {
                 <i className="pencil icon" /> Post
               </button>
             </div>
+
+            {this.state.showReminderInput ?
+            (
+                <Message
+                  size="small"
+                  attached
+                  negative
+                  content={this.state.reminderErrors.emptyField}
+                />
+            )
+            :
+            (
+              <div/>
+            )}
+
             <div className="ui segment">
               <div className="ui large header center aligned">
                 Inspirational Photos Based on Your Selected Interests

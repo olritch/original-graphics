@@ -12,14 +12,13 @@
   height: 100% !important;
 }
 
-
 link {
   transition: all 0.2s ease;
   transition-property: transform, opacity, color, border-color, background-color;
 }
 
 @media only screen and (max-width: 767px) {
-  .ui.stackable.buttons{
+  .ui.stackable.buttons {
     display: -webkit-box;
     display: -webkit-flex;
     display: -ms-flexbox;
@@ -27,13 +26,10 @@ link {
     flex-direction: column;
     width: 100%;
   }
-  .ui.stackable.buttons > .button{
+  .ui.stackable.buttons > .button {
     width: 100%;
   }
-
-
 }
-
 
 .margin-top {
   margin-top: 10px;
@@ -42,17 +38,15 @@ link {
 @media screen and (max-width: 400px) {
   .margin-top {
     margin-top: 10px;
-    /* margin-left: 10px; */
   }
-  .w3-button{
-    padding: 10px 10px
+  .w3-button {
+    padding: 10px 10px;
   }
 }
 
 @media screen and (min-width: 401px) {
   .margin-top {
     display: inline;
-    float: right;
-    margin-right: 20px
+    margin-right: 20px;
   }
 }
