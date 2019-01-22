@@ -15,8 +15,7 @@ module.exports = function (app) {
     app.post("/api/logout", logout);
     app.post("/api/loggedIn", loggedIn);
     app.put('/api/user', updateUser);
-    app.get('/api/userClasses', getUserWithClasses);
-    app.get('/api/userReminders', getUserWithReminders);
+    app.get('/api/userClasses', getUserWithClassesAndReminders);
     app.put('/api/interests/add', addInterest);
     app.put('/api/interests/remove', deleteInterest);
     app.put('/api/interests/clearAll', clearAllInterests);
@@ -41,15 +40,9 @@ module.exports = function (app) {
         res.json(data);
     }
 
-    async function getUserWithClasses(req, res) {
+    async function getUserWithClassesAndReminders(req, res) {
         const userId = req.query['uid'];
-        const data = await userModel.populateClasses(userId);
-        res.json(data);
-    }
-
-    async function getUserWithReminders(req, res) {
-        const userId = req.query['uid'];
-        const data = await userModel.populateReminders(userId);
+        const data = await userModel.populateClassesAndReminders(userId);
         res.json(data);
     }
 

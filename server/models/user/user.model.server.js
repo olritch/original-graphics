@@ -9,8 +9,7 @@ UserModel.findUsers = findUsers;
 UserModel.findUserByUsername = findUserByUsername;
 UserModel.updateUser = updateUser;
 UserModel.deleteUser = deleteUser;
-UserModel.populateClasses = populateClasses;
-UserModel.populateReminders = populateReminders;
+UserModel.populateClassesAndReminders = populateClassesAndReminders;
 UserModel.addInterest = addInterest;
 UserModel.deleteInterest = deleteInterest;
 UserModel.clearAllInterests = clearAllInterests;
@@ -36,14 +35,10 @@ function clearAllInterests(uid) {
     )
 }
 
-function populateClasses(uid) {
+function populateClassesAndReminders(uid) {
     return UserModel.findOne({ _id: uid })
-                    .populate('classes').exec();
-}
-
-function populateReminders(uid) {
-    return UserModel.findOne({ _id : uid })
-                    .populate('reminders').exec();
+                    .populate('classes', 'reminders')
+                    .exec();
 }
 
 function createUser(user) {
