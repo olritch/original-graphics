@@ -415,7 +415,7 @@ class Profile extends Component {
                       <div className="comment">
                         <div className="text">{reminder.description}</div>
                         <div className="actions">
-                          <a
+                          <a style={{color: 'red'}}
                             onClick={this.deleteReminder.bind(this, reminder)}
                           >
                             Delete
