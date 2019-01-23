@@ -29,7 +29,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "push": "npm run build & git add . & git commit -m build & git push"
   },
   "proxy": "http://localhost:3100",
   "eslintConfig": {
