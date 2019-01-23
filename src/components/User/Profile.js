@@ -130,18 +130,18 @@ class Profile extends Component {
     })
   }
 
-  deleteInterest = async currentInterest => {
+  deleteInterest = async currentReminder => {
     let user = { ...this.state.user }
     user.interests = this.state.user.interests.filter(
-      interest => interest !== currentInterest
+      interest => interest !== currentReminder
     )
 
     await axios.put(
-      `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
+      `/api/interests/remove?uid=${user._id}&interests=${currentReminder}`
     )
 
     let interestInfo = this.state.interestInfo.filter(
-      interest => interest.type !== currentInterest
+      interest => interest.type !== currentReminder
     )
 
     this.setState({
@@ -205,7 +205,7 @@ class Profile extends Component {
       return
     }
 
-    let thisReminder = await axios.post(`/api/user/reminder`, reminder);
+    let thisReminder = await axios.post(`/api/user/reminder`, reminder)
 
     this.setState(
       {
@@ -223,13 +223,22 @@ class Profile extends Component {
 
     await axios.put('/api/user', this.state.user)
 
-    this.refs.reminder.value = '';
+    this.refs.reminder.value = ''
     this.showReminderInput(false)
   }
 
-  deleteReminder = async () => {}
+  deleteReminder = async currentReminder => {
+    const { _id } = currentReminder;
+    // remove currentReminder from reminder
+    await axios.delete('/api/user/reminder', { data: { _id } });
 
-  clearAllReminders = async () => {}
+    this.setState({
+      reminders: this.state.reminders.filter(reminder => reminder._id !== _id),
+      user: {
+        ...this.state.user, reminders: this.state.reminders.filter(reminder => reminder._id  !== _id)
+      }
+    })
+  }
 
   render() {
     const {
@@ -386,18 +395,28 @@ class Profile extends Component {
               >
                 <input
                   onChange={this.onChange}
-                  ref='reminder'
+                  ref="reminder"
                   name="description"
                   type="text"
                   placeholder="I need to..."
                 />
               </div>
 
-              {reminders.map((reminder,i ) => {
-                // console.log(reminder.description);
+              {reminders.map((reminder, i) => {
                 return (
-                  <div key={i} className='ui raised segment'>
-                    <p>{reminder.description}</p>
+                  <div key={i} className="ui raised segment">
+                    <div className="ui comments">
+                      <div className="comment">
+                        <div className="text">{reminder.description}</div>
+                        <div className="actions">
+                          <a
+                            onClick={this.deleteReminder.bind(this, reminder)}
+                          >
+                            Delete
+                          </a>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )
               })}
