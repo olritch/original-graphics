@@ -156,8 +156,6 @@ class ClassCalendar extends Component {
   }
 
   render() {
-    console.log(this.state.user)
-    console.log(this.state.hasRegistered)
     const { errors } = this.state;
 
     return (

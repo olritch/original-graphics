@@ -209,7 +209,7 @@ class Profile extends Component {
 
     this.setState(
       {
-        reminders: [...this.state.reminders, thisReminder.data.description]
+        reminders: [...this.state.reminders, thisReminder.data]
       },
       () => {
         this.setState({
@@ -231,13 +231,17 @@ class Profile extends Component {
     const { _id } = currentReminder;
     // remove currentReminder from reminder
     await axios.delete('/api/user/reminder', { data: { _id } });
-
+    await this.setState({
+      reminders: this.state.reminders.filter(reminder => reminder._id !== _id)
+    })
+    
     this.setState({
-      reminders: this.state.reminders.filter(reminder => reminder._id !== _id),
       user: {
-        ...this.state.user, reminders: this.state.reminders.filter(reminder => reminder._id  !== _id)
+        ...this.state.user, reminders: this.state.reminders
       }
     })
+    
+    axios.put('/api/user', this.state.user)
   }
 
   render() {
