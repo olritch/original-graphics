@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { TextArea, Dropdown, Form, Message } from "semantic-ui-react";
-var mandrill = require('node-mandrill')('lEcov9c39Cj4O26ihmKeKg');
 
 class Contact extends Component {
   state = {
@@ -118,22 +117,6 @@ class Contact extends Component {
     this.setState({
       showContactForm: true
     });
-
-    // send email with mandrill
-    mandrill('/messages/send', {
-      message: {
-        to: [{ email: email, name: `${firstName} ${lastName}` }],
-        from_email: 'originalgraphics.contact@gmail.com',
-        subject: "Response to your Original Graphics Concerns",
-        text: "Hello, We have received your feedback and have decided to..."
-      }
-    }, function (error, response) {
-        //uh oh, there was an error
-        if (error) console.log(JSON.stringify(error));
-
-        //everything's good, lets see what mandrill said
-        else console.log(response);
-      });
   
   };
 
