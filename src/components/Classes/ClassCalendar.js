@@ -7,9 +7,9 @@ import Calendar from "react-calendar";
 import axios from "axios";
 import { Message } from "semantic-ui-react";
 import { DateInput } from "semantic-ui-calendar-react";
-import { classTitleOptions } from '../../utils/ClassTitleOptions';
-import { classProficiencyOptions } from '../../utils/ClassProficiencyOptions';
-import { classDescriptionOptions } from '../../utils/ClassDescriptionOptions';
+import { classTitleOptions } from "../../utils/ClassTitleOptions";
+import { classProficiencyOptions } from "../../utils/ClassProficiencyOptions";
+import { classDescriptionOptions } from "../../utils/ClassDescriptionOptions";
 
 class ClassCalendar extends Component {
   state = {
@@ -23,6 +23,7 @@ class ClassCalendar extends Component {
     viewDate: new Date(),
     showClassInput: false,
     isLoggedIn: false,
+    isAdmin: false,
     hasRegistered: []
   };
 
@@ -51,6 +52,12 @@ class ClassCalendar extends Component {
         isLoggedIn: true,
         user: user.data,
         hasRegistered: user.data.classes
+      });
+    }
+
+    if (user.data.admin) {
+      this.setState({
+        isAdmin: true
       });
     }
   };
@@ -131,29 +138,30 @@ class ClassCalendar extends Component {
     });
   };
 
-  onRegisterClick = async (course) => {
-    const { user } = this.state
+  onRegisterClick = async course => {
+    const { user } = this.state;
     await this.setState({
       user: { ...user, classes: [...user.classes, course._id] },
       hasRegistered: [...this.state.hasRegistered, course._id]
     });
-    axios.put('/api/user', this.state.user);
-  }
+    axios.put("/api/user", this.state.user);
+  };
 
-  onDeregisterClick = async (course) => {
+  onDeregisterClick = async course => {
     const { user } = this.state;
     await this.setState({
       user: {
-        ...user, classes: user.classes.filter(
-          (currentCourse) => {
-            return currentCourse !== course._id
-          }
-        )
+        ...user,
+        classes: user.classes.filter(currentCourse => {
+          return currentCourse !== course._id;
+        })
       },
-      hasRegistered: this.state.hasRegistered.filter(currentCourse => currentCourse !== course._id)
+      hasRegistered: this.state.hasRegistered.filter(
+        currentCourse => currentCourse !== course._id
+      )
     });
-    axios.put('/api/user', this.state.user);
-  }
+    axios.put("/api/user", this.state.user);
+  };
 
   render() {
     const { errors } = this.state;
@@ -164,17 +172,17 @@ class ClassCalendar extends Component {
           style={{ fontSize: "50px" }}
           className="ui grey center aligned huge header"
         >
-        <img
-              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
-              className="w3-round"
-            />
+          <img
+            src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+            style={{ width: "6%" }}
+            className="w3-round"
+          />
           Original Graphics
           <img
-              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
-              className="w3-round"
-            />
+            src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+            style={{ width: "6%" }}
+            className="w3-round"
+          />
         </div>
 
         <div>
@@ -213,81 +221,85 @@ class ClassCalendar extends Component {
 
           <div className="ui grid segment container">
             <div className="sixteen wide column">
-              {this.state.showClassInput ? (
-                <div>
-                  <div style={{ paddingBottom: "10px" }} className="ui form">
-                    <div
-                      onClick={this.createClass}
-                      className="ui large teal button"
-                    >
-                      Submit
-                    </div>
-                    <div
-                      onClick={this.showClassInput.bind(this, false)}
-                      className="ui large red button"
-                    >
-                      Cancel
-                    </div>
-                    <div className="ui stacked segment">
-                      <div className="three fields">
-                        <div className="ten wide field">
-                          <select
-                            name="title"
-                            onChange={this.onClassInputChange}
-                          >
-                            <option hidden>Class Title</option>
-                            {this.classTitleOptions.map((option, i) => (
-                              <option key={i}>{option}</option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="three wide field">
-                          <select
-                            name="proficiency"
-                            onChange={this.onClassInputChange}
-                          >
-                            <option hidden>Class Proficiency</option>
-                            {this.classProficiencyOptions.map((option, i) => (
-                              <option key={i}>{option}</option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="three wide field">
-                          <DateInput
-                            name="date"
-                            placeholder="Date"
-                            value={this.state.date}
-                            iconPosition="left"
-                            onChange={this.handleChange}
-                            autoComplete="off"
-                          />
-                        </div>
-                      </div>
-
-                      <select
-                        name="description"
-                        onChange={this.onClassInputChange}
+              {this.state.isAdmin ? (
+                this.state.showClassInput ? (
+                  <div>
+                    <div style={{ paddingBottom: "10px" }} className="ui form">
+                      <div
+                        onClick={this.createClass}
+                        className="ui large teal button"
                       >
-                        <option hidden>Class Description</option>
-                        {this.classDescriptionOptions.map((option, i) => (
-                          <option key={i}>{option}</option>
-                        ))}
-                      </select>
+                        Submit
+                      </div>
+                      <div
+                        onClick={this.showClassInput.bind(this, false)}
+                        className="ui large red button"
+                      >
+                        Cancel
+                      </div>
+                      <div className="ui stacked segment">
+                        <div className="three fields">
+                          <div className="ten wide field">
+                            <select
+                              name="title"
+                              onChange={this.onClassInputChange}
+                            >
+                              <option hidden>Class Title</option>
+                              {this.classTitleOptions.map((option, i) => (
+                                <option key={i}>{option}</option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="three wide field">
+                            <select
+                              name="proficiency"
+                              onChange={this.onClassInputChange}
+                            >
+                              <option hidden>Class Proficiency</option>
+                              {this.classProficiencyOptions.map((option, i) => (
+                                <option key={i}>{option}</option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="three wide field">
+                            <DateInput
+                              name="date"
+                              placeholder="Date"
+                              value={this.state.date}
+                              iconPosition="left"
+                              onChange={this.handleChange}
+                              autoComplete="off"
+                            />
+                          </div>
+                        </div>
+
+                        <select
+                          name="description"
+                          onChange={this.onClassInputChange}
+                        >
+                          <option hidden>Class Description</option>
+                          {this.classDescriptionOptions.map((option, i) => (
+                            <option key={i}>{option}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ) : (
+                ) : (
                   <div style={{ paddingBottom: "10px" }}>
                     <div
                       onClick={this.showClassInput.bind(this, true)}
                       className="ui large teal button"
                     >
                       Create Class
+                    </div>
                   </div>
-                  </div>
-                )}
+                )
+              ) : (
+                <span />
+              )}
 
               <Calendar
                 onChange={this.onCalendarChange}
@@ -322,29 +334,35 @@ class ClassCalendar extends Component {
                     </div>
                     {this.state.isLoggedIn ? (
                       <div className="ui stackable two buttons">
-                        {this.state.hasRegistered.includes(course._id) ?
-                          (
-                            <div onClick={this.onDeregisterClick.bind(null, course)} className='ui large red button'>Deregister for Class</div>
-                          ) :
-                          (<div onClick={this.onRegisterClick.bind(null, course)} className="ui large primary button">
+                        {this.state.hasRegistered.includes(course._id) ? (
+                          <div
+                            onClick={this.onDeregisterClick.bind(null, course)}
+                            className="ui large red button"
+                          >
+                            Deregister for Class
+                          </div>
+                        ) : (
+                          <div
+                            onClick={this.onRegisterClick.bind(null, course)}
+                            className="ui large primary button"
+                          >
                             Register for Class
                           </div>
-                          )
-                        }
+                        )}
                         {this.state.isLoggedIn && this.state.user.admin ? (
                           <div
                             onClick={this.deleteClass.bind(null, course)}
-                            className="ui large red button"
+                            className="ui large teal button"
                           >
                             Delete Class
                           </div>
                         ) : (
-                            <div />
-                          )}
+                          <div />
+                        )}
                       </div>
                     ) : (
-                        <div />
-                      )}
+                      <div />
+                    )}
                   </div>
                 );
               })}

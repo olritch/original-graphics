@@ -7,7 +7,6 @@ module.exports = function (app) {
     passport.serializeUser(serializeUser);
     passport.use(new LocalStrategy(localStrategy));
 
-
     app.post('/api/register', register);
     app.get('/api/user/id', findUserById);
     app.get('/api/user', findUser);
