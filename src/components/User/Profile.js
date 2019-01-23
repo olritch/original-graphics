@@ -64,7 +64,11 @@ class Profile extends Component {
 
     this.setState({
       user: userInfo.data,
-      interests: userInfo.data.interests
+      interests: userInfo.data.interests,
+    }, () => {
+      this.setState({
+        reminders: this.state.user.reminders
+      })
     })
 
     this.state.user.interests.map(interest => this.getInterestsInfo(interest))
@@ -231,16 +235,14 @@ class Profile extends Component {
     const { _id } = currentReminder;
     // remove currentReminder from reminder
     await axios.delete('/api/user/reminder', { data: { _id } });
-    await this.setState({
-      reminders: this.state.reminders.filter(reminder => reminder._id !== _id)
-    })
-    
     this.setState({
+      reminders: this.state.reminders.filter(reminder => reminder._id !== _id), 
+    }, () => this.setState({
       user: {
         ...this.state.user, reminders: this.state.reminders
       }
-    })
-    
+    }))
+
     axios.put('/api/user', this.state.user)
   }
 
@@ -512,13 +514,13 @@ class Profile extends Component {
                     {this.state.showInfo === course._id ? (
                       <div className="ui container">{course.description}</div>
                     ) : (
-                      <button
+                      <div
                         id={course._id}
                         onClick={this.onInfoClick.bind(this)}
                         className="ui large fluid blue basic button"
                       >
                         Info
-                      </button>
+                      </div>
                     )}
                   </div>
                 )
