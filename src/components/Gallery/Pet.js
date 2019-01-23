@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "../../App.css"
+import "../../App.css";
 
 class Pet extends Component {
   w3_close = () => {
@@ -19,7 +19,17 @@ class Pet extends Component {
             style={{ fontSize: "50px" }}
             className="ui grey center aligned huge header"
           >
+          <img
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              style={{ width: "6%" }}
+              className="w3-round"
+            />
             Original Graphics
+            <img
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              style={{ width: "6%" }}
+              className="w3-round"
+            />
           </div>
         </div>
 
@@ -118,13 +128,13 @@ class Pet extends Component {
                 <button className="w3-button w3-black">
                   ALL
                 </button>
-                <button className="w3-button w3-white">
+                <button className="w3-button w3-orange">
                   Videos
                 </button>
-                <button className="w3-button w3-white">
+                <button className="w3-button w3-gray">
                   Photos
                 </button>
-                <button className="w3-button w3-white">
+                <button className="w3-button w3-blue">
                   Art
                 </button>
                 <div className="margin-top">
