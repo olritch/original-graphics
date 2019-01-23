@@ -1,39 +1,40 @@
 // If have time, implement a friends list for user based on people they took the class with
 
-import React, { Component } from "react";
-import axios from "axios";
-import Unsplash, { toJson } from "unsplash-js";
-import { Dropdown, Message } from "semantic-ui-react";
-import { interestOptions } from "../../utils/InterestOptions";
-import { API_KEY } from "../../apis/unplash/Unsplash";
+import React, { Component } from 'react'
+import axios from 'axios'
+import Unsplash, { toJson } from 'unsplash-js'
+import { Dropdown, Message } from 'semantic-ui-react'
+import { interestOptions } from '../../utils/InterestOptions'
+import { API_KEY } from '../../apis/unplash/Unsplash'
 
 // Unsplash API
 const unsplash = new Unsplash({
   applicationId: API_KEY.applicationId,
   secret: API_KEY.secret,
   callbackUrl: API_KEY.callbackUrl
-});
+})
 
 function formatDate(date) {
-  return date.substring(0, 4);
+  return date.substring(0, 4)
 }
 
 function formatDescription(description) {
   return description
-    .split(" ")
+    .split(' ')
     .map(word => word.charAt(0).toUpperCase() + word.substr(1))
-    .join(" ");
+    .join(' ')
 }
 
 class Profile extends Component {
   state = {
     user: {
-      dateCreated: "",
+      dateCreated: '',
       classes: [],
-      interests: []
+      interests: [],
+      reminders: []
     },
-    showInfo: "",
-    description: "",
+    showInfo: '',
+    description: '',
     interests: [],
     reminders: [],
     showReminderInput: false,
@@ -42,178 +43,193 @@ class Profile extends Component {
     isLoggedIn: false,
     newInterests: [],
     interestInfo: []
-  };
+  }
 
-  options = interestOptions;
+  options = interestOptions
 
   componentDidMount = async () => {
-    let user = await this.props.isLoggedIn();
+    let user = await this.props.isLoggedIn()
     if (user.data) {
       this.setState({
         user: user.data,
         isLoggedIn: true
-      });
+      })
     } else {
-      this.props.history.push("/");
+      this.props.history.push('/')
     }
 
     let userInfo = await axios.get(
       `/api/userClasses?uid=${this.state.user._id}`
-    );
+    )
 
     this.setState({
       user: userInfo.data,
       interests: userInfo.data.interests
-    });
+    })
 
-    this.state.user.interests.map(interest => this.getInterestsInfo(interest));
-  };
+    this.state.user.interests.map(interest => this.getInterestsInfo(interest))
+  }
 
   getInterestsInfo = interest => {
     unsplash.search
       .photos(interest, 1, 2)
       .then(toJson)
       .then(json => {
-        const photos = json.results;
+        const photos = json.results
         photos.map(photo => {
-          photo.type = interest;
+          photo.type = interest
           this.setState({
             interestInfo: [photo, ...this.state.interestInfo]
-          });
-        });
-      });
-  };
+          })
+        })
+      })
+  }
 
   onInfoClick = e => {
     this.setState({
       showInfo: e.target.id
-    });
-  };
+    })
+  }
 
   onDropdownInputChange = async (e, data) => {
     this.setState({
       errors: {},
       newInterests: data.value
-    });
+    })
 
     await axios.put(
       `/api/interests/add?uid=${this.state.user._id}&interests=${
         data.value.slice(-1)[0]
       }`
-    );
+    )
 
     if (!this.state.interests.includes(data.value.slice(-1)[0])) {
       this.setState({
         interests: [...this.state.interests, data.value.slice(-1)[0]]
-      });
-      return;
+      })
+      return
     }
 
     this.setState({
       errors: { interestExist: "You've already added this interest." },
       newInterests: []
-    });
-  };
+    })
+  }
 
   addInterest = async () => {
-    let user = { ...this.state.user };
-    user.interests = this.state.interests;
+    let user = { ...this.state.user }
+    user.interests = this.state.interests
 
     await this.state.newInterests.map(newInterest =>
       this.getInterestsInfo(newInterest)
-    );
+    )
 
     this.setState({
       user,
       newInterests: []
-    });
-  };
+    })
+  }
 
   deleteInterest = async currentInterest => {
-    let user = { ...this.state.user };
+    let user = { ...this.state.user }
     user.interests = this.state.user.interests.filter(
       interest => interest !== currentInterest
-    );
+    )
 
     await axios.put(
       `/api/interests/remove?uid=${user._id}&interests=${currentInterest}`
-    );
+    )
 
     let interestInfo = this.state.interestInfo.filter(
       interest => interest.type !== currentInterest
-    );
+    )
 
     this.setState({
       user,
       interests: user.interests,
       interestInfo
-    });
-  };
+    })
+  }
 
   clearAllInterests = async () => {
-    let user = { ...this.state.user };
-    user.interests = [];
-    let interestInfo = [];
-    let interests = [];
+    let user = { ...this.state.user }
+    user.interests = []
+    let interestInfo = []
+    let interests = []
 
-    await axios.put(`/api/interests/clearAll?uid=${user._id}`);
+    await axios.put(`/api/interests/clearAll?uid=${user._id}`)
 
     this.setState({
       user,
       interestInfo,
       interests
-    });
-  };
+    })
+  }
 
   onChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   showReminderInput = bool => {
     this.setState({
       showReminderInput: bool
-    });
-  };
+    })
+  }
 
   addReminder = async e => {
-    e.preventDefault();
+    // prevent button from refreshing page on submit
+    e.preventDefault()
 
-    // Set up errors if there is no description
+    // clears the errors
     this.setState({
       reminderErrors: {}
-    });
+    })
 
-    const { description } = this.state;
+    const { description, user } = this.state
 
+    // pass in reminder object as an argument of post request
     const reminder = {
       description
-    };
-    
-    if (description === '') {
-      this.showReminderInput(true);
-      this.setState({
-        reminderErrors: {
-          emptyField: "Please provide a reminder"
-        }
-      });
-      return;
     }
 
-    let res = await axios.post(`/api/user/reminder`, reminder);
-    this.setState({
-      reminders: [...this.state.reminders, res.data.description]
-    });
-    this.showReminderInput(false);
-  };
+    // error message if no reminder is given
+    if (description === '') {
+      this.showReminderInput(true)
+      this.setState({
+        reminderErrors: {
+          emptyField: 'Please provide a reminder'
+        }
+      })
+      return
+    }
 
-  deleteReminder = async () => {};
+    let thisReminder = await axios.post(`/api/user/reminder`, reminder);
 
-  clearAllReminders = async () => {};
+    this.setState(
+      {
+        reminders: [...this.state.reminders, thisReminder.data.description]
+      },
+      () => {
+        this.setState({
+          user: {
+            ...user,
+            reminders: [...user.reminders, thisReminder.data._id]
+          }
+        })
+      }
+    )
+
+    await axios.put('/api/user', this.state.user)
+    this.showReminderInput(false)
+  }
+
+  deleteReminder = async () => {}
+
+  clearAllReminders = async () => {}
 
   render() {
-    console.log(this.state.user)
     const {
       firstName,
       lastName,
@@ -221,16 +237,19 @@ class Profile extends Component {
       email,
       telephone,
       classes,
+      reminders,
       dateCreated
-    } = this.state.user;
+    } = this.state.user
 
-    const { errors } = this.state;
+    console.log(reminders)
+
+    const { errors } = this.state
 
     return (
       <div>
-        <div className="column" style={{ padding: "15px 5px 75px 5px" }}>
+        <div className="column" style={{ padding: '15px 5px 75px 5px' }}>
           <div
-            style={{ fontSize: "50px" }}
+            style={{ fontSize: '50px' }}
             className="ui grey center aligned huge header"
           >
             Original Graphics
@@ -258,7 +277,7 @@ class Profile extends Component {
                 <div className="description">
                   <div>
                     <i
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: '20px' }}
                       className="envelope icon"
                     />
                     {email}
@@ -266,14 +285,14 @@ class Profile extends Component {
                 </div>
                 <div className="description">
                   <div>
-                    <i style={{ marginRight: "20px" }} className="phone icon" />
+                    <i style={{ marginRight: '20px' }} className="phone icon" />
                     {telephone}
                   </div>
                 </div>
                 <div className="description">
                   <div>
                     <i
-                      style={{ marginRight: "20px" }}
+                      style={{ marginRight: '20px' }}
                       className="info circle icon"
                     />
                     {bio}
@@ -284,14 +303,14 @@ class Profile extends Component {
             <div className="ui divider" />
             <div className="ui vertical buttons">
               <button
-                style={{ width: "210px", marginBottom: "10px" }}
+                style={{ width: '210px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="calendar alternate icon" />
                 My Events
               </button>
               <button
-                style={{ width: "210px", marginBottom: "10px" }}
+                style={{ width: '210px', marginBottom: '10px' }}
                 className="ui large inverted blue button"
               >
                 <i className="camera icon" />
@@ -309,7 +328,7 @@ class Profile extends Component {
                   content={errors.interestExist}
                 />
               )}
-              <form style={{ paddingBottom: "10px" }} className="ui form">
+              <form style={{ paddingBottom: '10px' }} className="ui form">
                 <div className="field">
                   <Dropdown
                     placeholder="Interests"
@@ -324,7 +343,7 @@ class Profile extends Component {
                 </div>
                 <div
                   onClick={this.addInterest}
-                  style={{ width: "150px" }}
+                  style={{ width: '150px' }}
                   className="ui inverted blue button"
                 >
                   Add
@@ -333,7 +352,7 @@ class Profile extends Component {
 
               {this.state.user.interests.map((interest, i) => (
                 <div
-                  style={{ marginBottom: "10px", marginRight: "5px" }}
+                  style={{ marginBottom: '10px', marginRight: '5px' }}
                   className="ui large label"
                   key={i}
                 >
@@ -362,7 +381,7 @@ class Profile extends Component {
             <div className="ui segment">
               <div className="ui header">My Reminders</div>
               <div
-                style={{ paddingBottom: "5px" }}
+                style={{ paddingBottom: '5px' }}
                 className="ui fluid input focus"
               >
                 <input
@@ -382,7 +401,7 @@ class Profile extends Component {
 
             {this.state.showReminderInput ? (
               <Message
-                size="large"
+                size="small"
                 attached
                 negative
                 content={this.state.reminderErrors.emptyField}
@@ -418,8 +437,8 @@ class Profile extends Component {
                         )}
                       </div>
                       <div className="ui red tiny header">
-                        By {interest.user.first_name}{" "}
-                      </div>{" "}
+                        By {interest.user.first_name}{' '}
+                      </div>{' '}
                       <span>Published {formatDate(interest.created_at)}</span>
                     </div>
                   </a>
@@ -435,9 +454,9 @@ class Profile extends Component {
             </div>
           </div>
           <div className="five wide column">
-            <div style={{ marginBottom: "10px" }} className="ui segment">
+            <div style={{ marginBottom: '10px' }} className="ui segment">
               <div
-                style={{ paddingBottom: "10px" }}
+                style={{ paddingBottom: '10px' }}
                 className="ui center aligned header"
               >
                 Upcoming Classes:
@@ -450,10 +469,10 @@ class Profile extends Component {
                         <strong>{course.title}</strong>
                       </span>
                     </div>
-                    <div style={{ textAlign: "center" }}>
+                    <div style={{ textAlign: 'center' }}>
                       <strong>{course.proficiency}</strong>
                     </div>
-                    <div style={{ paddingBottom: "25px", textAlign: "center" }}>
+                    <div style={{ paddingBottom: '25px', textAlign: 'center' }}>
                       <strong>{course.date}</strong>
                     </div>
                     {this.state.showInfo === course._id ? (
@@ -468,14 +487,14 @@ class Profile extends Component {
                       </button>
                     )}
                   </div>
-                );
+                )
               })}
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Profile;
+export default Profile

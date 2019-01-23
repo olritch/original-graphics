@@ -37,7 +37,8 @@ function clearAllInterests(uid) {
 
 function populateClassesAndReminders(uid) {
     return UserModel.findOne({ _id: uid })
-                    .populate('classes', 'reminders')
+                    .populate('classes')
+                    .populate('reminders')
                     .exec();
 }
 
