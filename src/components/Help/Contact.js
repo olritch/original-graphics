@@ -129,13 +129,29 @@ class Contact extends Component {
             style={{ fontSize: "50px" }}
             className="ui grey center aligned huge header"
           >
+          <img
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              style={{ width: "6%" }}
+              className="w3-round"
+            />
             Original Graphics
+            <img
+              src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              style={{ width: "6%" }}
+              className="w3-round"
+            />
+          </div>
+
+          <div className="ui verticle center aligned">
+            <h1 style={{ fontSize: "40px", textAlign: 'center' }}
+            className="ui header">
+            Contact Us
+            </h1>
           </div>
 
           <div className="ui vertical left aligned segment">
             <div className="ui container">
-              <h1 style={{ fontSize: "40px" }} className="ui header">
-                Contact Us
+              <h1 className="ui header">
                 <div className="sub header" style={{ paddingTop: "20px" }}>
                   Questions, need some help or have feedback? Fill out the form
                   below and we'll get back to you as soon as we can.
