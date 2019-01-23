@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { TextArea, Dropdown, Form, Message } from "semantic-ui-react";
+import { contactFeedbackTopics } from '../../utils/ContactFeedbackTopics';
 
 class Contact extends Component {
   state = {
@@ -13,24 +14,7 @@ class Contact extends Component {
     feedback: ""
   };
 
-  commentTopics = [
-    {
-      text: "Customer Service",
-      value: "Customer Service"
-    },
-    {
-      text: "Product Information",
-      value: "Product Information"
-    },
-    {
-      text: "Class Information",
-      value: "Class Information"
-    },
-    {
-      text: "Other",
-      value: "Other"
-    }
-  ];
+  commentTopics = contactFeedbackTopics;
 
   onInputChange = e => {
     this.setState({
@@ -117,7 +101,7 @@ class Contact extends Component {
     this.setState({
       showContactForm: true
     });
-  
+
   };
 
   render() {
