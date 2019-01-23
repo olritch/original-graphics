@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Message } from 'semantic-ui-react';
 import axios from "axios";
 import { Link } from "react-router-dom";
 
@@ -6,7 +7,8 @@ class Blog extends Component {
   state = {
     author: "",
     content: "",
-    comments: []
+    comments: [],
+    errors: {}
   };
 
   componentDidMount = async () => {
@@ -14,7 +16,6 @@ class Blog extends Component {
     this.setState({
       comments: res.data
     });
-    // console.log(this.state.comments);
     let user = await this.props.isLoggedIn();
     if (user.data) {
       this.setState({
@@ -30,6 +31,10 @@ class Blog extends Component {
   createComment = async e => {
     e.preventDefault();
 
+    this.setState({
+      errors: {}
+    })
+
     const { author, content } = this.state;
 
     const comment = {
@@ -37,11 +42,19 @@ class Blog extends Component {
       content
     };
 
+    if (content === '') {
+      this.setState({
+        errors: {emptyField: 'Please provide a comment'}
+      })
+      return
+    }
+
     let res = await axios.post(`/api/blog`, comment);
-    // console.log(res.data);
     this.setState({
       comments: [res.data, ...this.state.comments],
     });
+    
+    this.refs.comment.value = ''
   };
 
   onInputChange = e => {
@@ -85,14 +98,19 @@ class Blog extends Component {
           </h1>
         </div>
 
+        <div className='ui container'>
+        {this.state.errors.emptyField && <Message style={{marginTop: '10px'}} size='small' attached compact negative content={this.state.errors.emptyField}/>}
+        </div>
+
         <div className="ui grid segment container">
           <div>
             <div style={{ paddingBottom: "10px" }}>
               <div className="ui text container form">
                 <div className="field">
-                  <textarea onChange={this.onInputChange} name="content" />
+                  <textarea rows='3' ref='comment' onChange={this.onInputChange} name="content" />
                 </div>
                 <div
+                  style={{marginBottom: '20px'}}
                   onClick={this.createComment}
                   className="ui fluid large teal button"
                 >
