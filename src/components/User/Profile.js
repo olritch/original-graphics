@@ -215,13 +215,15 @@ class Profile extends Component {
         this.setState({
           user: {
             ...user,
-            reminders: [...user.reminders, thisReminder.data._id]
+            reminders: [...user.reminders, thisReminder.data]
           }
         })
       }
     )
 
     await axios.put('/api/user', this.state.user)
+
+    this.refs.reminder.value = '';
     this.showReminderInput(false)
   }
 
@@ -240,8 +242,6 @@ class Profile extends Component {
       reminders,
       dateCreated
     } = this.state.user
-
-    console.log(reminders)
 
     const { errors } = this.state
 
@@ -386,11 +386,22 @@ class Profile extends Component {
               >
                 <input
                   onChange={this.onChange}
+                  ref='reminder'
                   name="description"
                   type="text"
                   placeholder="I need to..."
                 />
               </div>
+
+              {reminders.map((reminder,i ) => {
+                // console.log(reminder.description);
+                return (
+                  <div key={i} className='ui raised segment'>
+                    <p>{reminder.description}</p>
+                  </div>
+                )
+              })}
+
               <button
                 onClick={this.addReminder}
                 className="ui large labeled icon button"
