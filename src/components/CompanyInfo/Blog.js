@@ -90,12 +90,14 @@ class Blog extends Component {
         >
           <img
             src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+            alt='company logo'
             style={{ width: "6%" }}
             className="w3-round"
           />
           Original Graphics
           <img
             src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+            alt='company logo'
             style={{ width: "6%" }}
             className="w3-round"
           />

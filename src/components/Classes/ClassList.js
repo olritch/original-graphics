@@ -8,19 +8,21 @@ class ClassList extends Component {
             <div style={{fontSize: '50px'}} className="ui grey center aligned huge header">
             <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              alt='company logo'
               style={{ width: "6%" }}
               className="w3-round"
             />
             Original Graphics
             <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
+              alt='company logo'
               style={{ width: "6%" }}
               className="w3-round"
             />
             </div>
 
                 <div >
-                
+
                 <div className="ui vertical center aligned segment">
                     <h1 style={{ fontSize: '40px' }} className="ui header">
                         Class List
