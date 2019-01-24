@@ -1,35 +1,35 @@
-import React, { Component } from "react";
-import { TextArea, Dropdown, Form, Message } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { TextArea, Dropdown, Form, Message } from 'semantic-ui-react';
 import { contactFeedbackTopics } from '../../utils/ContactFeedbackTopics';
-
+import { API_KEY, DOMAIN } from '../../apis/mailgun/Mailgun';
 class Contact extends Component {
   state = {
     errors: {},
     showContactForm: false,
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    commentTopic: "",
-    feedback: ""
-  };
+    firstName: '',
+    lastName: '',
+    email: '',
+    phoneNumber: '',
+    commentTopic: '',
+    feedback: ''
+  }
 
-  commentTopics = contactFeedbackTopics;
+  commentTopics = contactFeedbackTopics
 
   onInputChange = e => {
     this.setState({
       [e.target.name]: e.target.value
-    });
-  };
+    })
+  }
 
   onDropdownInputChange = (e, data) => {
     this.setState({
       commentTopic: data.value
-    });
-  };
+    })
+  }
 
   formSubmit = async e => {
-    e.preventDefault();
+    e.preventDefault()
 
     this.setState({
       errors: {}
@@ -42,108 +42,133 @@ class Contact extends Component {
       phoneNumber,
       commentTopic,
       feedback
-    } = this.state;
+    } = this.state
 
-    if (firstName === "") {
+    if (firstName === '') {
       this.setState({
         errors: {
-          firstName: "First name is required"
+          firstName: 'First name is required'
         }
-      });
-      return;
+      })
+      return
     }
 
-    if (lastName === "") {
+    if (lastName === '') {
       this.setState({
         errors: {
-          lastName: "Last name is required"
+          lastName: 'Last name is required'
         }
-      });
-      return;
+      })
+      return
     }
 
-    if (email === "") {
+    if (email === '') {
       this.setState({
         errors: {
-          email: "Email is required"
+          email: 'Email is required'
         }
-      });
-      return;
+      })
+      return
     }
 
-    if (phoneNumber === "") {
+    if (phoneNumber === '') {
       this.setState({
         errors: {
-          phoneNumber: "Phone number is required"
+          phoneNumber: 'Phone number is required'
         }
-      });
-      return;
+      })
+      return
     }
 
     if (commentTopic === '') {
       this.setState({
         errors: {
-          commentTopic: "Comment topic is required"
+          commentTopic: 'Comment topic is required'
         }
-      });
-      return;
+      })
+      return
     }
 
-    if (feedback === "") {
+    if (feedback === '') {
       this.setState({
         errors: {
-          feedback: "Feedback is required"
+          feedback: 'Feedback is required'
         }
-      });
-      return;
+      })
+      return
     }
+
+    var mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN })
+
+    const data = {
+      from: 'Excited User <me@samples.mailgun.org>',
+      to: 'hmtran.ae@gmail.com',
+      subject: 'Hello',
+      text: 'Testing some Mailgun awesomeness!'
+    }
+
+    await mailgun.messages().send(data, (error, body) => {
+      console.log(body)
+    })
 
     this.setState({
       showContactForm: true
-    });
-
-  };
+    })
+  }
 
   render() {
-    const { errors } = this.state;
+    const { errors } = this.state
     return (
       <div>
-        <div className="column" style={{ padding: "15px 5px 5px 5px" }}>
+        <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
           <div
-            style={{ fontSize: "50px" }}
+            style={{ fontSize: '50px' }}
             className="ui grey center aligned huge header"
           >
-          <img
+            <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
+              alt="company logo"
+              style={{ width: '6%' }}
               className="w3-round"
             />
             Original Graphics
             <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
+              alt="company logo"
+              style={{ width: '6%' }}
               className="w3-round"
             />
           </div>
 
           <div className="ui verticle center aligned">
-            <h1 style={{ fontSize: "40px", textAlign: 'center' }}
-            className="ui header">
-            Contact Us
+            <h1
+              style={{ fontSize: '40px', textAlign: 'center' }}
+              className="ui header"
+            >
+              Contact Us
             </h1>
           </div>
 
           <div className="ui vertical left aligned segment">
             <div className="ui container">
               <h1 className="ui header">
-                <div className="sub header" style={{ paddingTop: "20px" }}>
+                <div className="sub header" style={{ paddingTop: '20px' }}>
                   Questions, need some help or have feedback? Fill out the form
                   below and we'll get back to you as soon as we can.
                 </div>
               </h1>
 
               {Object.keys(errors).map((keyName, i) => {
-                return <Message key={i} compact size='large' attached negative content={errors[keyName]} />
+                return (
+                  <Message
+                    key={i}
+                    compact
+                    size="large"
+                    attached
+                    negative
+                    content={errors[keyName]}
+                  />
+                )
               })}
 
               {this.state.showContactForm ? (
@@ -191,7 +216,7 @@ class Contact extends Component {
                     </Form.Field>
                     <h1
                       className="ui header"
-                      style={{ paddingBottom: "10px", paddingTop: "25px" }}
+                      style={{ paddingBottom: '10px', paddingTop: '25px' }}
                     >
                       <div className="sub header">
                         What's on your mind? Choose a topic and add your
@@ -207,7 +232,7 @@ class Contact extends Component {
                     />
                     <h1
                       className="ui header"
-                      style={{ paddingBottom: "10px", paddingTop: "25px" }}
+                      style={{ paddingBottom: '10px', paddingTop: '25px' }}
                     >
                       <div className="sub header">
                         Send us your feedback, questions or concerns.
@@ -222,7 +247,7 @@ class Contact extends Component {
                     <div className="ui divider" />
                     <button
                       onClick={this.formSubmit}
-                      style={{ paddingTop: "20px" }}
+                      style={{ paddingTop: '20px' }}
                       className="ui fluid primary huge button"
                     >
                       Submit
@@ -234,8 +259,8 @@ class Contact extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Contact;
+export default Contact
