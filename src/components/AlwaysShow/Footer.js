@@ -82,6 +82,7 @@ class Footer extends Component {
                 <a
                   href="https://www.facebook.com/Original-Graphics-1997060387077873/"
                   target="_blank"
+                  rel='noopener noreferrer'
                   className="item"
                 >
                   <i className="facebook icon" />
