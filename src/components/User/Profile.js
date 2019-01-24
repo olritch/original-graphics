@@ -5,7 +5,7 @@ import axios from 'axios'
 import Unsplash, { toJson } from 'unsplash-js'
 import { Dropdown, Message } from 'semantic-ui-react'
 import { interestOptions } from '../../utils/InterestOptions'
-import { API_KEY } from '../../apis/unplash/Unsplash'
+import { API_KEY } from '../../apis/unsplash/Unsplash'
 
 // Unsplash API
 const unsplash = new Unsplash({
@@ -236,7 +236,7 @@ class Profile extends Component {
     // remove currentReminder from reminder
     await axios.delete('/api/user/reminder', { data: { _id } });
     this.setState({
-      reminders: this.state.reminders.filter(reminder => reminder._id !== _id), 
+      reminders: this.state.reminders.filter(reminder => reminder._id !== _id),
     }, () => this.setState({
       user: {
         ...this.state.user, reminders: this.state.reminders
