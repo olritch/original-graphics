@@ -22,7 +22,7 @@ function ensureSecure(req, res, next) {
 app.use("/", ensureSecure);
 
 const cookieParser = require("cookie-parser");
-const session = require("cookie-session");
+const session = require("express-session");
 const passport = require("passport");
 
 app.use(cookieParser());
@@ -32,7 +32,8 @@ if (process.env.SESSION_SECRET) {
     session({
       secret: process.env.SESSION_SECRET,
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
+      cookie: { maxAge  : new Date(Date.now() + (1000 * 60 * 60)) }
     })
   );
 } else {
@@ -40,7 +41,8 @@ if (process.env.SESSION_SECRET) {
     session({
       secret: "test",
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
+      cookie: { maxAge  : new Date(Date.now() + (1000 * 60 * 60)) }
     })
   );
 }
