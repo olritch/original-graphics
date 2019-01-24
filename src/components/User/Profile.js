@@ -415,11 +415,12 @@ class Profile extends Component {
                       <div className="comment">
                         <div className="text">{reminder.description}</div>
                         <div className="actions">
-                          <a style={{color: 'red'}}
+                          <button
+                            className='ui tiny basic button red'
                             onClick={this.deleteReminder.bind(this, reminder)}
                           >
                             Delete
-                          </a>
+                          </button>
                         </div>
                       </div>
                     </div>
