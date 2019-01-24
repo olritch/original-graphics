@@ -1,33 +1,35 @@
-import React, { Component } from "react";
-import "../../App.css";
+import React, { Component } from 'react'
+import '../../App.css'
 
 class Pet extends Component {
   w3_close = () => {
-    document.getElementById("mySidebar").style.display = "none";
-    document.getElementById("myOverlay").style.display = "none";
-  };
+    document.getElementById('mySidebar').style.display = 'none'
+    document.getElementById('myOverlay').style.display = 'none'
+  }
   w3_open() {
-    document.getElementById("mySidebar").style.display = "block";
-    document.getElementById("myOverlay").style.display = "block";
+    document.getElementById('mySidebar').style.display = 'block'
+    document.getElementById('myOverlay').style.display = 'block'
   }
 
   render() {
     return (
       <div>
-        <div className="column" style={{ padding: "15px 5px 5px 5px" }}>
+        <div className="column" style={{ padding: '15px 5px 5px 5px' }}>
           <div
-            style={{ fontSize: "50px" }}
+            style={{ fontSize: '50px' }}
             className="ui grey center aligned huge header"
           >
-          <img
+            <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
+              alt="company logo"
+              style={{ width: '6%' }}
               className="w3-round"
             />
             Original Graphics
             <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "6%" }}
+              alt="company logo"
+              style={{ width: '6%' }}
               className="w3-round"
             />
           </div>
@@ -35,22 +37,32 @@ class Pet extends Component {
 
         <nav
           className="w3-sidebar w3-collapse w3-white w3-animate-left"
-          style={{ zIndex: "3", width: "300px" }}
+          style={{ zIndex: '3', width: '300px' }}
           id="mySidebar"
         >
           <br />
           <div className="w3-container">
-            <a
-              href="#"
+            <button
+              type="button"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                display: 'inline',
+                margin: '0',
+                padding: '0'
+              }}
               onClick={this.w3_close}
               className="w3-hide-large w3-right w3-jumbo w3-padding w3-hover-grey"
               title="close menu"
             >
               <i className="fa fa-remove" />
-            </a>
+            </button>
             <img
               src="https://image.shutterstock.com/display_pic_with_logo/179108744/718542784/stock-vector-initial-logo-letter-og-with-shield-and-crown-icon-golden-color-isolated-on-black-background-718542784.jpg"
-              style={{ width: "45%" }}
+              alt="company logo"
+              style={{ width: '45%' }}
               className="w3-round"
             />
             <br />
@@ -58,7 +70,6 @@ class Pet extends Component {
             <h4>
               <b>PORTFOLIO</b>
             </h4>
-           
           </div>
           <div className="w3-bar-block">
             <a
@@ -99,20 +110,32 @@ class Pet extends Component {
         <div
           className="w3-overlay w3-hide-large w3-animate-opacity"
           onClick={this.w3_close}
-          style={{ cursor: "pointer" }}
+          style={{ cursor: 'pointer' }}
           title="close side menu"
           id="myOverlay"
         />
 
-        <div className="w3-main" style={{ marginLeft: "300px" }}>
+        <div className="w3-main" style={{ marginLeft: '300px' }}>
           <header id="portfolio">
-            <a href="#">
+            <button
+              type="button"
+              style={{
+                backgroundColor: 'transparent',
+                border: 'none',
+                cursor: 'pointer',
+                textDecoration: 'underline',
+                display: 'inline',
+                margin: '0',
+                padding: '0'
+              }}
+            >
               <img
-                src="/w3images/avatar_g2.jpg"
-                style={{ width: "65px" }}
+                src="#"
+                alt="avatar"
+                style={{ width: '65px' }}
                 className="w3-circle w3-right w3-margin w3-hide-large w3-hover-opacity"
               />
-            </a>
+            </button>
             <span
               className="w3-button w3-hide-large w3-xxlarge w3-hover-text-grey"
               onClick={this.w3_close}
@@ -125,21 +148,15 @@ class Pet extends Component {
               </h1>
               <div className="w3-section w3-padding-16">
                 <span className="w3-margin-right">Filter:</span>
-                <button className="w3-button w3-black">
-                  ALL
-                </button>
-                <button className="w3-button w3-orange">
-                  Videos
-                </button>
-                <button className="w3-button w3-gray">
-                  Photos
-                </button>
-                <button className="w3-button w3-blue">
-                  Art
-                </button>
+                <button className="w3-button w3-black">ALL</button>
+                <button className="w3-button w3-orange">Videos</button>
+                <button className="w3-button w3-gray">Photos</button>
+                <button className="w3-button w3-blue">Art</button>
                 <div className="margin-top">
-                  <span style= {{paddingRight:"20px"}}>Upload:</span>
-                  <button className="w3-button ui red button ">Video / Photo</button>
+                  <span style={{ paddingRight: '20px' }}>Upload:</span>
+                  <button className="w3-button ui red button ">
+                    Video / Photo
+                  </button>
                   {/* <button className="w3-button w3-white">
                     <i className="fa fa-diamond w3-margin-right" />
                     Videos
@@ -150,29 +167,7 @@ class Pet extends Component {
                   </button> */}
                 </div>
               </div>
-              <hr/>
-              <div className="w3-center w3-padding-32">
-                <div className="w3-bar">
-                  <a href="#" className="w3-bar-item w3-button w3-hover-black">
-                    «
-                  </a>
-                  <a href="#" className="w3-bar-item w3-black w3-button">
-                    1
-                  </a>
-                  <a href="#" className="w3-bar-item w3-button w3-hover-black">
-                    2
-                  </a>
-                  <a href="#" className="w3-bar-item w3-button w3-hover-black">
-                    3
-                  </a>
-                  <a href="#" className="w3-bar-item w3-button w3-hover-black">
-                    4
-                  </a>
-                  <a href="#" className="w3-bar-item w3-button w3-hover-black">
-                    »
-                  </a>
-                </div>
-              </div>
+              <hr />
             </div>
           </header>
 
@@ -182,7 +177,7 @@ class Pet extends Component {
                 <img
                   src="http://www.neetashankar.com/photography/wp-content/uploads/2017/08/Neeta-Shankar-Photography-Best-Fashion-Portfolio-Shoot-Femina-Miss-India-Diva-Earth-Universe-World-28-1024x683.jpg"
                   alt="Norway"
-                  style={{ width: "100%" }}
+                  style={{ width: '100%' }}
                   className="w3-hover-opacity"
                 />
               </a>
@@ -202,17 +197,19 @@ class Pet extends Component {
             </div>
             <div className="w3-third w3-container w3-margin-bottom">
               <a href="https://www.facebook.com">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoV2blN5Z1WoyzxXjeHBL9FDLpV2pQCcs9b3_ymrryyHLAA5tp7w"
-                alt="Norway"
-                style={{ width: "100%" }}
-                className="w3-hover-opacity"
-              />
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoV2blN5Z1WoyzxXjeHBL9FDLpV2pQCcs9b3_ymrryyHLAA5tp7w"
+                  alt="Norway"
+                  style={{ width: '100%' }}
+                  className="w3-hover-opacity"
+                />
               </a>
               <div className="w3-container w3-white">
                 <p>
                   <b>
-                    <a href="https://www.facebook.com">Weddings / Anniversary</a> 
+                    <a href="https://www.facebook.com">
+                      Weddings / Anniversary
+                    </a>
                   </b>
                 </p>
                 <p>
@@ -224,18 +221,18 @@ class Pet extends Component {
             </div>
             <div className="w3-third w3-container">
               <a href="https://www.yahoo.com">
-              <img
-                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOxhKIJMfsWGjqcpHxm8Wlhf9KVzCP3OZnhKa1_z3vQH68tvd"
-                alt="Norway"
-                style={{ width: "100%" }}
-                className="w3-hover-opacity"
-              />
+                <img
+                  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTfOxhKIJMfsWGjqcpHxm8Wlhf9KVzCP3OZnhKa1_z3vQH68tvd"
+                  alt="Norway"
+                  style={{ width: '100%' }}
+                  className="w3-hover-opacity"
+                />
               </a>
               <div className="w3-container w3-white">
                 <p>
                   <b>
-                    <a href="https://www.yahoo.com">Landscape / Nature</a> 
-                    </b>
+                    <a href="https://www.yahoo.com">Landscape / Nature</a>
+                  </b>
                 </p>
                 <p>
                   Nature photography refers to a wide range of photography taken
@@ -250,18 +247,18 @@ class Pet extends Component {
           <div className="w3-row-padding">
             <div className="w3-third w3-container w3-margin-bottom">
               <a href="https://www.twitter.com">
-              <img
-                src="https://cmgpbppostonpolitics.files.wordpress.com/2018/09/091718-roger-stone-camera.jpg?w=640&h=427"
-                alt="Norway"
-                style={{ width: "100%" }}
-                className="w3-hover-opacity"
-              />
+                <img
+                  src="https://cmgpbppostonpolitics.files.wordpress.com/2018/09/091718-roger-stone-camera.jpg?w=640&h=427"
+                  alt="Norway"
+                  style={{ width: '100%' }}
+                  className="w3-hover-opacity"
+                />
               </a>
               <div className="w3-container w3-white">
                 <p>
                   <b>
                     <a href="www.twitter.com">News / Events</a>
-                    </b>
+                  </b>
                 </p>
                 <p>
                   “I’m ready. I will never roll on Donald Trump. Michael Cohen I
@@ -271,19 +268,19 @@ class Pet extends Component {
               </div>
             </div>
             <div className="w3-third w3-container w3-margin-bottom">
-            <a href="https://www.youtube.com">
-              <img
-                src="https://cdn.lynda.com/course/429031/429031-635905339675845661-16x9.jpg"
-                alt="Norway"
-                style={{ width: "100%" }}
-                className="w3-hover-opacity"
-              />
+              <a href="https://www.youtube.com">
+                <img
+                  src="https://cdn.lynda.com/course/429031/429031-635905339675845661-16x9.jpg"
+                  alt="Norway"
+                  style={{ width: '100%' }}
+                  className="w3-hover-opacity"
+                />
               </a>
               <div className="w3-container w3-white">
                 <p>
                   <b>
                     <a href="https://www.youtube.com">Multy-Cam Video shoot</a>
-                    </b>
+                  </b>
                 </p>
                 <p>
                   A multicamera setup is the next big step in video production.
@@ -294,18 +291,20 @@ class Pet extends Component {
             </div>
             <div className="w3-third w3-container">
               <a href="https://www.worldstarhiphop.com">
-              <img
-                src="https://i.pinimg.com/originals/5d/f5/ee/5df5ee9385604c7515b4974aa37ad081.jpg"
-                alt="Norway"
-                style={{ width: "100%" }}
-                className="w3-hover-opacity"
-              />
+                <img
+                  src="https://i.pinimg.com/originals/5d/f5/ee/5df5ee9385604c7515b4974aa37ad081.jpg"
+                  alt="Norway"
+                  style={{ width: '100%' }}
+                  className="w3-hover-opacity"
+                />
               </a>
               <div className="w3-container w3-white">
                 <p>
                   <b>
-                    <a href="https://www.worldstarhiphip.com">B-Day / Anniversary</a>
-                    </b>
+                    <a href="https://www.worldstarhiphip.com">
+                      B-Day / Anniversary
+                    </a>
+                  </b>
                 </p>
                 <p>
                   Capturing irreplaceable moments and translating them into
@@ -319,19 +318,19 @@ class Pet extends Component {
           <div className="w3-row-padding w3-padding-16" id="about">
             <div className="w3-col m6">
               <img
-                src="/w3images/avatar_g.jpg"
+                src="#"
                 alt="Me"
-                style={{ width: "100%" }}
+                style={{ width: '100%' }}
               />
             </div>
             <div className="w3-col m6">
-              <img src="/w3images/me2.jpg" alt="Me" style={{ width: "100%" }} />
+              <img src="#" alt="Me" style={{ width: '100%' }} />
             </div>
           </div>
 
           <div
             className="w3-container w3-padding-large"
-            style={{ marginBottom: "32px" }}
+            style={{ marginBottom: '32px' }}
           >
             <h4>
               <b>About Me</b>
@@ -353,7 +352,7 @@ class Pet extends Component {
             <div className="w3-grey">
               <div
                 className="w3-container w3-dark-grey w3-padding w3-center"
-                style={{ width: "95%" }}
+                style={{ width: '95%' }}
               >
                 95%
               </div>
@@ -362,7 +361,7 @@ class Pet extends Component {
             <div className="w3-grey">
               <div
                 className="w3-container w3-dark-grey w3-padding w3-center"
-                style={{ width: "85%" }}
+                style={{ width: '85%' }}
               >
                 85%
               </div>
@@ -371,7 +370,7 @@ class Pet extends Component {
             <div className="w3-grey">
               <div
                 className="w3-container w3-dark-grey w3-padding w3-center"
-                style={{ width: "80%" }}
+                style={{ width: '80%' }}
               >
                 80%
               </div>
@@ -385,7 +384,7 @@ class Pet extends Component {
             <hr />
 
             <h4>How much I charge</h4>
-            <div className="w3-row-padding" style={{ margin: "0 -16px" }}>
+            <div className="w3-row-padding" style={{ margin: '0 -16px' }}>
               <div className="w3-third w3-margin-bottom">
                 <ul className="w3-ul w3-border w3-white w3-center w3-opacity w3-hover-opacity-off">
                   <li className="w3-black w3-xlarge w3-padding-32">Basic</li>
@@ -451,7 +450,7 @@ class Pet extends Component {
             </h4>
             <div
               className="w3-row-padding w3-center w3-padding-24"
-              style={{ margin: "0 -16px" }}
+              style={{ margin: '0 -16px' }}
             >
               <div className="w3-third w3-dark-grey">
                 <p>
@@ -521,10 +520,11 @@ class Pet extends Component {
                   non fringilla.
                 </p>
                 <p>
-                  Powered by{" "}
+                  Powered by{' '}
                   <a
                     href="https://www.w3schools.com/w3css/default.asp"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     w3.css
                   </a>
@@ -537,8 +537,9 @@ class Pet extends Component {
                   <li className="w3-padding-16">
                     <img
                       src="https://cmgpbppostonpolitics.files.wordpress.com/2018/09/091718-roger-stone-camera.jpg?w=640"
+                      alt="camera"
                       className="w3-left w3-margin-right"
-                      style={{ width: "50px" }}
+                      style={{ width: '50px' }}
                     />
                     <span className="w3-large">Lorem</span>
                     <br />
@@ -546,9 +547,10 @@ class Pet extends Component {
                   </li>
                   <li className="w3-padding-16">
                     <img
-                      src="/w3images/gondol.jpg"
+                      src="#"
+                      alt="gondol"
                       className="w3-left w3-margin-right"
-                      style={{ width: "50px" }}
+                      style={{ width: '50px' }}
                     />
                     <span className="w3-large">Ipsum</span>
                     <br />
@@ -562,43 +564,43 @@ class Pet extends Component {
                 <p>
                   <span className="w3-tag w3-black w3-margin-bottom">
                     Travel
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Fashion
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Portrait
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Food
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Landscape
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Liberal art
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Wedding
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Nature
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Family
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     News
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Clothing
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Shopping
                   </span>
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Sports
-                  </span>{" "}
+                  </span>{' '}
                   <span className="w3-tag w3-grey w3-small w3-margin-bottom">
                     Games
                   </span>
@@ -608,11 +610,12 @@ class Pet extends Component {
           </footer>
 
           <div className="w3-black w3-center w3-padding-24">
-            Powered by{" "}
+            Powered by{' '}
             <a
               href="https://www.w3schools.com/w3css/default.asp"
               title="W3.CSS"
               target="_blank"
+              rel="noopener noreferrer"
               className="w3-hover-opacity"
             >
               w3.css
@@ -620,8 +623,8 @@ class Pet extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default Pet;
+export default Pet
