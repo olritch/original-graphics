@@ -36,6 +36,16 @@ import Terms from './Help/Terms'
 import axios from 'axios'
 
 class App extends Component {
+  state = {
+    showLoginModal: false
+  }
+
+  showLoginModal = () => {
+     this.setState({
+      showLoginModal: true
+    })
+  }
+
   isLoggedIn = async () => {
     return await axios.post('/api/loggedIn')
   }
@@ -44,10 +54,15 @@ class App extends Component {
     return (
       <BrowserRouter>
         <ScrollToTop>
-          <Navbar isLoggedIn={this.isLoggedIn} />
+          <Navbar showLoginModal={this.state.showLoginModal} isLoggedIn={this.isLoggedIn} />
           <Switch>
-            <Route path="/" exact component={LandingPage} />
-
+            <Route 
+              path="/" 
+              exact 
+              render={props => (
+                <LandingPage {...props} isLoggedIn={this.isLoggedIn} showLoginModal={this.showLoginModal} />
+              )}
+            />
             <Route path="/gallery" exact component={GalleryList} />
             <Route path="/gallery/family" exact component={Family} />
             <Route path="/gallery/wedding" exact component={Wedding} />
