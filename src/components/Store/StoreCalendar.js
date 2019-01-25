@@ -45,19 +45,29 @@ class StoreCalendar extends Component {
 
   calendarThemeOptions = [
     {
-      key: "small",
-      value: "Small",
-      text: "Small"
+      key: "new-year",
+      value: "New-Year",
+      text: "New Year"
     },
     {
-      key: "medium",
-      value: "Medium",
-      text: "Medium"
+      key: "easter",
+      value: "Easter",
+      text: "Easter"
     },
     {
-      key: "large",
-      value: "Large",
-      text: "Large"
+      key: "halloween",
+      value: "Halloween",
+      text: "Halloween"
+    },
+    {
+      key: "thanksgiving",
+      value: "Thanksgiving",
+      text: "Thanksgiving"
+    },
+    {
+      key: "christmas",
+      value: "Christmas",
+      text: "Christmas"
     }
   ];
 
