@@ -17,7 +17,7 @@ class Aerial extends Component {
         </div>
 
         <div>
-          <div class="ui medium images">
+          <div className="ui medium images">
             <img
               className="ui image"
               alt="prudential building"
