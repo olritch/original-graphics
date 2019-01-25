@@ -19,7 +19,7 @@ class StoreFrame extends Component {
       text: "Hand-finished grey"
     },
     {
-    key: "satin-white",
+      key: "satin-white",
       value: "Satin white",
       text: "Satin white"
     },
