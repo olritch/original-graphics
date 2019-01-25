@@ -39,6 +39,9 @@ class Navbar extends Component {
     this.setState({
       isLoggedIn: res.data !== 0
     })
+    if (this.props.showLoginModal && this.props.location.pathname === '/') {
+      this.changeLogin(true)
+    }
   }
 
   closeLogin = () => this.setState({ isLogin: false })
