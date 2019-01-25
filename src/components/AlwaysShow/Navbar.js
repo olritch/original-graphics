@@ -36,11 +36,9 @@ class Navbar extends Component {
 
   componentWillReceiveProps = async () => {
     let res = await this.props.isLoggedIn();
-    if (res.data) {
-      this.setState({
-        isLoggedIn: true
-      })
-    } 
+    this.setState({
+      isLoggedIn: res.data !== 0
+    })
   }
 
   closeLogin = () => this.setState({ isLogin: false })
