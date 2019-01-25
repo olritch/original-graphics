@@ -32,34 +32,24 @@ class StorePoster extends Component {
 
   posterSizeOptions = [
     {
-      key: "8.5 x 11",
-      value: "8.5 x 11",
-      text: "8.5 x 11"
+      key: "8 x 10",
+      value: "8 x 10",
+      text: "8 x 10"
     },
     {
-      key: "11 x 17",
-      value: "11 x 17",
-      text: "11 x 17"
+      key: "12 x 16",
+      value: "12 x 16",
+      text: "12 x 16"
+    },
+    {
+      key: "16 x 20",
+      value: "16 x 20",
+      text: "16 x 20"
     },
     {
       key: "18 x 24",
       value: "18 x 24",
       text: "18 x 24"
-    },
-    {
-      key: "19 x 27",
-      value: "19 x 27",
-      text: "19 x 27"
-    },
-    {
-      key: "24 x 36",
-      value: "24 x 36",
-      text: "24 x 36"
-    },
-    {
-      key: "27 x 39",
-      value: "27 x 39",
-      text: "27 x 39"
     },
     {
       key: "24 x 36",

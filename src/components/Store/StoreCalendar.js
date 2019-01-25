@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
+import { Dropdown } from "semantic-ui-react";
 
 class StoreCalendar extends Component {
+    calendarTypeOptions = [
+        {
+            key: "wall-calendar",
+            value: "Wall-calendar",
+            text: "Wall-calendar" 
+
+        }
+    ]
     render() {
         return (
 
@@ -10,7 +19,7 @@ class StoreCalendar extends Component {
                 </div>
                 <div>StoreCalender</div>
             </div>
-        )
+        );
       }
       }
 
