@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Unsplash, { toJson } from 'unsplash-js'
+import { withRouter } from 'react-router-dom'
 import { Dropdown, Message } from 'semantic-ui-react'
 import { interestOptions } from '../../utils/InterestOptions'
 import { API_KEY } from '../../apis/unsplash/Unsplash'
@@ -246,6 +247,13 @@ class Profile extends Component {
     axios.put('/api/user', this.state.user)
   }
 
+  onEditProfile = () => {
+    this.props.history.push({
+      pathname: 'profile-input',
+      state: { user: this.state.user }
+    })
+  }
+
   render() {
     const {
       firstName,
@@ -283,6 +291,7 @@ class Profile extends Component {
               <div className="content">
                 <div className="header">
                   {firstName} {lastName}
+                  <span style={{float: 'right'}}><i style={{cursor: 'pointer'}} onClick={this.onEditProfile} className='blue pencil icon'/></span>
                 </div>
                 <div className="meta">
                   <span className="date">
@@ -534,4 +543,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default withRouter(Profile);
