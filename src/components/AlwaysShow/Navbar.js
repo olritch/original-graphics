@@ -36,11 +36,12 @@ class Navbar extends Component {
 
   componentWillReceiveProps = async () => {
     let res = await this.props.isLoggedIn();
-    if (res.data) {
-      this.setState({
-        isLoggedIn: true
-      })
-    } 
+    this.setState({
+      isLoggedIn: res.data !== 0
+    })
+    if (this.props.showLoginModal && this.props.location.pathname === '/') {
+      this.changeLogin(true)
+    }
   }
 
   closeLogin = () => this.setState({ isLogin: false })

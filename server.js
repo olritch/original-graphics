@@ -32,7 +32,9 @@ if (process.env.SESSION_SECRET) {
     session({
       secret: process.env.SESSION_SECRET,
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
+      // cookie: { maxAge  : new Date(Date.now() + (1000 * 60 * 60)) }
+      maxAge: 7 * 24 * 60 * 60 * 1000 // a week before timeout
     })
   );
 } else {
@@ -40,7 +42,9 @@ if (process.env.SESSION_SECRET) {
     session({
       secret: "test",
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: true,
+      // cookie: { maxAge  : new Date(Date.now() + (1000 * 20)) }
+      maxAge: 7 * 24 * 60 * 60 * 1000 // a week before timeout
     })
   );
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { TextArea, Dropdown, Form, Message } from 'semantic-ui-react';
 import { contactFeedbackTopics } from '../../utils/ContactFeedbackTopics';
-import { API_KEY, DOMAIN } from '../../apis/mailgun/Mailgun';
+// import { API_KEY, DOMAIN } from '../../apis/mailgun/Mailgun';
+import axios from 'axios';
+
 class Contact extends Component {
   state = {
     errors: {},
@@ -98,18 +100,28 @@ class Contact extends Component {
       return
     }
 
-    var mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN })
-
     const data = {
-      from: 'Excited User <me@samples.mailgun.org>',
-      to: 'hmtran.ae@gmail.com',
-      subject: 'Hello',
-      text: 'Testing some Mailgun awesomeness!'
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      commentTopic: commentTopic,
+      feedback: feedback
     }
 
-    await mailgun.messages().send(data, (error, body) => {
-      console.log(body)
-    })
+    await axios.post('/api/contact/send', data);
+
+    // var mailgun = require('mailgun-js')({ apiKey: API_KEY, domain: DOMAIN })
+
+    // const data = {
+    //   from: 'Excited User <me@samples.mailgun.org>',
+    //   to: 'hmtran.ae@gmail.com',
+    //   subject: 'Hello',
+    //   text: 'Testing some Mailgun awesomeness!'
+    // }
+
+    // await mailgun.messages().send(data, (error, body) => {
+    //   console.log(body)
+    // })
 
     this.setState({
       showContactForm: true

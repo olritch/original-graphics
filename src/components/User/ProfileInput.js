@@ -12,7 +12,20 @@ class ProfileInput extends Component {
     bio: '',
     _id: this.props.state,
     errors : {},
-    uid : this.props.location.state.user._id
+    uid : this.props.location.state.user._id,
+    user: this.props.location.state.user
+  }
+
+  componentDidMount = () => {
+    const { firstName, lastName, email, telephone, bio } = this.state.user;
+
+    this.setState({
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      telephone: telephone,
+      bio: bio
+    })
   }
 
   onChangeInput = e => {
@@ -91,7 +104,7 @@ class ProfileInput extends Component {
             <h1 style={{ fontSize: '40px' }} className="ui header">
               Profile
               <div className="sub header" style={{ paddingTop: '10px' }}>
-                Complete the following inputs so that we can better tailor our
+                Complete the following so that we can better tailor our
                 suggestions for you!
               </div>
             </h1>
@@ -105,6 +118,7 @@ class ProfileInput extends Component {
                     name='firstName'
                     type="text"
                     placeholder="First Name"
+                    value={this.state.firstName}
                   />
                 </Form.Field>
                 <Form.Field required>
@@ -115,6 +129,7 @@ class ProfileInput extends Component {
                     name='lastName'
                     type="text"
                     placeholder="Last Name"
+                    value={this.state.lastName}
                   />
                 </Form.Field>
                 <Form.Field required>
@@ -125,6 +140,7 @@ class ProfileInput extends Component {
                     name='email'
                     type="text"
                     placeholder="Email Address"
+                    value={this.state.email}
                   />
                 </Form.Field>
                 <Form.Field required>
@@ -135,6 +151,7 @@ class ProfileInput extends Component {
                     name='telephone'
                     type="tel"
                     placeholder="Phone Number"
+                    value={this.state.telephone}
                   />
                 </Form.Field>
 
@@ -147,6 +164,7 @@ class ProfileInput extends Component {
                   name='bio'
                   rows={2}
                   placeholder="Tell us more"
+                  value={this.state.bio}
                 />
                 <div className="ui divider" />
                 <button
