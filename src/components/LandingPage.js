@@ -50,7 +50,7 @@ class LandingPage extends Component {
             )}
           </div>
         </div>
-        <div className="ui vertical stripe segment">
+        {/* <div className="ui vertical stripe segment">
           <div className="ui middle aligned stackable grid container">
             <div className="row">
               <div className="eight wide column">das</div>
@@ -59,7 +59,7 @@ class LandingPage extends Component {
               <div className="six wide right floated column">dasdas</div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     );
   }
